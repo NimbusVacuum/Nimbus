@@ -1,6 +1,5 @@
 /**
  * Commands to be used, whenever possible, for MQTT command topics.
- * Most values are those supported by OpenHab: https://www.openhab.org/docs/concepts/items.html#enum-types
  */
 
 /**

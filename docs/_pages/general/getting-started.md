@@ -73,8 +73,7 @@ If you're using a computer running Microsoft Windows, you can also open the expl
 
 Congratulations! You have now significantly increased the baseline cleanliness of your living space.
 
-It is strongly recommended to now connect Nimbus to the home automation system of your choice such as [OpenHab](https://nimbus.cleaning/pages/integrations/openhab-integration.html)
-or [Home Assistant](https://nimbus.cleaning/pages/integrations/home-assistant-integration.html).
+It is strongly recommended to now connect Nimbus to the home automation system of your choice such as [Home Assistant](https://nimbus.cleaning/pages/integrations/home-assistant-integration.html).
 
 Using that, you can now do things such as
 

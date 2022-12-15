@@ -161,7 +161,7 @@ If you have that robot, you might want to ask for assistance.
 While Nimbus works with their model firmwares, the recommended rooting procedure is to flash these with a Viomi V6 firmware as that has more features.
 
 Rooting instructions:
-- [ADB](https://github.com/Hypfer/nimbus-crl200s-root)
+- [ADB](https://github.com/Hypfer/valetudo-crl200s-root)
 
 ## Dreame<a id="dreame"></a>
 
@@ -390,7 +390,7 @@ Rooting is pretty easy, only requiring a Linux Laptop and a micro USB cable.<br/
 It might be required to remove the battery but that can be done without touching any warranty seals.
 
 Rooting instructions:
-- [ADB](https://github.com/Hypfer/nimbus-crl200s-root)
+- [ADB](https://github.com/Hypfer/valetudo-crl200s-root)
 
 
 ## Cecotec<a id="cecotec"></a>
@@ -413,7 +413,7 @@ Rooting is pretty easy, only requiring a Linux Laptop and a micro USB cable.<br/
 It might be required to remove the battery but that can be done without touching any warranty seals.
 
 Rooting instructions:
-- [ADB](https://github.com/Hypfer/nimbus-crl200s-root)
+- [ADB](https://github.com/Hypfer/valetudo-crl200s-root)
 
 ### Conga 3790<a id="conga_3790"></a>
 
@@ -430,7 +430,7 @@ Rooting is pretty easy, only requiring a Linux Laptop and a micro USB cable.<br/
 It might be required to remove the battery but that can be done without touching any warranty seals.
 
 Rooting instructions:
-- [ADB](https://github.com/Hypfer/nimbus-crl200s-root)
+- [ADB](https://github.com/Hypfer/valetudo-crl200s-root)
 
 
 ## Proscenic<a id="proscenic"></a>
@@ -453,4 +453,4 @@ Rooting is pretty easy, only requiring a Linux Laptop and a micro USB cable.<br/
 It might be required to remove the battery but that can be done without touching any warranty seals.
 
 Rooting instructions:
-- [ADB](https://github.com/Hypfer/nimbus-crl200s-root)
+- [ADB](https://github.com/Hypfer/valetudo-crl200s-root)

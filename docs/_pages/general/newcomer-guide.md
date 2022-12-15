@@ -57,7 +57,7 @@ With support for both **Homie** and **Home Assistant Autodiscovery** for MQTT, y
 the open-source smarthome software of your choice.
 
 Make sure to check out the [MQTT Docs](https://nimbus.cleaning/pages/integrations/mqtt.html) as well as the
-[OpenHAB integration](https://nimbus.cleaning/pages/integrations/openhab-integration.html).
+[Home Assistant integration](https://nimbus.cleaning/pages/integrations/home-assistant-integration.html).
 
 Nimbus fully supports:
 

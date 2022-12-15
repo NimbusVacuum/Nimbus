@@ -7,7 +7,7 @@ order: 20
 # MQTT integration
 
 To make your robot talk to your MQTT broker and integrate with home automation software, such as but not limited to
-Home Assistant, openHAB and Node-RED, configure MQTT via Nimbus's web interface (Settings → MQTT).
+Home Assistant and Node-RED, configure MQTT via Nimbus's web interface (Settings → MQTT).
 
 ## Autodiscovery
 
@@ -15,7 +15,6 @@ See the specific integration pages for instructions on how to set up autodiscove
 platform:
 
 - [Home Assistant](./home-assistant-integration)
-- [openHAB](./openhab-integration)
 - [Node-RED](./node-red)
 
 Other home automation software that follows the [Homie convention](https://homieiot.github.io/) should also be able to
@@ -33,7 +32,7 @@ automatically discover your Nimbus instance.
 
 Note that, in order to view the map provided over MQTT, you additionally need
 [I Can't Believe It's Not Valetudo](/pages/companion_apps/i_cant_believe_its_not_valetudo.html) to generate PNG maps.
-You can then configure it to serve the PNG map over HTTP for openHAB and other software, or install the
+You can then configure it to serve the PNG map over HTTP or install the
 [Lovelace Valetudo Card Map](/pages/companion_apps/lovelace_valetudo_map_card.html) for Home Assistant.
 
 ## Custom integrations

@@ -54,7 +54,7 @@ Once logged in, build a patched firmware image for manual installation via the [
 **Make sure that both `Prepackage nimbus` and `Patch DNS` are selected before clicking on `Create Job`.**
 You will receive an email once it's built. Download the `tar.gz` file from the link in that mail to your laptop.
 
-With the `tar.gz` downloaded, head over to <a href="https://github.com/Hypfer/nimbus-helper-httpbridge" rel="noopener" target="_blank">https://github.com/Hypfer/nimbus-helper-httpbridge</a>
+With the `tar.gz` downloaded, head over to <a href="https://github.com/Hypfer/valetudo-helper-httpbridge" rel="noopener" target="_blank">https://github.com/Hypfer/valetudo-helper-httpbridge</a>
 and download a matching binary for your laptops operating system.
 
 Now, connect the laptop to the Wi-Fi Access Point of the robot. If you can't see the robots Wi-Fi AP to connect to, it might have disabled itself because 30 minutes passed since the last boot.
@@ -82,7 +82,7 @@ To do that, head back to the UART shell and create a tar file of all the require
 tar cvf /tmp/backup.tar /mnt/private/ /mnt/misc/ /etc/OTA_Key_pub.pem /etc/publickey.pem
 ```
 
-Then, look at the output of the `nimbus-helper-httpbridge` instance you've started previously.
+Then, look at the output of the `valetudo-helper-httpbridge` instance you've started previously.
 It contains an example curl command usable for uploading that should look similar to this one:
 
 ```
@@ -97,7 +97,7 @@ If you're experiencing issues, make sure that you've specified the correct port.
 </div>
 
 After uploading the backup and storing it in a safe place, you can now download the firmware image file that you've
-previously put in the `www` directory. `nimbus-helper-httpbridge` will tell you the correct command, which should look
+previously put in the `www` directory. `valetudo-helper-httpbridge` will tell you the correct command, which should look
 similar to this:
 
 ```

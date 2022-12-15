@@ -10,7 +10,7 @@ If that is disabled or unable to reach the configured NTP server, no timers will
 for your convenience.**
 
 Timers in Nimbus are provided as a convenience feature.<br/>
-It is **highly recommended** to deploy a full-scale home automation system such as openHAB or Home Assistant to allow for
+It is **highly recommended** to deploy a full-scale home automation system such as Home Assistant to allow for
 better scheduled operation taking into account e.g. whether or not a room is currently occupied, you're currently on vacation etc.
 
 `;

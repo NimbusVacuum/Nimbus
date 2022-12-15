@@ -30,7 +30,7 @@ See [https://github.com/dgiese/dustcloud/wiki/Xiaomi-Vacuum-Robots-Factory-Reset
 It is recommended to use the Dustbuilder to build your firmware image.
 It can be found here: [https://builder.dontvacuum.me/](https://builder.dontvacuum.me/)
 
-In DustBuilder, make sure to use the "Build update package" option, as it is the only file type supported by nimbus-helper-miioota.
+In DustBuilder, make sure to use the "Build update package" option, as it is the only file type supported by valetudo-helper-miioota.
 
 The service is provided by Dennis who is also the reason, why Nimbus can exist in the first place.
 
@@ -40,14 +40,14 @@ The irony that this guide suggests using "the cloud" to uncloud your device is n
 
 ### Flashing the firmware image
 
-Flashing the firmware .pkg file can easily be done by using [nimbus-helper-miioota](https://github.com/Hypfer/nimbus-helper-miioota),
+Flashing the firmware .pkg file can easily be done by using [valetudo-helper-miioota](https://github.com/Hypfer/valetudo-helper-miioota),
 which is a standalone tool that does the right thing.
 
 Just connect your laptop to the robots Wi-Fi access point and use the tool to install the firmware.
 A successful run should look similar to this:
 
 ```
-./nimbus-helper-miioota install-firmware v11_2034.pkg 
+./valetudo-helper-miioota install-firmware v11_2034.pkg 
 Starting installer.
 If you experience issues, make sure to disable your firewall and/or VPN.
 Also, make sure that the robot is docked during the firmware update procedure.

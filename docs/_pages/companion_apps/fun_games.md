@@ -7,16 +7,16 @@ order: 20
 
 A small and rather hackish script, which takes a NimbusMap JSON and renders it to a Minecraft World.
 
-![image](./img/nimbus-minecraft-mapper.png)
+![image](./img/valetudo-minecraft-mapper.png)
 
 
-[https://github.com/Hypfer/Nimbus-Minecraft-Mapper](https://github.com/Hypfer/Nimbus-Minecraft-Mapper)
+[https://github.com/Hypfer/Valetudo-Minecraft-Mapper](https://github.com/Hypfer/Valetudo-Minecraft-Mapper)
 
-# Nimbus-To-VMF
+# Valetudo-To-VMF
 
 A script to convert Nimbus Mapdata (containing segments) to Source-Engine VMF Maps (for use with the Hammer Editor).
 
-[https://github.com/Sch1nken/Nimbus-To-VMF](https://github.com/Sch1nken/Nimbus-To-VMF)
+[https://github.com/Sch1nken/Valetudo-To-VMF](https://github.com/Sch1nken/Valetudo-To-VMF)
 
 # Remote control using a Gamepad
 
