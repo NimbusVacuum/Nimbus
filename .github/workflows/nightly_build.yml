@@ -53,9 +53,18 @@
                 'run': 'npm run build_release_manifest nightly',
               },
               {
+                'name': 'Import GPG key',
+                'id': 'import_gpg',
+                'uses': 'crazy-max/ghaction-import-gpg@v5',
+                'with': {
+                  'gpg_private_key': '${{ secrets.GPG_PRIVATE_KEY }}',
+                  'passphrase': '${{ secrets.GPG_PASSPHRASE }}'
+                }
+              },
+              {
                 'name': 'Push binaries to nightly repo',
                 'id': 'push_directory',
-                'uses': 'hypfer/github-action-push-to-another-repository@v1.3',
+                'uses': 'NimbusVacuum/github-action-push-to-another-repository@v2',
                 'env': {
                   'API_TOKEN_GITHUB': '${{ secrets.API_TOKEN_GITHUB }}'
                 },
@@ -65,7 +74,8 @@
                   'destination-repository-name': 'nimbus-nightly-builds',
                   'destination-repository-username': 'NimbusVacuum',
                   'user-email': '120611326+NimbusVacBot@users.noreply.github.com',
-                  'target-branch': 'main'
+                  'target-branch': 'main',
+                  'gpg-fingerprint': '${{ steps.import_gpg.outputs.fingerprint }}'
                 }
               }
             ],
