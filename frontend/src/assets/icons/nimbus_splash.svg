@@ -1,58 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   width="300"
-   height="170"
-   enable-background="new 0 0 600 400"
-   version="1.1"
-   viewBox="0 0 300 170"
-   xmlSpace="preserve"
-   id="svg17692"
-   sodipodiDocname="nimbus_splash.svg"
-   inkscapeVersion="1.1.2 (b8e25be833, 2022-02-05)"
-   xmlnsInkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlnsSodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlnsXlink="http://www.w3.org/1999/xlink"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlnsSvg="http://www.w3.org/2000/svg"><defs
-   id="defs17696"><linearGradient
-     inkscapeCollect="always"
-     xlinkHref="#linearGradient8204"
-     id="linearGradient8206"
-     x1="11.10372"
-     y1="46.266541"
-     x2="114.95962"
-     y2="46.266541"
-     gradientUnits="userSpaceOnUse"
-     gradientTransform="matrix(1.2052247,0,0,1.2834704,74.316228,-7.4913763)" /><linearGradient
-     inkscapeCollect="always"
-     id="linearGradient8204"><stop
-       style="stop-color:#8affff;stop-opacity:1;"
-       offset="0"
-       id="stop8200" /><stop
-       style="stop-color:#8affff;stop-opacity:0;"
-       offset="1"
-       id="stop8202" /></linearGradient><linearGradient
-     inkscapeCollect="always"
-     xlinkHref="#linearGradient8204"
-     id="linearGradient16977"
-     x1="148.81943"
-     y1="15.518248"
-     x2="148.64073"
-     y2="30.088863"
-     gradientUnits="userSpaceOnUse" /><rect
-     x="125.54348"
-     y="0.25992438"
-     width="424.45651"
-     height="94.872398"
-     id="rect13489" /></defs>
-<path
-   id="path10000"
-   d="m 138.20194,14.230805 c -9.23239,0 -18.4087,4.355442 -24.93699,11.834891 -4.11308,4.712271 -7.14068,10.628481 -8.81971,17.006054 -4.0357,0.872818 -7.847162,3.129494 -10.753402,6.459084 -3.788,4.339866 -5.99314,10.437856 -5.99314,16.575394 0,6.137593 2.20514,12.237546 5.99314,16.577413 3.78804,4.33987 9.112302,6.866272 14.469372,6.866272 h 91.64598 c 3.41943,0 6.81848,-1.611912 9.23635,-4.381938 2.41794,-2.770136 3.82487,-6.664497 3.82487,-10.582102 0,-3.917606 -1.40693,-7.809841 -3.82487,-10.579977 -2.40301,-2.75322 -5.77535,-4.360426 -9.17342,-4.380203 -0.66311,-7.097961 -3.46989,-13.929954 -7.87924,-18.981696 -5.07754,-5.817288 -12.21372,-9.204512 -19.39446,-9.204512 -1.74338,0 -3.48289,0.204799 -5.1922,0.590363 -1.25082,-2.138478 -2.67526,-4.142575 -4.2653,-5.964152 -6.52829,-7.479449 -15.70455,-11.834891 -24.93698,-11.834891 z"
-   style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:url(#linearGradient8206);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.523351px;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" /><text
-   xmlSpace="preserve"
-   id="text13487"
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:29.3333px;line-height:1.25;font-family:Constantia;-inkscape-font-specification:'Constantia, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect13489);fill:url(#linearGradient16977);fill-opacity:1;stroke:none"
-   transform="matrix(2.6760478,0,0,2.8657984,-331.22893,90.092966)"><tspan
-     x="125.54297"
-     y="25.955049"
-     id="tspan18009">Nimbus</tspan></text></svg>
+<svg width="300" height="170" viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="a" x1="11.104" y1="46.267" x2="114.96" y2="46.267" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1.20522 0 0 1.28347 74.316 -7.491)">
+        <stop stop-color="#8affff" stop-opacity="1" offset="0"/>
+        <stop stop-color="#8affff" stop-opacity="0" offset="1"/>
+      </linearGradient>
+      <linearGradient id="b" x1="0.104" y1="30.267" x2="150.96" y2="80.267" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1.20522 0 0 1.28347 74.316 -7.491)">
+        <stop stop-color="#8affff" stop-opacity="1" offset="0"/>
+        <stop stop-color="#8aeeee" stop-opacity="0" offset="1"/>
+      </linearGradient>
+    </defs>
+    <path stroke="none" fill="url(#a)" fill-opacity="1" d="M138.202 14.23c-9.232 0-18.409 4.356-24.937 11.836-4.113 4.712-7.14 10.628-8.82 17.006-4.035.873-7.847 3.13-10.753 6.459-3.788 4.34-5.993 10.438-5.993 16.575 0 6.138 2.205 12.238 5.993 16.578 3.788 4.34 9.112 6.866 14.47 6.866h91.645c3.42 0 6.819-1.612 9.237-4.382 2.417-2.77 3.824-6.665 3.824-10.582 0-3.918-1.407-7.81-3.824-10.58-2.403-2.753-5.776-4.36-9.174-4.38-.663-7.098-3.47-13.93-7.88-18.982-5.077-5.817-12.213-9.205-19.394-9.205-1.743 0-3.482.205-5.192.59a39.022 39.022 0 0 0-4.265-5.963c-6.528-7.48-15.705-11.835-24.937-11.835z" />
+    <text font-weight="700" font-size="29.3333px" line-height="1.25" font-family="Helvetica" fill="url(#b)" fill-opacity="1" stroke="none" transform="matrix(2.67605 0 0 2.8658 -331.229 90.093)"><tspan x="125.543" y="25.955">Nimbus</tspan></text>
+</svg>
