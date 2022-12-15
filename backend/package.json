@@ -45,7 +45,7 @@
     "express-dynamic-middleware": "1.0.0",
     "express-list-endpoints": "6.0.0",
     "express-rate-limit": "6.6.0",
-    "hashlru": "git+https://npm@github.com/Hypfer/hashlru#3.0.0",
+    "hashlru": "git+https://npm@github.com/NimbusVacuum/hashlru#3.0.0",
     "is-in-subnet": "4.0.1",
     "jstoxml": "3.2.5",
     "mqtt": "4.3.7",
