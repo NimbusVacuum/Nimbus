@@ -1,0 +1,31 @@
+{
+  "components": {
+    "schemas": {
+      "NimbusNTPClientErrorState": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NimbusNTPClientState"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "unknown",
+                  "transient",
+                  "name_resolution",
+                  "connection",
+                  "persisting"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

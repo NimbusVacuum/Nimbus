@@ -1,0 +1,30 @@
+{
+  "components": {
+    "schemas": {
+      "NimbusWifiConfiguration": {
+        "type": "object",
+        "properties": {
+          "ssid": {
+            "type": "string",
+            "description": "Wireless network name"
+          },
+          "credentials": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "typeSpecificSettings": {
+                "type": "object",
+                "description": "Settings depending on type, for example WPA preshared key"
+              }
+            }
+          },
+          "metaData": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

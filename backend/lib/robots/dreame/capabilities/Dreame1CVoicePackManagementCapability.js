@@ -1,11 +1,11 @@
 const DreameMiotHelper = require("../DreameMiotHelper");
-const ValetudoVoicePackOperationStatus = require("../../../entities/core/ValetudoVoicePackOperationStatus");
+const NimbusVoicePackOperationStatus = require("../../../entities/core/NimbusVoicePackOperationStatus");
 const VoicePackManagementCapability = require("../../../core/capabilities/VoicePackManagementCapability");
 
 class Dreame1CVoicePackManagementCapability extends VoicePackManagementCapability {
     /**
      * @param {object} options
-     * @param {import("../../../core/ValetudoRobot")|any} options.robot
+     * @param {import("../../../core/NimbusRobot")|any} options.robot
      *
      * @param {number} options.siid MIOT Service ID
      * @param {number} options.aiid MIOT Action ID
@@ -76,7 +76,7 @@ class Dreame1CVoicePackManagementCapability extends VoicePackManagementCapabilit
     /**
      * This method should return the status of the current voice pack operation, if one is ongoing.
      *
-     * @returns {Promise<ValetudoVoicePackOperationStatus>}
+     * @returns {Promise<NimbusVoicePackOperationStatus>}
      */
     async getVoicePackOperationStatus() {
         // Voice pack operation status is returned via events.
@@ -84,11 +84,11 @@ class Dreame1CVoicePackManagementCapability extends VoicePackManagementCapabilit
         // I didn't find a get_properties way to retrieve it, it's unsupported (for now?) and will always return IDLE
 
         const statusOptions = {
-            type: ValetudoVoicePackOperationStatus.TYPE.IDLE,
+            type: NimbusVoicePackOperationStatus.TYPE.IDLE,
             progress: undefined
         };
 
-        return new ValetudoVoicePackOperationStatus(statusOptions);
+        return new NimbusVoicePackOperationStatus(statusOptions);
     }
 }
 

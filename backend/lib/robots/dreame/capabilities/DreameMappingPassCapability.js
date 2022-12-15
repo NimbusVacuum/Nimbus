@@ -2,13 +2,13 @@ const DreameMiotHelper = require("../DreameMiotHelper");
 const MappingPassCapability = require("../../../core/capabilities/MappingPassCapability");
 
 /**
- * @extends MappingPassCapability<import("../DreameValetudoRobot")>
+ * @extends MappingPassCapability<import("../DreameNimbusRobot")>
  */
 class DreameMappingPassCapability extends MappingPassCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {object} options.miot_actions
      * @param {object} options.miot_actions.start

@@ -1,10 +1,10 @@
 import React from "react";
 import {PaletteMode} from "@mui/material";
-import {Capability, useValetudoInformationQuery, useWifiStatusQuery} from "./api";
+import {Capability, useNimbusInformationQuery, useWifiStatusQuery} from "./api";
 import {useCapabilitiesSupported} from "./CapabilitiesProvider";
 import AppRouter from "./AppRouter";
 import ProvisioningPage from "./ProvisioningPage";
-import ValetudoSplash from "./components/ValetudoSplash";
+import NimbusSplash from "./components/NimbusSplash";
 
 //This is either just an artifact of how React works or I'm doing something wrong
 const RouterChoiceStageTwo: React.FunctionComponent<{
@@ -22,7 +22,7 @@ const RouterChoiceStageTwo: React.FunctionComponent<{
     } = useWifiStatusQuery();
 
     if (wifiConfigurationLoading) {
-        return <ValetudoSplash/>;
+        return <NimbusSplash/>;
     }
 
     if (wifiConfiguration) {
@@ -49,20 +49,19 @@ const RouterChoice: React.FunctionComponent<{
     const [bypassProvisioning, setBypassProvisioning] = React.useState(false);
     const [wifiConfigSupported] = useCapabilitiesSupported(Capability.WifiConfiguration);
     const {
-        data: valetudoInformation,
-        isLoading: valetudoInformationLoading
-    } = useValetudoInformationQuery();
+        data: nimbusInformation,
+        isLoading: nimbusInformationLoading
+    } = useNimbusInformationQuery();
 
     if (!bypassProvisioning && wifiConfigSupported) {
-        if (valetudoInformationLoading) {
-            return <ValetudoSplash/>;
+        if (nimbusInformationLoading) {
+            return <NimbusSplash/>;
         }
 
-        if (valetudoInformation && valetudoInformation.embedded) {
+        if (nimbusInformation && nimbusInformation.embedded) {
             return <RouterChoiceStageTwo paletteMode={paletteMode} setPaletteMode={setPaletteMode} setBypassProvisioning={setBypassProvisioning}/>;
         }
     }
-
 
     return (
         <AppRouter paletteMode={paletteMode} setPaletteMode={setPaletteMode}/>

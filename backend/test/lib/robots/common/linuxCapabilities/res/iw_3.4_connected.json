@@ -1,5 +1,5 @@
 {
-  "__class": "ValetudoWifiStatus",
+  "__class": "NimbusWifiStatus",
   "metaData": {},
   "state": "connected",
   "details": {

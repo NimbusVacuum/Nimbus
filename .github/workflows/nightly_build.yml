@@ -14,7 +14,6 @@
       'nightly_build':
         {
           'runs-on': 'ubuntu-latest',
-          'if': "github.repository_owner == 'Hypfer'",
           'steps':
             [
               { 
@@ -34,15 +33,15 @@
                 'run': 'npm run build_openapi_schema',
               },
               {
-                'name': 'Build Valetudo frontend',
+                'name': 'Build Nimbus frontend',
                 'run': 'npm run build --workspace=frontend',
               },
               {
-                'name': 'Build Valetudo',
+                'name': 'Build Nimbus',
                 'run': 'npm run build --workspace=backend',
               },
               {
-                'name': 'UPX-compress valetudo binaries',
+                'name': 'UPX-compress nimbus binaries',
                 'run': 'npm run upx',
               },
               {
@@ -62,11 +61,11 @@
                 },
                 'with': {
                   'source-directory': 'build',
-                  'destination-github-username': 'ValetudoBot',
-                  'destination-repository-name': 'valetudo-nightly-builds',
-                  'destination-repository-username': 'hypfer',
-                  'user-email': 'github_valetudo_bot@hypfer.de',
-                  'target-branch': 'master'
+                  'destination-github-username': 'NimbusVacBot',
+                  'destination-repository-name': 'nimbus-nightly-builds',
+                  'destination-repository-username': 'NimbusVacuum',
+                  'user-email': '120611326+NimbusVacBot@users.noreply.github.com',
+                  'target-branch': 'main'
                 }
               }
             ],

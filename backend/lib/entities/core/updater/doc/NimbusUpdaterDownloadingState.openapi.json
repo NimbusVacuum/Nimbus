@@ -1,0 +1,39 @@
+{
+  "components": {
+    "schemas": {
+      "NimbusUpdaterDownloadingState": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NimbusUpdaterState"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "The nimbus version to be installed"
+              },
+              "releaseTimestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The release date as found in the manifest"
+              },
+              "downloadUrl": {
+                "type": "string",
+                "description": "The url from which the binary will be downloaded from"
+              },
+              "expectedHash": {
+                "type": "string",
+                "description": "The expected sha256sum of the downloaded binary"
+              },
+              "downloadPath": {
+                "type": "string",
+                "description": "The path the new binary is downloaded to"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

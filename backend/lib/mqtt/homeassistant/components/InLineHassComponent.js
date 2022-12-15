@@ -5,7 +5,7 @@ class InLineHassComponent extends HassComponent {
     /**
      * @param {object} options
      * @param {import("../HassController")} options.hass
-     * @param {import("../../../core/ValetudoRobot")} options.robot
+     * @param {import("../../../core/NimbusRobot")} options.robot
      * @param {string} options.name
      * @param {string} options.friendlyName
      * @param {string} options.componentType

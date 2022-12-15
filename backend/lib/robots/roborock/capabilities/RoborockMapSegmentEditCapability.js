@@ -2,12 +2,12 @@ const MapSegmentEditCapability = require("../../../core/capabilities/MapSegmentE
 const RoborockMapParser = require("../RoborockMapParser");
 
 /**
- * @extends MapSegmentEditCapability<import("../RoborockValetudoRobot")>
+ * @extends MapSegmentEditCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockMapSegmentEditCapability extends MapSegmentEditCapability {
     /**
-     * @param {import("../../../entities/core/ValetudoMapSegment")} segmentA
-     * @param {import("../../../entities/core/ValetudoMapSegment")} segmentB
+     * @param {import("../../../entities/core/NimbusMapSegment")} segmentA
+     * @param {import("../../../entities/core/NimbusMapSegment")} segmentB
      * @returns {Promise<void>}
      */
     async joinSegments(segmentA, segmentB) {
@@ -17,7 +17,7 @@ class RoborockMapSegmentEditCapability extends MapSegmentEditCapability {
     }
 
     /**
-     * @param {import("../../../entities/core/ValetudoMapSegment")} segment
+     * @param {import("../../../entities/core/NimbusMapSegment")} segment
      * @param {object} pA
      * @param {number} pA.x
      * @param {number} pA.y

@@ -2,7 +2,7 @@ const Capability = require("./Capability");
 const NotImplementedError = require("../NotImplementedError");
 
 /**
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class PresetSelectionCapability extends Capability {
@@ -10,7 +10,7 @@ class PresetSelectionCapability extends Capability {
     /**
      * @param {object} options
      * @param {T} options.robot
-     * @param {Array<import("../../entities/core/ValetudoSelectionPreset")>} options.presets
+     * @param {Array<import("../../entities/core/NimbusSelectionPreset")>} options.presets
      */
     constructor(options) {
         super(options);

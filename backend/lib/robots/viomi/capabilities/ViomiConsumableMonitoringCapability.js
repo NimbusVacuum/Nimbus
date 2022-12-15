@@ -3,7 +3,7 @@ const ConsumableMonitoringCapability = require("../../../core/capabilities/Consu
 const ConsumableStateAttribute = require("../../../entities/state/attributes/ConsumableStateAttribute");
 
 /**
- * @extends ConsumableMonitoringCapability<import("../ViomiValetudoRobot")>
+ * @extends ConsumableMonitoringCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiConsumableMonitoringCapability extends ConsumableMonitoringCapability {
     /**

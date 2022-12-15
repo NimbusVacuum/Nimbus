@@ -7,7 +7,7 @@ order: 20
 # MQTT integration
 
 To make your robot talk to your MQTT broker and integrate with home automation software, such as but not limited to
-Home Assistant, openHAB and Node-RED, configure MQTT via Valetudo's web interface (Settings → MQTT).
+Home Assistant, openHAB and Node-RED, configure MQTT via Nimbus's web interface (Settings → MQTT).
 
 ## Autodiscovery
 
@@ -19,7 +19,7 @@ platform:
 - [Node-RED](./node-red)
 
 Other home automation software that follows the [Homie convention](https://homieiot.github.io/) should also be able to
-automatically discover your Valetudo instance.
+automatically discover your Nimbus instance.
 
 <div style="text-align: center;">
     <a href="https://homieiot.github.io" rel="noopener" target="_blank">
@@ -34,7 +34,7 @@ automatically discover your Valetudo instance.
 Note that, in order to view the map provided over MQTT, you additionally need
 [I Can't Believe It's Not Valetudo](/pages/companion_apps/i_cant_believe_its_not_valetudo.html) to generate PNG maps.
 You can then configure it to serve the PNG map over HTTP for openHAB and other software, or install the
-[Lovelace Valetudo Card Map](/pages/companion_apps/lovelace_valetudo_map_card.html) for Home Assistant. 
+[Lovelace Valetudo Card Map](/pages/companion_apps/lovelace_valetudo_map_card.html) for Home Assistant.
 
 ## Custom integrations
 
@@ -54,57 +54,65 @@ Homie autodiscovery info is best viewed with something like [MQTT Explorer](http
 
 ### Table of contents
 
- - [Robot](#robot)
-   - [Capabilities](#capabilities)
-     - [Auto Empty Dock Manual Trigger (`AutoEmptyDockManualTriggerCapability`)](#autoemptydockmanualtriggerautoemptydockmanualtriggercapability)
-       - [Auto Empty Dock Manual Trigger (`trigger`)](#autoemptydockmanualtriggertrigger)
-     - [Basic control (`BasicControlCapability`)](#basiccontrolbasiccontrolcapability)
-       - [Operation (`operation`)](#operationoperation)
-     - [Consumables monitoring (`ConsumableMonitoringCapability`)](#consumablesmonitoringconsumablemonitoringcapability)
-       - [Consumable (minutes) (`<CONSUMABLE-MINUTES>`)](#consumableminutesconsumable-minutes)
-       - [Consumable (percent) (`<CONSUMABLE-PERCENT>`)](#consumablepercentconsumable-percent)
-     - [Current Statistics (`CurrentStatisticsCapability`)](#currentstatisticscurrentstatisticscapability)
-       - [Current Statistics Area (`area`)](#currentstatisticsareaarea)
-       - [Current Statistics Time (`time`)](#currentstatisticstimetime)
-       - [Refresh current statistics (`refresh`)](#refreshcurrentstatisticsrefresh)
-     - [Fan speed control (`FanSpeedControlCapability`)](#fanspeedcontrolfanspeedcontrolcapability)
-       - [Fan speed (`preset`)](#fanspeedpreset)
-     - [Go to location (`GoToLocationCapability`)](#gotolocationgotolocationcapability)
-       - [Go to location (`go`)](#gotolocationgo)
-     - [Locate (`LocateCapability`)](#locatelocatecapability)
-       - [Locate (`locate`)](#locatelocate)
-     - [Segment cleaning (`MapSegmentationCapability`)](#segmentcleaningmapsegmentationcapability)
-       - [Clean segments (`clean`)](#cleansegmentsclean)
-     - [Speaker volume control (`SpeakerVolumeControlCapability`)](#speakervolumecontrolspeakervolumecontrolcapability)
-       - [Speaker volume (`value`)](#speakervolumevalue)
-     - [Water grade control (`WaterUsageControlCapability`)](#watergradecontrolwaterusagecontrolcapability)
-       - [Water grade (`preset`)](#watergradepreset)
-     - [Wi-Fi configuration (`WifiConfigurationCapability`)](#wi-ficonfigurationwificonfigurationcapability)
-       - [Frequency (`frequency`)](#frequencyfrequency)
-       - [IP addresses (`ips`)](#ipaddressesips)
-       - [Refresh configuration (`refresh`)](#refreshconfigurationrefresh)
-       - [Signal (`signal`)](#signalsignal)
-       - [Wireless network (`ssid`)](#wirelessnetworkssid)
-     - [Zone cleaning (`ZoneCleaningCapability`)](#zonecleaningzonecleaningcapability)
-       - [Start zoned cleaning (`start`)](#startzonedcleaningstart)
-   - [Map data](#mapdata)
-     - [Map (`map`)](#mapmap)
-     - [Map segments (`segments`)](#mapsegmentssegments)
-     - [Raw map data (`map-data`)](#rawmapdatamap-data)
-     - [Raw map data for Home Assistant (`map-data-hass`)](#rawmapdataforhomeassistantmap-data-hass)
-   - [Status](#status)
-     - [Attachment state (`AttachmentStateAttribute`)](#attachmentstateattachmentstateattribute)
-       - [Dust bin (`dustbin`)](#dustbindustbin)
-       - [Mop (`mop`)](#mopmop)
-       - [Water tank (`watertank`)](#watertankwatertank)
-     - [Battery state (`BatteryStateAttribute`)](#batterystatebatterystateattribute)
-       - [Battery level (`level`)](#batterylevellevel)
-       - [Battery status (`status`)](#batterystatusstatus)
-     - [Vacuum status (`StatusStateAttribute`)](#vacuumstatusstatusstateattribute)
-       - [Error description (`error_description`)](#errordescriptionerrordescription)
-       - [Robot Error (`error`)](#roboterrorerror)
-       - [Status (`status`)](#statusstatus)
-       - [Status detail (`detail`)](#statusdetaildetail)
+- [MQTT integration](#mqtt-integration)
+  - [Autodiscovery](#autodiscovery)
+  - [Map](#map)
+  - [Custom integrations](#custom-integrations)
+    - [Table of contents](#table-of-contents)
+    - [State attributes index](#state-attributes-index)
+    - [Home Assistant components index](#home-assistant-components-index)
+- [MQTT API reference](#mqtt-api-reference)
+  - [Robot ](#robot-)
+    - [Capabilities ](#capabilities-)
+      - [Auto Empty Dock Manual Trigger (`AutoEmptyDockManualTriggerCapability`) ](#auto-empty-dock-manual-trigger-autoemptydockmanualtriggercapability-)
+        - [Auto Empty Dock Manual Trigger (`trigger`) ](#auto-empty-dock-manual-trigger-trigger-)
+      - [Basic control (`BasicControlCapability`) ](#basic-control-basiccontrolcapability-)
+        - [Operation (`operation`) ](#operation-operation-)
+      - [Consumables monitoring (`ConsumableMonitoringCapability`) ](#consumables-monitoring-consumablemonitoringcapability-)
+        - [Consumable (minutes) (`<CONSUMABLE-MINUTES>`) ](#consumable-minutes-consumable-minutes-)
+        - [Consumable (percent) (`<CONSUMABLE-PERCENT>`) ](#consumable-percent-consumable-percent-)
+      - [Current Statistics (`CurrentStatisticsCapability`) ](#current-statistics-currentstatisticscapability-)
+        - [Current Statistics Area (`area`) ](#current-statistics-area-area-)
+        - [Refresh current statistics (`refresh`) ](#refresh-current-statistics-refresh-)
+        - [Current Statistics Time (`time`) ](#current-statistics-time-time-)
+      - [Fan speed control (`FanSpeedControlCapability`) ](#fan-speed-control-fanspeedcontrolcapability-)
+        - [Fan speed (`preset`) ](#fan-speed-preset-)
+      - [Go to location (`GoToLocationCapability`) ](#go-to-location-gotolocationcapability-)
+        - [Go to location (`go`) ](#go-to-location-go-)
+      - [Locate (`LocateCapability`) ](#locate-locatecapability-)
+        - [Locate (`locate`) ](#locate-locate-)
+      - [Segment cleaning (`MapSegmentationCapability`) ](#segment-cleaning-mapsegmentationcapability-)
+        - [Clean segments (`clean`) ](#clean-segments-clean-)
+      - [Speaker volume control (`SpeakerVolumeControlCapability`) ](#speaker-volume-control-speakervolumecontrolcapability-)
+        - [Speaker volume (`value`) ](#speaker-volume-value-)
+      - [Water grade control (`WaterUsageControlCapability`) ](#water-grade-control-waterusagecontrolcapability-)
+        - [Water grade (`preset`) ](#water-grade-preset-)
+      - [Wi-Fi configuration (`WifiConfigurationCapability`) ](#wi-fi-configuration-wificonfigurationcapability-)
+        - [Frequency (`frequency`) ](#frequency-frequency-)
+        - [IP addresses (`ips`) ](#ip-addresses-ips-)
+        - [Refresh configuration (`refresh`) ](#refresh-configuration-refresh-)
+        - [Signal (`signal`) ](#signal-signal-)
+        - [Wireless network (`ssid`) ](#wireless-network-ssid-)
+      - [Zone cleaning (`ZoneCleaningCapability`) ](#zone-cleaning-zonecleaningcapability-)
+        - [Start zoned cleaning (`start`) ](#start-zoned-cleaning-start-)
+    - [Map data ](#map-data-)
+      - [Map (`map`) ](#map-map-)
+      - [Raw map data (`map-data`) ](#raw-map-data-map-data-)
+      - [Raw map data for Home Assistant (`map-data-hass`) ](#raw-map-data-for-home-assistant-map-data-hass-)
+      - [Map segments (`segments`) ](#map-segments-segments-)
+    - [Status ](#status-)
+      - [Attachment state (`AttachmentStateAttribute`) ](#attachment-state-attachmentstateattribute-)
+        - [Dust bin (`dustbin`) ](#dust-bin-dustbin-)
+        - [Mop (`mop`) ](#mop-mop-)
+        - [Water tank (`watertank`) ](#water-tank-watertank-)
+      - [Battery state (`BatteryStateAttribute`) ](#battery-state-batterystateattribute-)
+        - [Battery level (`level`) ](#battery-level-level-)
+        - [Battery status (`status`) ](#battery-status-status-)
+      - [Vacuum status (`StatusStateAttribute`) ](#vacuum-status-statusstateattribute-)
+        - [Status detail (`detail`) ](#status-detail-detail-)
+        - [Robot Error (`error`) ](#robot-error-error-)
+        - [Error description (`error_description`) ](#error-description-error_description-)
+        - [Status (`status`) ](#status-status-)
 
 
 ### State attributes index
@@ -347,7 +355,7 @@ max
 
 This handle accepts a JSON object identical to the one used by the REST API.
 
-Please refer to the "General Help" section in Valetudo for more information.
+Please refer to the "General Help" section in Nimbus for more information.
 
 Sample payload:
 
@@ -394,7 +402,7 @@ Sample payload:
 
 This handle accepts a JSON object identical to the one used by the REST API.
 
-Please refer to the "General Help" section in Valetudo for more information.
+Please refer to the "General Help" section in Nimbus for more information.
 
 Sample payload:
 
@@ -422,7 +430,7 @@ Sample payload:
 
 *Node, capability: [SpeakerVolumeControlCapability](/pages/usage/capabilities-overview.html#speakervolumecontrolcapability)*
 
-**Note:** This is an optional exposed capability handle and thus will only be available via MQTT if enabled in the Valetudo configuration.
+**Note:** This is an optional exposed capability handle and thus will only be available via MQTT if enabled in the Nimbus configuration.
 
 ##### Speaker volume (`value`) <a id="speakervolumevalue" />
 
@@ -563,7 +571,7 @@ Sample value:
 Sample value:
 
 ```
-Valetudo Wi-Fi
+Nimbus Wi-Fi
 ```
 
 
@@ -580,7 +588,7 @@ Valetudo Wi-Fi
 
 This handle accepts a JSON object identical to the one used by the REST API.
 
-Please refer to the "General Help" section in Valetudo for more information.
+Please refer to the "General Help" section in Nimbus for more information.
 
 Sample payload:
 
@@ -836,7 +844,7 @@ segment
 
 *Property, readable, retained*
 
-This property contains the current ValetudoRobotError (if any)
+This property contains the current NimbusRobotError (if any)
 
 - Read topic: `<TOPIC PREFIX>/<IDENTIFIER>/StatusStateAttribute/error`
 - Data type: [string](https://homieiot.github.io/specification/#string) (JSON)

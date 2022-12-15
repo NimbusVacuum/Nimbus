@@ -7,7 +7,7 @@
         "properties": {
           "embedded": {
             "type": "boolean",
-            "description": "Whether or not Valetudo is running on the robot itself.\nDetermines if we can do FS access and more."
+            "description": "Whether or not Nimbus is running on the robot itself.\nDetermines if we can do FS access and more."
           },
           "robot": {
             "type": "object",
@@ -186,7 +186,7 @@
             "properties": {
               "topicPrefix": {
                 "type": "string",
-                "description": "You can override the default \"valetudo\" mqtt topic prefix if you e.g. prefer to group all your mqtt stuff by rooms/floors/protocols"
+                "description": "You can override the default \"nimbus\" mqtt topic prefix if you e.g. prefer to group all your mqtt stuff by rooms/floors/protocols"
               },
               "provideMapData": {
                 "type": "boolean",
@@ -346,7 +346,7 @@
           }
         }
       },
-      "ValetudoTimer": {
+      "NimbusTimer": {
         "type": "object",
         "description": "Everything time-related is in UTC",
         "required": [

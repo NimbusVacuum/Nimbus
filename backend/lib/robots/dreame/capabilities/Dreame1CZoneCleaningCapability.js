@@ -3,13 +3,13 @@ const RobotFirmwareError = require("../../../core/RobotFirmwareError");
 const ZoneCleaningCapability = require("../../../core/capabilities/ZoneCleaningCapability");
 
 /**
- * @extends ZoneCleaningCapability<import("../Dreame1CValetudoRobot")>
+ * @extends ZoneCleaningCapability<import("../Dreame1CNimbusRobot")>
  */
 class Dreame1CZoneCleaningCapability extends ZoneCleaningCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../Dreame1CValetudoRobot")} options.robot
+     * @param {import("../Dreame1CNimbusRobot")} options.robot
      *
      * @param {object} options.miot_actions
      * @param {object} options.miot_actions.start
@@ -33,15 +33,14 @@ class Dreame1CZoneCleaningCapability extends ZoneCleaningCapability {
         this.zoneCleaningModeId = options.zoneCleaningModeId;
     }
 
-
     /**
-     * @param {Array<import("../../../entities/core/ValetudoZone")>} valetudoZones
+     * @param {Array<import("../../../entities/core/NimbusZone")>} nimbusZones
      * @returns {Promise<void>}
      */
-    async start(valetudoZones) {
+    async start(nimbusZones) {
         const zones = [];
 
-        valetudoZones.forEach((vZ, i) => {
+        nimbusZones.forEach((vZ, i) => {
             const pA = DreameMapParser.CONVERT_TO_DREAME_COORDINATES(vZ.points.pA.x, vZ.points.pA.y);
             const pC = DreameMapParser.CONVERT_TO_DREAME_COORDINATES(vZ.points.pC.x, vZ.points.pC.y);
 

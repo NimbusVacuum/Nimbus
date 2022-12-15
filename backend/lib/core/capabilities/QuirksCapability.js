@@ -3,7 +3,7 @@ const Logger = require("../../Logger");
 
 /**
  *
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class QuirksCapability extends Capability {

@@ -1,19 +1,19 @@
 const DoNotDisturbCapability = require("../../../core/capabilities/DoNotDisturbCapability");
-const ValetudoDNDConfiguration = require("../../../entities/core/ValetudoDNDConfiguration");
+const NimbusDNDConfiguration = require("../../../entities/core/NimbusDNDConfiguration");
 
 /**
- * @extends DoNotDisturbCapability<import("../RoborockValetudoRobot")>
+ * @extends DoNotDisturbCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockDoNotDisturbCapability extends DoNotDisturbCapability {
     /**
      *
-     * @returns {Promise<ValetudoDNDConfiguration>}
+     * @returns {Promise<NimbusDNDConfiguration>}
      */
     async getDndConfiguration() {
         const res = await this.robot.sendCommand("get_dnd_timer", [], {});
         const offset = new Date().getTimezoneOffset();
 
-        return new ValetudoDNDConfiguration({
+        return new NimbusDNDConfiguration({
             enabled: (res[0].enabled === 1),
             start: RoborockDoNotDisturbCapability.convertTime(
                 res[0].start_hour,
@@ -30,7 +30,7 @@ class RoborockDoNotDisturbCapability extends DoNotDisturbCapability {
 
     /**
      * @abstract
-     * @param {ValetudoDNDConfiguration} dndConfig
+     * @param {NimbusDNDConfiguration} dndConfig
      * @returns {Promise<void>}
      */
     async setDndConfiguration(dndConfig) {
@@ -59,13 +59,13 @@ class RoborockDoNotDisturbCapability extends DoNotDisturbCapability {
     }
 
     /**
-     * Valetudo aims to use UTC only and leave timezone conversion stuff to the frontend.
+     * Nimbus aims to use UTC only and leave timezone conversion stuff to the frontend.
      * This will work fine for most things, however unfortunately Roborock DND is an edge case
      * 
      * Due to the daily reboot happening at 3-4am, the robot cannot use UTC as its system time
      * since that would interfere with regular operation for users that don't live near UTC
      * 
-     * Therefore, the timezone needs to be set correctly (out of scope for valetudo!) and
+     * Therefore, the timezone needs to be set correctly (out of scope for nimbus!) and
      * we need to store DND as localTime
      * 
      * @private

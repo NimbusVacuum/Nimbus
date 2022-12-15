@@ -42,7 +42,7 @@ const Connectivity = (): JSX.Element => {
                 key="mqttConnectivity"
                 url="/settings/connectivity/mqtt"
                 primaryLabel="MQTT Connectivity"
-                secondaryLabel="Connect Valetudo to your MQTT Broker"
+                secondaryLabel="Connect Nimbus to your MQTT Broker"
                 icon={<MQTTIcon/>}
             />
         );
@@ -72,7 +72,7 @@ const Connectivity = (): JSX.Element => {
                 key="authSettings"
                 url="/settings/connectivity/auth"
                 primaryLabel="Auth Settings"
-                secondaryLabel="Restrict access to Valetudo"
+                secondaryLabel="Restrict access to Nimbus"
                 icon={<AuthIcon/>}
             />
         );
@@ -86,7 +86,7 @@ const Connectivity = (): JSX.Element => {
         <PaperContainer>
             <ListMenu
                 primaryHeader={"Connectivity Settings"}
-                secondaryHeader={"Configure how Valetudo and your robot communicate with the outside world"}
+                secondaryHeader={"Configure how Nimbus and your robot communicate with the outside world"}
                 listItems={listItems}
             />
         </PaperContainer>

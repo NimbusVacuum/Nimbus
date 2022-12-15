@@ -1,14 +1,14 @@
 const CapabilityMqttHandle = require("./CapabilityMqttHandle");
 const DataType = require("../homie/DataType");
 const PropertyMqttHandle = require("../handles/PropertyMqttHandle");
-const ValetudoGoToLocation = require("../../entities/core/ValetudoGoToLocation");
+const NimbusGoToLocation = require("../../entities/core/NimbusGoToLocation");
 
 class GoToLocationCapabilityMqttHandle extends CapabilityMqttHandle {
     /**
      * @param {object} options
      * @param {import("../handles/RobotMqttHandle")} options.parent
      * @param {import("../MqttController")} options.controller MqttController instance
-     * @param {import("../../core/ValetudoRobot")} options.robot
+     * @param {import("../../core/NimbusRobot")} options.robot
      * @param {import("../../core/capabilities/GoToLocationCapability")} options.capability
      */
     constructor(options) {
@@ -32,7 +32,7 @@ class GoToLocationCapabilityMqttHandle extends CapabilityMqttHandle {
                     typeof reqGoToLocation.coordinates.x === "number" &&
                     typeof reqGoToLocation.coordinates.y === "number"
                 ) {
-                    await this.capability.goTo(new ValetudoGoToLocation({
+                    await this.capability.goTo(new NimbusGoToLocation({
                         coordinates: {
                             x: reqGoToLocation.coordinates.x,
                             y: reqGoToLocation.coordinates.y
@@ -43,7 +43,7 @@ class GoToLocationCapabilityMqttHandle extends CapabilityMqttHandle {
                 }
             },
             helpText: "This handle accepts a JSON object identical to the one used by the REST API.\n\n" +
-                "Please refer to the \"General Help\" section in Valetudo for more information.\n\n" +
+                "Please refer to the \"General Help\" section in Nimbus for more information.\n\n" +
                 "Sample payload:\n\n" +
                 "```json\n" +
                 JSON.stringify({
@@ -61,4 +61,3 @@ class GoToLocationCapabilityMqttHandle extends CapabilityMqttHandle {
 GoToLocationCapabilityMqttHandle.OPTIONAL = false;
 
 module.exports = GoToLocationCapabilityMqttHandle;
-

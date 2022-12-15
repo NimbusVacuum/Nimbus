@@ -3,13 +3,13 @@ const RobotFirmwareError = require("../../../core/RobotFirmwareError");
 
 
 /**
- * @extends PendingMapChangeHandlingCapability<import("../DreameValetudoRobot")>
+ * @extends PendingMapChangeHandlingCapability<import("../DreameNimbusRobot")>
  */
 class DreamePendingMapChangeHandlingCapability extends PendingMapChangeHandlingCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {object} options.miot_actions
      * @param {object} options.miot_actions.map_edit

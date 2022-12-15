@@ -15,8 +15,7 @@ const notFoundPages = require("./res/404");
 
 const Middlewares = require("./middlewares");
 const RobotRouter = require("./RobotRouter");
-const ValetudoRouter = require("./ValetudoRouter");
-
+const NimbusRouter = require("./NimbusRouter");
 
 const fs = require("fs");
 const MQTTRouter = require("./MQTTRouter");
@@ -27,17 +26,17 @@ const SystemRouter = require("./SystemRouter");
 const TimerRouter = require("./TimerRouter");
 const Tools = require("../utils/Tools");
 const UpdaterRouter = require("./UpdaterRouter");
-const ValetudoEventRouter = require("./ValetudoEventRouter");
+const NimbusEventRouter = require("./NimbusEventRouter");
 
 class WebServer {
     /**
      * @param {object} options
-     * @param {import("../core/ValetudoRobot")} options.robot
+     * @param {import("../core/NimbusRobot")} options.robot
      * @param {import("../mqtt/MqttController")} options.mqttController
      * @param {import("../NetworkAdvertisementManager")} options.networkAdvertisementManager
      * @param {import("../NTPClient")} options.ntpClient
      * @param {import("../updater/Updater")} options.updater
-     * @param {import("../ValetudoEventStore")} options.valetudoEventStore
+     * @param {import("../NimbusEventStore")} options.nimbusEventStore
      * @param {import("../Configuration")} options.config
      */
     constructor(options) {
@@ -46,7 +45,7 @@ class WebServer {
         this.robot = options.robot;
         this.config = options.config;
 
-        this.valetudoEventStore = options.valetudoEventStore;
+        this.nimbusEventStore = options.nimbusEventStore;
 
         this.webserverConfig = this.config.get("webserver");
 
@@ -118,11 +117,11 @@ class WebServer {
         }
 
         this.robotRouter = new RobotRouter({robot: this.robot, validator: this.validator});
-        this.valetudoRouter = new ValetudoRouter({config: this.config, robot: this.robot, validator: this.validator});
+        this.nimbusRouter = new NimbusRouter({config: this.config, robot: this.robot, validator: this.validator});
 
         this.app.use("/api/v2/robot/", this.robotRouter.getRouter());
 
-        this.app.use("/api/v2/valetudo/", this.valetudoRouter.getRouter());
+        this.app.use("/api/v2/nimbus/", this.nimbusRouter.getRouter());
 
         this.app.use("/api/v2/mqtt/", new MQTTRouter({config: this.config, mqttController: options.mqttController, validator: this.validator}).getRouter());
 
@@ -134,7 +133,7 @@ class WebServer {
 
         this.app.use("/api/v2/system/", new SystemRouter({}).getRouter());
 
-        this.app.use("/api/v2/events/", new ValetudoEventRouter({valetudoEventStore: this.valetudoEventStore, validator: this.validator}).getRouter());
+        this.app.use("/api/v2/events/", new NimbusEventRouter({nimbusEventStore: this.nimbusEventStore, validator: this.validator}).getRouter());
 
         this.app.use("/api/v2/updater/", new UpdaterRouter({config: this.config, updater: options.updater, validator: this.validator}).getRouter());
 
@@ -161,9 +160,7 @@ class WebServer {
             res.json(endpointsMap);
         });
 
-
         this.robot.initModelSpecificWebserverRoutes(this.app);
-
 
         this.app.use((err, req, res, next) => {
             if (err instanceof swaggerValidation.InputValidationError) {
@@ -225,7 +222,7 @@ class WebServer {
         return new Promise((resolve, reject) => {
             Logger.debug("Webserver shutdown in progress...");
             this.robotRouter.shutdown();
-            this.valetudoRouter.shutdown();
+            this.nimbusRouter.shutdown();
 
             //closing the server
             this.webserver.close(() => {
@@ -242,11 +239,10 @@ class WebServer {
         let spec;
 
         try {
-            spec = JSON.parse(fs.readFileSync(path.join(__dirname, "../res/valetudo.openapi.schema.json")).toString());
+            spec = JSON.parse(fs.readFileSync(path.join(__dirname, "../res/nimbus.openapi.schema.json")).toString());
         } catch (e) {
             Logger.warn("Failed to load OpenApi spec. Swagger endpoint and payload validation will be unavailable.", e.message);
         }
-
 
         const capabilityRoutePathRegex = /\/api\/v2\/robot\/capabilities\/(?<capabilityName>[A-Za-z]+)/;
         const supportedCapabilities = Object.keys(this.robot.capabilities);
@@ -263,7 +259,6 @@ class WebServer {
         spec.tags = spec.tags.filter(tag => {
             return !(tag.name.endsWith("Capability") && !supportedCapabilities.includes(tag.name));
         });
-
 
         this.openApiSpec = spec;
     }

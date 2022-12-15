@@ -7,10 +7,10 @@ const Logger = require("../Logger");
 
 class CapabilitiesRouter {
     /**
-     * Takes a ValetudoRobot and creates routers for each capability it features
+     * Takes a NimbusRobot and creates routers for each capability it features
      *
      * @param {object} options
-     * @param {import("../core/ValetudoRobot")} options.robot
+     * @param {import("../core/NimbusRobot")} options.robot
      * @param {*} options.validator
      */
     constructor(options) {
@@ -21,7 +21,6 @@ class CapabilitiesRouter {
 
         this.initRoutes();
     }
-
 
     initRoutes() {
         this.router.get("/", (req, res) => {

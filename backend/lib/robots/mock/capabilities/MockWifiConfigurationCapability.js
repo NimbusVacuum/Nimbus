@@ -1,4 +1,4 @@
-const ValetudoWifiStatus = require("../../../entities/core/ValetudoWifiStatus");
+const NimbusWifiStatus = require("../../../entities/core/NimbusWifiStatus");
 const WifiConfigurationCapability = require("../../../core/capabilities/WifiConfigurationCapability");
 
 /**
@@ -13,11 +13,11 @@ class MockWifiConfigurationCapability extends WifiConfigurationCapability {
         super(Object.assign({}, options, {networkInterface: "wlan0"}));
 
         this.connected = true;
-        this.ssid = "Valetudo Wi-Fi";
+        this.ssid = "Nimbus Wi-Fi";
     }
 
     /**
-     * @returns {Promise<ValetudoWifiStatus>}
+     * @returns {Promise<NimbusWifiStatus>}
      */
     async getWifiStatus() {
         if (this.robot.config.get("embedded") === true) {
@@ -25,7 +25,7 @@ class MockWifiConfigurationCapability extends WifiConfigurationCapability {
         }
 
         const output = {
-            state: this.connected ? ValetudoWifiStatus.STATE.CONNECTED : ValetudoWifiStatus.STATE.NOT_CONNECTED,
+            state: this.connected ? NimbusWifiStatus.STATE.CONNECTED : NimbusWifiStatus.STATE.NOT_CONNECTED,
             details: {}
         };
 
@@ -35,16 +35,16 @@ class MockWifiConfigurationCapability extends WifiConfigurationCapability {
                 upspeed: 72.2,
                 downspeed: 54,
                 ips: ["192.168.100.100", "fe80::1ff:fe23:4567:890a", "fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"],
-                frequency: ValetudoWifiStatus.FREQUENCY_TYPE.W2_4Ghz,
+                frequency: NimbusWifiStatus.FREQUENCY_TYPE.W2_4Ghz,
                 ssid: this.ssid
             });
         }
 
-        return new ValetudoWifiStatus(output);
+        return new NimbusWifiStatus(output);
     }
 
     /**
-     * @param {import("../../../entities/core/ValetudoWifiConfiguration")} wifiConfig
+     * @param {import("../../../entities/core/NimbusWifiConfiguration")} wifiConfig
      * @returns {Promise<void>}
      */
     async setWifiConfiguration(wifiConfig) {

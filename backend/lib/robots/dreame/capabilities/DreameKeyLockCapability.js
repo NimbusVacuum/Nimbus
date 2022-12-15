@@ -2,13 +2,13 @@ const DreameMiotHelper = require("../DreameMiotHelper");
 const KeyLockCapability = require("../../../core/capabilities/KeyLockCapability");
 
 /**
- * @extends KeyLockCapability<import("../DreameValetudoRobot")>
+ * @extends KeyLockCapability<import("../DreameNimbusRobot")>
  */
 class DreameKeyLockCapability extends KeyLockCapability {
 
     /**
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {number} options.siid MIOT Service ID
      * @param {number} options.piid MIOT Property ID

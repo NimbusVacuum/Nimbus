@@ -4,7 +4,7 @@ const NotImplementedError = require("../NotImplementedError");
 /**
  * Some robots may allow for or even require a mapping pass instead of building the map as they go.
  *
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class MappingPassCapability extends Capability {

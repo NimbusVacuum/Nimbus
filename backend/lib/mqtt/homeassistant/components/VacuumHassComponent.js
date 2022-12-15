@@ -8,7 +8,7 @@ class VacuumHassComponent extends HassComponent {
     /**
      * @param {object} options
      * @param {import("../HassController")} options.hass
-     * @param {import("../../../core/ValetudoRobot")} options.robot
+     * @param {import("../../../core/NimbusRobot")} options.robot
      */
     constructor(options) {
         super(Object.assign(options, {
@@ -57,7 +57,6 @@ class VacuumHassComponent extends HassComponent {
         return result;
     }
 
-
     getTopics() {
         const result = {
             "state": {
@@ -70,7 +69,6 @@ class VacuumHassComponent extends HassComponent {
         }
         return result;
     }
-
 
     getInterestingTopics() {
         return {

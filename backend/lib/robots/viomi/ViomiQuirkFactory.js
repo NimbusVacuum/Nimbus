@@ -4,7 +4,7 @@ class ViomiQuirkFactory {
     /**
      *
      * @param {object} options
-     * @param {import("./ViomiValetudoRobot")} options.robot
+     * @param {import("./ViomiNimbusRobot")} options.robot
      */
     constructor(options) {
         this.robot = options.robot;

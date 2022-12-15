@@ -3,14 +3,14 @@ const DreameUtils = require("../DreameUtils");
 const OperationModeControlCapability = require("../../../core/capabilities/OperationModeControlCapability");
 
 /**
- * @extends OperationModeControlCapability<import("../DreameValetudoRobot")>
+ * @extends OperationModeControlCapability<import("../DreameNimbusRobot")>
  */
 class DreameOperationModeControlCapability extends OperationModeControlCapability {
 
     /**
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
-     * @param {Array<import("../../../entities/core/ValetudoSelectionPreset")>} options.presets
+     * @param {import("../DreameNimbusRobot")} options.robot
+     * @param {Array<import("../../../entities/core/NimbusSelectionPreset")>} options.presets
      *
      * @param {number} options.siid MIOT Service ID
      * @param {number} options.piid MIOT Property ID

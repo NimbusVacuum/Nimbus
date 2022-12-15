@@ -1,0 +1,18 @@
+{
+  "components": {
+    "schemas": {
+      "NimbusUpdaterDisabledState": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NimbusUpdaterState"
+          },
+          {
+            "type": "object",
+            "properties": {
+            }
+          }
+        ]
+      }
+    }
+  }
+}

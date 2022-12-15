@@ -7,11 +7,10 @@ const zlib = require("zlib");
  * @property {Buffer} view
  */
 
-
 class ThreeIRobotixMapParser {
     /**
      * @param {Buffer} mapBuf Should contain map data
-     * @returns {null|import("../../entities/map/ValetudoMap")}
+     * @returns {null|import("../../entities/map/NimbusMap")}
      */
     static PARSE(mapBuf){
         if (mapBuf.length < 4) {
@@ -34,7 +33,6 @@ class ThreeIRobotixMapParser {
         }
 
         const processedBlocks = ThreeIRobotixMapParser.PROCESS_BLOCKS(blocks, uniqueMapId === 0);
-
 
         return ThreeIRobotixMapParser.POST_PROCESS_BLOCKS(processedBlocks, uniqueMapId);
     }
@@ -229,7 +227,6 @@ class ThreeIRobotixMapParser {
             throw new Error("Image block does not contain the correct amount of pixels or invalid image header.");
         }
 
-
         const pixelData = block.view.subarray(40);
         const pixels = {
             floor: [],
@@ -278,7 +275,6 @@ class ThreeIRobotixMapParser {
             }
         }
 
-
         return {
             mapId: header.mapId,
             position: {
@@ -302,7 +298,6 @@ class ThreeIRobotixMapParser {
         const segments = {};
         let offset = 4;
 
-
         const mapNameLength = block.view[offset];
         offset += mapNameLength + 1;
         // For now, we'll just ignore that map name
@@ -323,7 +318,6 @@ class ThreeIRobotixMapParser {
 
             segments[segmentId] = name;
         }
-
 
         return segments;
     }
@@ -349,7 +343,7 @@ class ThreeIRobotixMapParser {
 
         for (let i = 0; i < header.pathLength; i++) {
             // The first byte is the mode. 0: taxiing, 1: cleaning
-            const convertedCoordinates = ThreeIRobotixMapParser.CONVERT_TO_VALETUDO_COORDINATES(
+            const convertedCoordinates = ThreeIRobotixMapParser.CONVERT_TO_NIMBUS_COORDINATES(
                 block.view.readFloatLE(offset + 1),
                 block.view.readFloatLE(offset + 5)
             );
@@ -366,7 +360,7 @@ class ThreeIRobotixMapParser {
      */
     static PARSE_ROBOT_POSITION_BLOCK(block) {
         // At offset 4 there's some ID and after that there's what seems to be some kind of flag byte?
-        const convertedCoordinates = ThreeIRobotixMapParser.CONVERT_TO_VALETUDO_COORDINATES(
+        const convertedCoordinates = ThreeIRobotixMapParser.CONVERT_TO_NIMBUS_COORDINATES(
             block.view.readFloatLE(9),
             block.view.readFloatLE(13)
         );
@@ -375,7 +369,7 @@ class ThreeIRobotixMapParser {
         return {
             x: convertedCoordinates.x,
             y: convertedCoordinates.y,
-            angle: ThreeIRobotixMapParser.CONVERT_TO_VALETUDO_ANGLE(angle)
+            angle: ThreeIRobotixMapParser.CONVERT_TO_NIMBUS_ANGLE(angle)
         };
     }
 
@@ -383,7 +377,7 @@ class ThreeIRobotixMapParser {
      * @param {Block} block
      */
     static PARSE_CHARGER_LOCATION_BLOCK(block) {
-        const convertedCoordinates = ThreeIRobotixMapParser.CONVERT_TO_VALETUDO_COORDINATES(
+        const convertedCoordinates = ThreeIRobotixMapParser.CONVERT_TO_NIMBUS_COORDINATES(
             block.view.readFloatLE(4),
             block.view.readFloatLE(8)
         );
@@ -392,7 +386,7 @@ class ThreeIRobotixMapParser {
         return {
             x: convertedCoordinates.x,
             y: convertedCoordinates.y,
-            angle: ThreeIRobotixMapParser.CONVERT_TO_VALETUDO_ANGLE(angle)
+            angle: ThreeIRobotixMapParser.CONVERT_TO_NIMBUS_ANGLE(angle)
         };
     }
 
@@ -410,7 +404,6 @@ class ThreeIRobotixMapParser {
         const restrictionCount = block.view.readUInt32LE(8);
         let offset = 12;
 
-
         for (let i = 0; i < restrictionCount; i++) {
             offset += 12; // some kind of header
 
@@ -425,15 +418,15 @@ class ThreeIRobotixMapParser {
 
             if (canHaveWalls && x0 === x1 && y0 === y1 && x2 === x3 && y2 === y3) {
                 areaData.walls.push([
-                    ...Object.values(ThreeIRobotixMapParser.CONVERT_TO_VALETUDO_COORDINATES(x0, y0)),
-                    ...Object.values(ThreeIRobotixMapParser.CONVERT_TO_VALETUDO_COORDINATES(x2, y2)),
+                    ...Object.values(ThreeIRobotixMapParser.CONVERT_TO_NIMBUS_COORDINATES(x0, y0)),
+                    ...Object.values(ThreeIRobotixMapParser.CONVERT_TO_NIMBUS_COORDINATES(x2, y2)),
                 ]);
             } else {
                 areaData.areas.push([
-                    ...Object.values(ThreeIRobotixMapParser.CONVERT_TO_VALETUDO_COORDINATES(x0, y0)),
-                    ...Object.values(ThreeIRobotixMapParser.CONVERT_TO_VALETUDO_COORDINATES(x1, y1)),
-                    ...Object.values(ThreeIRobotixMapParser.CONVERT_TO_VALETUDO_COORDINATES(x2, y2)),
-                    ...Object.values(ThreeIRobotixMapParser.CONVERT_TO_VALETUDO_COORDINATES(x3, y3)),
+                    ...Object.values(ThreeIRobotixMapParser.CONVERT_TO_NIMBUS_COORDINATES(x0, y0)),
+                    ...Object.values(ThreeIRobotixMapParser.CONVERT_TO_NIMBUS_COORDINATES(x1, y1)),
+                    ...Object.values(ThreeIRobotixMapParser.CONVERT_TO_NIMBUS_COORDINATES(x2, y2)),
+                    ...Object.values(ThreeIRobotixMapParser.CONVERT_TO_NIMBUS_COORDINATES(x3, y3)),
                 ]);
             }
 
@@ -448,7 +441,7 @@ class ThreeIRobotixMapParser {
      *
      * @param {object} blocks
      * @param {number} uniqueMapId
-     * @returns {null|import("../../entities/map/ValetudoMap")}
+     * @returns {null|import("../../entities/map/NimbusMap")}
      */
     static POST_PROCESS_BLOCKS(blocks, uniqueMapId) {
         if (blocks[TYPE_FLAGS.MAP_IMAGE]?.pixels) {
@@ -483,7 +476,6 @@ class ThreeIRobotixMapParser {
                     }
                 }));
             });
-
 
             if (blocks[TYPE_FLAGS.PATH]?.length > 0) {
                 entities.push(new Map.PathMapEntity({
@@ -566,7 +558,7 @@ class ThreeIRobotixMapParser {
             }
 
             if (layers.length > 0) {
-                return new Map.ValetudoMap({
+                return new Map.NimbusMap({
                     metaData: {
                         vendorMapId: uniqueMapId
                     },
@@ -608,7 +600,7 @@ class ThreeIRobotixMapParser {
      * @param {number} y
      * @returns {{x: number, y: number}}
      */
-    static CONVERT_TO_VALETUDO_COORDINATES(x, y) {
+    static CONVERT_TO_NIMBUS_COORDINATES(x, y) {
         return {
             x: ThreeIRobotixMapParser.CONVERT_FLOAT(x),
             y: ThreeIRobotixMapParser.MAX_MAP_HEIGHT - ThreeIRobotixMapParser.CONVERT_FLOAT(y)
@@ -630,7 +622,7 @@ class ThreeIRobotixMapParser {
      * @param {number} angle
      * @return {number}
      */
-    static CONVERT_TO_VALETUDO_ANGLE(angle) {
+    static CONVERT_TO_NIMBUS_ANGLE(angle) {
         return (angle + 180) % 360;
     }
 }

@@ -4,7 +4,7 @@ const NotImplementedError = require("../NotImplementedError");
 /**
  * Plays some kind of sound, flashes a light etc to find the robot
  * 
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class LocateCapability extends Capability {

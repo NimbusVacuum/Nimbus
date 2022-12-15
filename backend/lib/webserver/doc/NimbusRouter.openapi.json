@@ -1,0 +1,247 @@
+{
+  "/api/v2/nimbus": {
+    "get": {
+      "tags": [
+        "Nimbus"
+      ],
+      "summary": "Get basic Nimbus info",
+      "responses": {
+        "200": {
+          "description": "Ok",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "embedded": {
+                    "type": "boolean"
+                  },
+                  "systemId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/api/v2/nimbus/version": {
+    "get": {
+      "tags": [
+        "Nimbus"
+      ],
+      "summary": "Get Nimbus version",
+      "responses": {
+        "200": {
+          "description": "Ok",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "release": {
+                    "type": "string"
+                  },
+                  "commit": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/api/v2/nimbus/log/content": {
+    "get": {
+      "tags": [
+        "Nimbus"
+      ],
+      "summary": "Get full log",
+      "responses": {
+        "200": {
+          "description": "Ok",
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/api/v2/nimbus/log/content/sse": {
+    "get": {
+      "tags": [
+        "Nimbus"
+      ],
+      "summary": "Get new log lines (SSE events)",
+      "description": "Retrieve new log lines.\n\nNote! This endpoint provides SSE events. Swagger does not support it.\nNote! This endpoint provides raw text, do not try to decode it as JSON.",
+      "responses": {
+        "200": {
+          "description": "Ok",
+          "content": {
+            "text/event-stream": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/api/v2/nimbus/log/level": {
+    "get": {
+      "tags": [
+        "Nimbus"
+      ],
+      "summary": "Get log level",
+      "responses": {
+        "200": {
+          "description": "Ok",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "current": {
+                    "type": "string"
+                  },
+                  "presets": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "put": {
+      "tags": [
+        "Nimbus"
+      ],
+      "summary": "Set log level",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "level": {
+                  "type": "string",
+                  "enum": [
+                    "trace",
+                    "debug",
+                    "info",
+                    "warn",
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "description": "Log level retrieved from GET presets",
+      "responses": {
+        "200": {
+          "$ref": "#/components/responses/200"
+        }
+      }
+    }
+  },
+  "/api/v2/nimbus/config/interfaces/mqtt": {
+    "get": {
+      "tags": [
+        "Nimbus"
+      ],
+      "summary": "Get MQTT configuration",
+      "responses": {
+        "200": {
+          "description": "Ok",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MqttConfigDTO"
+              }
+            }
+          }
+        }
+      }
+    },
+    "put": {
+      "tags": [
+        "Nimbus"
+      ],
+      "summary": "Update MQTT configuration",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/MqttConfigDTO"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "$ref": "#/components/responses/200"
+        }
+      }
+    }
+  },
+  "/api/v2/nimbus/config/interfaces/http/auth/basic": {
+    "get": {
+      "tags": [
+        "Nimbus"
+      ],
+      "summary": "Get HTTP basic auth configuration",
+      "responses": {
+        "200": {
+          "description": "Ok",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BasicAuthConfigDTO"
+              }
+            }
+          }
+        }
+      }
+    },
+    "put": {
+      "tags": [
+        "Nimbus"
+      ],
+      "summary": "Update HTTP basic auth configuration",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BasicAuthConfigDTO"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "$ref": "#/components/responses/200"
+        },
+        "400": {
+          "$ref": "#/components/responses/400"
+        }
+      }
+    }
+  }
+}

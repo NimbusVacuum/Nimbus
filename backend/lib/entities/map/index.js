@@ -4,5 +4,5 @@ module.exports = {
     PathMapEntity: require("./PathMapEntity"),
     PointMapEntity: require("./PointMapEntity"),
     PolygonMapEntity: require("./PolygonMapEntity"),
-    ValetudoMap: require("./ValetudoMap")
+    NimbusMap: require("./NimbusMap")
 };

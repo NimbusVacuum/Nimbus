@@ -7,14 +7,14 @@ const HassAnchor = require("../homeassistant/HassAnchor");
 const InLineHassComponent = require("../homeassistant/components/InLineHassComponent");
 const PropertyMqttHandle = require("../handles/PropertyMqttHandle");
 const Unit = require("../common/Unit");
-const ValetudoDataPoint = require("../../entities/core/ValetudoDataPoint");
+const NimbusDataPoint = require("../../entities/core/NimbusDataPoint");
 
 class CurrentStatisticsCapabilityMqttHandle extends CapabilityMqttHandle {
     /**
      * @param {object} options
      * @param {import("../handles/RobotMqttHandle")} options.parent
      * @param {import("../MqttController")} options.controller MqttController instance
-     * @param {import("../../core/ValetudoRobot")} options.robot
+     * @param {import("../../core/NimbusRobot")} options.robot
      * @param {import("../../core/capabilities/CurrentStatisticsCapability")} options.capability
      */
     constructor(options) {
@@ -39,7 +39,7 @@ class CurrentStatisticsCapabilityMqttHandle extends CapabilityMqttHandle {
 
         this.capability.getProperties().availableStatistics.forEach(availableStatistic => {
             switch (availableStatistic) {
-                case ValetudoDataPoint.TYPES.TIME:
+                case NimbusDataPoint.TYPES.TIME:
                     this.registerChild(
                         new PropertyMqttHandle({
                             parent: this,
@@ -74,7 +74,7 @@ class CurrentStatisticsCapabilityMqttHandle extends CapabilityMqttHandle {
                     );
                     break;
 
-                case ValetudoDataPoint.TYPES.AREA:
+                case NimbusDataPoint.TYPES.AREA:
                     this.registerChild(
                         new PropertyMqttHandle({
                             parent: this,
@@ -116,10 +116,10 @@ class CurrentStatisticsCapabilityMqttHandle extends CapabilityMqttHandle {
 
         for (const point of currentStatistics) {
             switch (point.type) {
-                case ValetudoDataPoint.TYPES.TIME:
+                case NimbusDataPoint.TYPES.TIME:
                     await HassAnchor.getAnchor(HassAnchor.ANCHOR.CURRENT_STATISTICS_TIME).post(point.value);
                     break;
-                case ValetudoDataPoint.TYPES.AREA:
+                case NimbusDataPoint.TYPES.AREA:
                     await HassAnchor.getAnchor(HassAnchor.ANCHOR.CURRENT_STATISTICS_AREA).post(point.value);
                     break;
             }

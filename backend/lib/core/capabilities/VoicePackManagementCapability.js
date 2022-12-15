@@ -2,7 +2,7 @@ const Capability = require("./Capability");
 const NotImplementedError = require("../NotImplementedError");
 
 /**
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class VoicePackManagementCapability extends Capability {
@@ -36,7 +36,7 @@ class VoicePackManagementCapability extends Capability {
      * This method should return the status of the current voice pack operation, if one is ongoing.
      *
      * @abstract
-     * @returns {Promise<import("../../entities/core/ValetudoVoicePackOperationStatus")>}
+     * @returns {Promise<import("../../entities/core/NimbusVoicePackOperationStatus")>}
      */
     async getVoicePackOperationStatus() {
         throw new NotImplementedError();

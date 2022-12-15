@@ -7,7 +7,7 @@ class DreameQuirkFactory {
     /**
      *
      * @param {object} options
-     * @param {import("./DreameValetudoRobot")} options.robot
+     * @param {import("./DreameNimbusRobot")} options.robot
      */
     constructor(options) {
         this.robot = options.robot;

@@ -5,7 +5,7 @@ const entities = require("../../../entities");
 const stateAttrs = entities.state.attributes;
 
 /**
- * @extends BasicControlCapability<import("../RoborockValetudoRobot")>
+ * @extends BasicControlCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockBasicControlCapability extends BasicControlCapability {
 

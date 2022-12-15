@@ -1,5 +1,5 @@
 const CapabilityRouter = require("./CapabilityRouter");
-const ValetudoZone = require("../../entities/core/ValetudoZone");
+const NimbusZone = require("../../entities/core/NimbusZone");
 
 class ZoneCleaningCapabilityRouter extends CapabilityRouter {
     initRoutes() {
@@ -11,7 +11,7 @@ class ZoneCleaningCapabilityRouter extends CapabilityRouter {
                             throw new Error("Invalid Zone");
                         }
 
-                        return new ValetudoZone({
+                        return new NimbusZone({
                             points: {
                                 pA: {
                                     x: z.points.pA?.x,

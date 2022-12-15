@@ -1,14 +1,14 @@
 const BasicControlCapability = require("../core/capabilities/BasicControlCapability");
 const express = require("express");
 const MapSegmentationCapability = require("../core/capabilities/MapSegmentationCapability");
-const ValetudoTimer = require("../entities/core/ValetudoTimer");
+const NimbusTimer = require("../entities/core/NimbusTimer");
 
 class TimerRouter {
     /**
      *
      * @param {object} options
      * @param {import("../Configuration")} options.config
-     * @param {import("../core/ValetudoRobot")} options.robot
+     * @param {import("../core/NimbusRobot")} options.robot
      * @param {*} options.validator
      */
     constructor(options) {
@@ -21,7 +21,6 @@ class TimerRouter {
         this.initRoutes();
     }
 
-
     initRoutes() {
         this.router.get("/", (req, res) => {
             res.json(this.config.get("timers"));
@@ -33,11 +32,11 @@ class TimerRouter {
             };
 
             if (this.robot.hasCapability(BasicControlCapability.TYPE)) {
-                response.supportedActions.push(ValetudoTimer.ACTION_TYPE.FULL_CLEANUP);
+                response.supportedActions.push(NimbusTimer.ACTION_TYPE.FULL_CLEANUP);
             }
 
             if (this.robot.hasCapability(MapSegmentationCapability.TYPE)) {
-                response.supportedActions.push(ValetudoTimer.ACTION_TYPE.SEGMENT_CLEANUP);
+                response.supportedActions.push(NimbusTimer.ACTION_TYPE.SEGMENT_CLEANUP);
             }
 
             res.json(response);
@@ -67,7 +66,7 @@ class TimerRouter {
                     res.sendStatus(400);
                 } else {
                     const storedTimers = this.config.get("timers");
-                    const newTimer = new ValetudoTimer({
+                    const newTimer = new NimbusTimer({
                         enabled: req.body.enabled === true,
                         dow: req.body.dow,
                         hour: req.body.hour,
@@ -102,7 +101,7 @@ class TimerRouter {
                     if (!action) {
                         res.sendStatus(400);
                     } else {
-                        const newTimer = new ValetudoTimer({
+                        const newTimer = new NimbusTimer({
                             id: req.params.id,
                             enabled: req.body.enabled === true,
                             dow: req.body.dow,
@@ -151,15 +150,15 @@ class TimerRouter {
         let action;
 
         switch (body.action.type) {
-            case ValetudoTimer.ACTION_TYPE.FULL_CLEANUP:
+            case NimbusTimer.ACTION_TYPE.FULL_CLEANUP:
                 action = {
-                    type: ValetudoTimer.ACTION_TYPE.FULL_CLEANUP,
+                    type: NimbusTimer.ACTION_TYPE.FULL_CLEANUP,
                     params: {}
                 };
                 break;
-            case ValetudoTimer.ACTION_TYPE.SEGMENT_CLEANUP:
+            case NimbusTimer.ACTION_TYPE.SEGMENT_CLEANUP:
                 action = {
-                    type: ValetudoTimer.ACTION_TYPE.SEGMENT_CLEANUP,
+                    type: NimbusTimer.ACTION_TYPE.SEGMENT_CLEANUP,
                     params: {
                         segment_ids: body.action.params.segment_ids,
                         iterations: body.action.params.iterations,

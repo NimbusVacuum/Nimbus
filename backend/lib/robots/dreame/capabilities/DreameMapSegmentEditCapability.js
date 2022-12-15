@@ -3,13 +3,13 @@ const MapSegmentEditCapability = require("../../../core/capabilities/MapSegmentE
 const RobotFirmwareError = require("../../../core/RobotFirmwareError");
 
 /**
- * @extends MapSegmentEditCapability<import("../DreameValetudoRobot")>
+ * @extends MapSegmentEditCapability<import("../DreameNimbusRobot")>
  */
 class DreameMapSegmentEditCapability extends MapSegmentEditCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {object} options.miot_actions
      * @param {object} options.miot_actions.map_edit
@@ -31,8 +31,8 @@ class DreameMapSegmentEditCapability extends MapSegmentEditCapability {
     }
 
     /**
-     * @param {import("../../../entities/core/ValetudoMapSegment")} segmentA
-     * @param {import("../../../entities/core/ValetudoMapSegment")} segmentB
+     * @param {import("../../../entities/core/NimbusMapSegment")} segmentA
+     * @param {import("../../../entities/core/NimbusMapSegment")} segmentB
      * @returns {Promise<void>}
      */
     async joinSegments(segmentA, segmentB) {
@@ -72,7 +72,7 @@ class DreameMapSegmentEditCapability extends MapSegmentEditCapability {
     }
 
     /**
-     * @param {import("../../../entities/core/ValetudoMapSegment")} segment
+     * @param {import("../../../entities/core/NimbusMapSegment")} segment
      * @param {object} pA
      * @param {number} pA.x
      * @param {number} pA.y

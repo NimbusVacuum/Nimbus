@@ -3,7 +3,7 @@ const ConsumableStateAttribute = require("../../entities/state/attributes/Consum
 const NotImplementedError = require("../NotImplementedError");
 
 /**
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class ConsumableMonitoringCapability extends Capability {
@@ -37,7 +37,7 @@ class ConsumableMonitoringCapability extends Capability {
      */
     markEventsAsProcessed(type, subType) {
         try {
-            this.robot.valetudoEventStore.setProcessed(`consumable_depleted_${type}_${subType}`);
+            this.robot.nimbusEventStore.setProcessed(`consumable_depleted_${type}_${subType}`);
         } catch (e) {
             //intentional
         }
@@ -53,12 +53,10 @@ class ConsumableMonitoringCapability extends Capability {
         };
     }
 
-
     getType() {
         return ConsumableMonitoringCapability.TYPE;
     }
 }
-
 
 ConsumableMonitoringCapability.TYPE = "ConsumableMonitoringCapability";
 

@@ -2,13 +2,13 @@ const Capability = require("./Capability");
 const NotImplementedError = require("../NotImplementedError");
 
 /**
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class MapSegmentEditCapability extends Capability {
     /**
-     * @param {import("../../entities/core/ValetudoMapSegment")} segmentA
-     * @param {import("../../entities/core/ValetudoMapSegment")} segmentB
+     * @param {import("../../entities/core/NimbusMapSegment")} segmentA
+     * @param {import("../../entities/core/NimbusMapSegment")} segmentB
      * @returns {Promise<void>}
      */
     async joinSegments(segmentA, segmentB) {
@@ -16,7 +16,7 @@ class MapSegmentEditCapability extends Capability {
     }
 
     /**
-     * @param {import("../../entities/core/ValetudoMapSegment")} segment
+     * @param {import("../../entities/core/NimbusMapSegment")} segment
      * @param {object} pA
      * @param {number} pA.x
      * @param {number} pA.y

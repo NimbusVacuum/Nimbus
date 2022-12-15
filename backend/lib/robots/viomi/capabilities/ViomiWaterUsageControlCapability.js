@@ -1,7 +1,7 @@
 const WaterUsageControlCapability = require("../../../core/capabilities/WaterUsageControlCapability");
 
 /**
- * @extends WaterUsageControlCapability<import("../ViomiValetudoRobot")>
+ * @extends WaterUsageControlCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiWaterUsageControlCapability extends WaterUsageControlCapability {
     /**

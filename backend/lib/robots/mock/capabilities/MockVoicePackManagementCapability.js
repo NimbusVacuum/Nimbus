@@ -1,4 +1,4 @@
-const ValetudoVoicePackOperationStatus = require("../../../entities/core/ValetudoVoicePackOperationStatus");
+const NimbusVoicePackOperationStatus = require("../../../entities/core/NimbusVoicePackOperationStatus");
 const VoicePackManagementCapability = require("../../../core/capabilities/VoicePackManagementCapability");
 
 /**
@@ -13,7 +13,7 @@ class MockVoicePackManagementCapability extends VoicePackManagementCapability {
         super(options);
 
         this.current_language = "EN";
-        this.status = ValetudoVoicePackOperationStatus.TYPE.IDLE;
+        this.status = NimbusVoicePackOperationStatus.TYPE.IDLE;
         this.progress = undefined;
     }
 
@@ -22,7 +22,7 @@ class MockVoicePackManagementCapability extends VoicePackManagementCapability {
     }
 
     async downloadVoicePack(options) {
-        this.status = ValetudoVoicePackOperationStatus.TYPE.DOWNLOADING;
+        this.status = NimbusVoicePackOperationStatus.TYPE.DOWNLOADING;
         this.progress = 0;
 
         // Simulate download
@@ -33,7 +33,7 @@ class MockVoicePackManagementCapability extends VoicePackManagementCapability {
         }
 
         setTimeout(() => {
-            this.status = ValetudoVoicePackOperationStatus.TYPE.INSTALLING;
+            this.status = NimbusVoicePackOperationStatus.TYPE.INSTALLING;
             this.progress = 0;
         }, 6000);
 
@@ -45,7 +45,7 @@ class MockVoicePackManagementCapability extends VoicePackManagementCapability {
         }
 
         setTimeout(() => {
-            this.status = ValetudoVoicePackOperationStatus.TYPE.IDLE;
+            this.status = NimbusVoicePackOperationStatus.TYPE.IDLE;
             this.current_language = options.language;
         }, 13000);
     }
@@ -56,7 +56,7 @@ class MockVoicePackManagementCapability extends VoicePackManagementCapability {
             progress: this.progress,
         };
 
-        return new ValetudoVoicePackOperationStatus(statusOptions);
+        return new NimbusVoicePackOperationStatus(statusOptions);
     }
 }
 

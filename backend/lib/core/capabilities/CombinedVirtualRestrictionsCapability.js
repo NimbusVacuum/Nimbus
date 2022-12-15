@@ -1,9 +1,9 @@
 const Capability = require("./Capability");
 const NotImplementedError = require("../NotImplementedError");
 
-const ValetudoRestrictedZone = require("../../entities/core/ValetudoRestrictedZone");
-const ValetudoVirtualRestrictions = require("../../entities/core/ValetudoVirtualRestrictions");
-const ValetudoVirtualWall = require("../../entities/core/ValetudoVirtualWall");
+const NimbusRestrictedZone = require("../../entities/core/NimbusRestrictedZone");
+const NimbusVirtualRestrictions = require("../../entities/core/NimbusVirtualRestrictions");
+const NimbusVirtualWall = require("../../entities/core/NimbusVirtualWall");
 
 const entities = require("../../entities");
 
@@ -13,7 +13,7 @@ const entities = require("../../entities");
  *
  * Honestly, every robot should be like this. Only supporting one of the two is questionable
  *
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class CombinedVirtualRestrictionsCapability extends Capability {
@@ -21,22 +21,21 @@ class CombinedVirtualRestrictionsCapability extends Capability {
      *
      * @param {object} options
      * @param {T} options.robot
-     * @param {Array<import("../../entities/core/ValetudoRestrictedZone").ValetudoRestrictedZoneType>} [options.supportedRestrictedZoneTypes]
+     * @param {Array<import("../../entities/core/NimbusRestrictedZone").NimbusRestrictedZoneType>} [options.supportedRestrictedZoneTypes]
      * @class
      */
     constructor(options) {
         super(options);
 
-        this.supportedRestrictedZoneTypes = options.supportedRestrictedZoneTypes ?? [ValetudoRestrictedZone.TYPE.REGULAR];
+        this.supportedRestrictedZoneTypes = options.supportedRestrictedZoneTypes ?? [NimbusRestrictedZone.TYPE.REGULAR];
     }
 
     /**
-     * @returns {Promise<import("../../entities/core/ValetudoVirtualRestrictions")>}
+     * @returns {Promise<import("../../entities/core/NimbusVirtualRestrictions")>}
      */
     async getVirtualRestrictions() {
         const virtualWalls = [];
         const restrictedZones = [];
-
 
         this.robot.state.map.entities.filter(e => {
             return (e instanceof entities.map.LineMapEntity && e.type === entities.map.LineMapEntity.TYPE.VIRTUAL_WALL) ||
@@ -44,7 +43,7 @@ class CombinedVirtualRestrictionsCapability extends Capability {
                 (e instanceof entities.map.PolygonMapEntity && e.type === entities.map.PolygonMapEntity.TYPE.NO_MOP_AREA);
         }).forEach(restriction => {
             if (restriction instanceof entities.map.LineMapEntity) {
-                virtualWalls.push(new ValetudoVirtualWall({
+                virtualWalls.push(new NimbusVirtualWall({
                     points: {
                         pA: {
                             x: restriction.points[0],
@@ -61,14 +60,14 @@ class CombinedVirtualRestrictionsCapability extends Capability {
 
                 switch (restriction.type) {
                     case entities.map.PolygonMapEntity.TYPE.NO_GO_AREA:
-                        type = ValetudoRestrictedZone.TYPE.REGULAR;
+                        type = NimbusRestrictedZone.TYPE.REGULAR;
                         break;
                     case entities.map.PolygonMapEntity.TYPE.NO_MOP_AREA:
-                        type = ValetudoRestrictedZone.TYPE.MOP;
+                        type = NimbusRestrictedZone.TYPE.MOP;
                         break;
                 }
 
-                restrictedZones.push(new ValetudoRestrictedZone({
+                restrictedZones.push(new NimbusRestrictedZone({
                     points: {
                         pA: {
                             x: restriction.points[0],
@@ -92,7 +91,7 @@ class CombinedVirtualRestrictionsCapability extends Capability {
             }
         });
 
-        return new ValetudoVirtualRestrictions({
+        return new NimbusVirtualRestrictions({
             virtualWalls: virtualWalls,
             restrictedZones: restrictedZones
         });
@@ -100,7 +99,7 @@ class CombinedVirtualRestrictionsCapability extends Capability {
 
     /**
      *
-     * @param {import("../../entities/core/ValetudoVirtualRestrictions")} virtualRestrictions
+     * @param {import("../../entities/core/NimbusVirtualRestrictions")} virtualRestrictions
      * @returns {Promise<void>}
      */
     async setVirtualRestrictions(virtualRestrictions) {
@@ -128,5 +127,5 @@ module.exports = CombinedVirtualRestrictionsCapability;
 /**
  * @typedef {object} CombinedVirtualRestrictionsCapabilityProperties
  *
- * @property {Array<import("../../entities/core/ValetudoRestrictedZone").ValetudoRestrictedZoneType>} supportedRestrictedZoneTypes
+ * @property {Array<import("../../entities/core/NimbusRestrictedZone").NimbusRestrictedZoneType>} supportedRestrictedZoneTypes
  */

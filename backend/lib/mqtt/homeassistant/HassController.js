@@ -20,7 +20,7 @@ class HassController {
     /**
      * @param {object} options
      * @param {import("../MqttController")} options.controller
-     * @param {import("../../core/ValetudoRobot")} options.robot
+     * @param {import("../../core/NimbusRobot")} options.robot
      * @param {import("../../Configuration")} options.config
      */
     constructor(options) {
@@ -51,7 +51,7 @@ class HassController {
         this.friendlyName = this.controller.currentConfig.identity.friendlyName;
         this.qos = this.controller.currentConfig.qos;
 
-        this.objectId = `valetudo_${this.identifier.toLowerCase()}`;
+        this.objectId = `nimbus_${this.identifier.toLowerCase()}`;
 
         this.debugAnchors = debugConfig.debugHassAnchors ?? false;
     }
@@ -77,7 +77,7 @@ class HassController {
             model: this.robot.getModelName(),
             name: this.friendlyName,
             identifiers: [this.identifier],
-            sw_version: Tools.GET_VALETUDO_VERSION() + " (Valetudo)",
+            sw_version: Tools.GET_NIMBUS_VERSION() + " (Nimbus)",
             configuration_url: `http://${Tools.GET_ZEROCONF_HOSTNAME()}`
         };
     }
@@ -115,7 +115,6 @@ class HassController {
             await component.deconfigure(options);
         }
     }
-
 
     /**
      * Helper function for components to subscribe to topics of their interest

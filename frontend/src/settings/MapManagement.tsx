@@ -6,7 +6,7 @@ import {
     usePersistentDataQuery,
     useRobotMapQuery,
     useStartMappingPassMutation,
-    useValetudoInformationQuery
+    useNimbusInformationQuery
 } from "../api";
 import {
     Save as PersistentMapControlIcon,
@@ -15,7 +15,7 @@ import {
     RoomPreferences as SegmentEditIcon,
     Dangerous as VirtualRestrictionsIcon,
     Crop as CleanupCoverageIcon,
-    Download as ValetudoMapDownloadIcon,
+    Download as NimbusMapDownloadIcon,
 } from "@mui/icons-material";
 import React from "react";
 import ConfirmationDialog from "../components/ConfirmationDialog";
@@ -27,7 +27,6 @@ import {ToggleSwitchListMenuItem} from "../components/list_menu/ToggleSwitchList
 import {MapManagementHelp} from "./res/MapManagementHelp";
 import PaperContainer from "../components/PaperContainer";
 import {MapUtilitiesHelp} from "./res/MapUtilitiesHelp";
-
 
 const MappingPassButtonItem = (): JSX.Element => {
     const {mutate: startMappingPass, isLoading: mappingPassStarting} = useStartMappingPassMutation();
@@ -118,26 +117,25 @@ const PersistentMapSwitchListItem = () => {
     );
 };
 
-const ValetudoMapDataExportButtonItem = (): JSX.Element => {
+const NimbusMapDataExportButtonItem = (): JSX.Element => {
     const {
-        data: valetudoInformation,
-        isLoading: valetudoInformationLoading
-    } = useValetudoInformationQuery();
+        data: nimbusInformation,
+        isLoading: nimbusInformationLoading
+    } = useNimbusInformationQuery();
 
     const {
         data: mapData,
         isLoading: mapIsLoading,
     } = useRobotMapQuery();
 
-
     return (
         <ButtonListMenuItem
-            primaryLabel="Export ValetudoMap"
-            secondaryLabel="Download a ValetudoMap data export to use with other tools"
-            icon={<ValetudoMapDownloadIcon/>}
+            primaryLabel="Export NimbusMap"
+            secondaryLabel="Download a NimbusMap data export to use with other tools"
+            icon={<NimbusMapDownloadIcon/>}
             buttonLabel="Go"
             action={() => {
-                if (valetudoInformation && mapData) {
+                if (nimbusInformation && mapData) {
                     const timestamp = new Date().toISOString().replaceAll(":","-").split(".")[0];
                     const mapExportBlob = new Blob(
                         [JSON.stringify(mapData, null, 2)],
@@ -147,12 +145,12 @@ const ValetudoMapDataExportButtonItem = (): JSX.Element => {
                     const linkElement = document.createElement("a");
 
                     linkElement.href = URL.createObjectURL(mapExportBlob);
-                    linkElement.download = `ValetudoMapExport-${valetudoInformation.systemId}-${timestamp}.json`;
+                    linkElement.download = `NimbusMapExport-${nimbusInformation.systemId}-${timestamp}.json`;
 
                     linkElement.click();
                 }
             }}
-            actionLoading={valetudoInformationLoading || mapIsLoading}
+            actionLoading={nimbusInformationLoading || mapIsLoading}
         />
     );
 };
@@ -212,7 +210,6 @@ const MapManagement = (): JSX.Element => {
             }
         }
 
-
         if (mapSegmentEditCapabilitySupported || mapSegmentRenameCapabilitySupported) {
             items.push(
                 <LinkListMenuItem
@@ -257,7 +254,7 @@ const MapManagement = (): JSX.Element => {
                 secondaryLabel="Check the robots coverage"
                 icon={<CleanupCoverageIcon/>}
             />,
-            <ValetudoMapDataExportButtonItem key="valetudoMapDataExport" />
+            <NimbusMapDataExportButtonItem key="nimbusMapDataExport" />
         ];
     }, []);
 

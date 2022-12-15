@@ -4,9 +4,9 @@ import HomePage from "./HomePage";
 import SettingsRouter from "./settings";
 import {PaletteMode, styled} from "@mui/material";
 import RobotRouter from "./robot";
-import ValetudoAppBar from "./components/ValetudoAppBar";
+import NimbusAppBar from "./components/NimbusAppBar";
 import React from "react";
-import ValetudoRouter from "./valetudo";
+import NimbusRouter from "./nimbus";
 
 const Root = styled(Div100vh)({
     display: "flex",
@@ -30,7 +30,7 @@ const AppRouter: React.FunctionComponent<{ paletteMode: PaletteMode, setPaletteM
         <HashRouter>
             <Root>
                 <Content>
-                    <ValetudoAppBar paletteMode={paletteMode} setPaletteMode={setPaletteMode}/>
+                    <NimbusAppBar paletteMode={paletteMode} setPaletteMode={setPaletteMode}/>
                     <Switch>
                         <Route exact path="/">
                             <HomePage/>
@@ -41,8 +41,8 @@ const AppRouter: React.FunctionComponent<{ paletteMode: PaletteMode, setPaletteM
                         <Route path="/settings">
                             <SettingsRouter/>
                         </Route>
-                        <Route path="/valetudo">
-                            <ValetudoRouter/>
+                        <Route path="/nimbus">
+                            <NimbusRouter/>
                         </Route>
                         <Route path="*">
                             <Redirect to="/"/>

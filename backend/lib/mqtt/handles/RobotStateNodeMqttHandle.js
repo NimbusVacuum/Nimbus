@@ -10,7 +10,7 @@ class RobotStateNodeMqttHandle extends NodeMqttHandle {
      * @param {object} options
      * @param {import("./RobotMqttHandle")} options.parent
      * @param {import("../MqttController")} options.controller MqttController instance
-     * @param {import("../../core/ValetudoRobot")} options.robot
+     * @param {import("../../core/NimbusRobot")} options.robot
      * @param {string} options.topicName Topic ID following the linked format
      * @param {string} options.friendlyName User-friendly name for this node
      * @param {string} options.type Type of this node, such as "Capability", "Status", etc.

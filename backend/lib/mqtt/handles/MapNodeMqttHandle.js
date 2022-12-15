@@ -16,7 +16,7 @@ class MapNodeMqttHandle extends NodeMqttHandle {
      * @param {object} options
      * @param {import("./RobotMqttHandle")} options.parent}
      * @param {import("../MqttController")} options.controller MqttController instance
-     * @param {import("../../core/ValetudoRobot")} options.robot
+     * @param {import("../../core/NimbusRobot")} options.robot
      */
     constructor(options) {
         super(Object.assign(options, {
@@ -44,7 +44,7 @@ class MapNodeMqttHandle extends NodeMqttHandle {
 
         // Add "I Can't Believe It's Not Valetudo" map property. Unlike Home Assistant, Homie autodiscovery attributes
         // may not be changed by external services, so for proper autodiscovery support it needs to be provided by
-        // Valetudo itself. ICBINV may publish the data at any point in time.
+        // Nimbus itself. ICBINV may publish the data at any point in time.
         if (this.controller.currentConfig.interfaces.homie.addICBINVMapProperty) {
             this.registerChild(
                 new PropertyMqttHandle({
@@ -198,7 +198,6 @@ class MapNodeMqttHandle extends NodeMqttHandle {
                     length.writeInt32BE(PNG_WRAPPER.TEXT_CHUNK_METADATA.length + buf.length, 0);
                     checksum.writeUInt32BE(crc.crc32(textChunkData), 0);
 
-
                     payload = Buffer.concat([
                         PNG_WRAPPER.IMAGE_WITHOUT_END_CHUNK,
                         length,
@@ -222,14 +221,12 @@ class MapNodeMqttHandle extends NodeMqttHandle {
         return null;
     }
 
-
 }
-
 
 const PNG_WRAPPER = {
     TEXT_CHUNK_TYPE: Buffer.from("zTXt"),
-    TEXT_CHUNK_METADATA: Buffer.from("ValetudoMap\0\0"),
-    IMAGE: fs.readFileSync(path.join(__dirname, "../../res/valetudo_home_assistant_mqtt_wrapper.png"))
+    TEXT_CHUNK_METADATA: Buffer.from("NimbusMap\0\0"),
+    IMAGE: fs.readFileSync(path.join(__dirname, "../../res/nimbus_home_assistant_mqtt_wrapper.png"))
 };
 PNG_WRAPPER.IMAGE_WITHOUT_END_CHUNK = PNG_WRAPPER.IMAGE.subarray(0, PNG_WRAPPER.IMAGE.length - 12);
 //The PNG IEND chunk is always the last chunk and consists of a 4-byte length, the 4-byte chunk type, 0-byte chunk data and a 4-byte crc

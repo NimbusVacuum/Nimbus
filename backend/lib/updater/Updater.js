@@ -1,18 +1,16 @@
 const fs = require("fs");
-const GithubValetudoNightlyUpdateProvider = require("./lib/update_provider/GithubValetudoNightlyUpdateProvider");
-const GithubValetudoUpdateProvider = require("./lib/update_provider/GithubValetudoUpdateProvider");
+const GithubNimbusNightlyUpdateProvider = require("./lib/update_provider/GithubNimbusNightlyUpdateProvider");
+const GithubNimbusUpdateProvider = require("./lib/update_provider/GithubNimbusUpdateProvider");
 const Logger = require("../Logger");
 const States = require("../entities/core/updater");
 const Steps = require("./lib/steps");
 const Tools = require("../utils/Tools");
 
-
-
 class Updater {
     /**
      * @param {object} options
      * @param {import("../Configuration")} options.config
-     * @param {import("../core/ValetudoRobot")} options.robot
+     * @param {import("../core/NimbusRobot")} options.robot
      */
     constructor(options) {
         this.config = options.config;
@@ -20,26 +18,25 @@ class Updater {
 
         this.updaterConfig = this.config.get("updater");
 
-        /** @type {import("../entities/core/updater/ValetudoUpdaterState")} */
+        /** @type {import("../entities/core/updater/NimbusUpdaterState")} */
         this.state = undefined;
-        /** @type {import("./lib/update_provider/ValetudoUpdateProvider")} */
+        /** @type {import("./lib/update_provider/NimbusUpdateProvider")} */
         this.updateProvider = undefined;
 
         if (this.updaterConfig.enabled === true) {
-            this.state = new States.ValetudoUpdaterIdleState({
-                currentVersion: Tools.GET_VALETUDO_VERSION()
+            this.state = new States.NimbusUpdaterIdleState({
+                currentVersion: Tools.GET_NIMBUS_VERSION()
             });
         } else {
-            this.state = new States.ValetudoUpdaterDisabledState({});
+            this.state = new States.NimbusUpdaterDisabledState({});
         }
 
-
         switch (this.updaterConfig.updateProvider.type) {
-            case GithubValetudoUpdateProvider.TYPE:
-                this.updateProvider = new GithubValetudoUpdateProvider();
+            case GithubNimbusUpdateProvider.TYPE:
+                this.updateProvider = new GithubNimbusUpdateProvider();
                 break;
-            case GithubValetudoNightlyUpdateProvider.TYPE:
-                this.updateProvider = new GithubValetudoNightlyUpdateProvider();
+            case GithubNimbusNightlyUpdateProvider.TYPE:
+                this.updateProvider = new GithubNimbusNightlyUpdateProvider();
                 break;
             default:
                 throw new Error(`Invalid UpdateProvider ${this.updaterConfig.updateProvider.type}`);
@@ -56,18 +53,17 @@ class Updater {
     triggerCheck() {
         if (
             !(
-                this.state instanceof States.ValetudoUpdaterIdleState ||
-                this.state instanceof States.ValetudoUpdaterErrorState ||
-                this.state instanceof States.ValetudoUpdaterNoUpdateRequiredState
+                this.state instanceof States.NimbusUpdaterIdleState ||
+                this.state instanceof States.NimbusUpdaterErrorState ||
+                this.state instanceof States.NimbusUpdaterNoUpdateRequiredState
             )
         ) {
             throw new Error("Updates can only be started when the updaters state is idle or error");
         }
 
-
         this.state.busy = true;
 
-        const step = new Steps.ValetudoUpdaterCheckStep({
+        const step = new Steps.NimbusUpdaterCheckStep({
             embedded: this.config.get("embedded"),
             architectures: Updater.ARCHITECTURES,
             spaceRequired: Updater.SPACE_REQUIREMENTS,
@@ -78,7 +74,7 @@ class Updater {
         step.execute().then((state) => {
             this.state = state;
         }).catch(err => {
-            this.state = new States.ValetudoUpdaterErrorState({
+            this.state = new States.NimbusUpdaterErrorState({
                 type: err.type,
                 message: err.message
             });
@@ -89,13 +85,13 @@ class Updater {
      * @return {void}
      */
     triggerDownload() {
-        if (!(this.state instanceof States.ValetudoUpdaterApprovalPendingState)) {
+        if (!(this.state instanceof States.NimbusUpdaterApprovalPendingState)) {
             throw new Error("Downloads can only be started when there's pending approval");
         }
         const downloadPath = this.state.downloadPath;
         this.state.busy = true;
 
-        const step = new Steps.ValetudoUpdaterDownloadStep({
+        const step = new Steps.NimbusUpdaterDownloadStep({
             downloadUrl: this.state.downloadUrl,
             downloadPath: this.state.downloadPath,
             expectedHash: this.state.expectedHash,
@@ -103,7 +99,7 @@ class Updater {
             releaseTimestamp: this.state.releaseTimestamp
         });
 
-        this.state = new States.ValetudoUpdaterDownloadingState({
+        this.state = new States.NimbusUpdaterDownloadingState({
             downloadUrl: this.state.downloadUrl,
             downloadPath: this.state.downloadPath,
             expectedHash: this.state.expectedHash,
@@ -119,12 +115,12 @@ class Updater {
                 Logger.warn("Updater: User confirmation timeout.");
                 fs.unlinkSync(downloadPath);
 
-                this.state = new States.ValetudoUpdaterIdleState({
-                    currentVersion: Tools.GET_VALETUDO_VERSION()
+                this.state = new States.NimbusUpdaterIdleState({
+                    currentVersion: Tools.GET_NIMBUS_VERSION()
                 });
             }, 10 * 60 * 1000); // 10 minutes
         }).catch(err => {
-            this.state = new States.ValetudoUpdaterErrorState({
+            this.state = new States.NimbusUpdaterErrorState({
                 type: err.type,
                 message: err.message
             });
@@ -135,18 +131,18 @@ class Updater {
      * @return {void}
      */
     triggerApply() {
-        if (!(this.state instanceof States.ValetudoUpdaterApplyPendingState)) {
+        if (!(this.state instanceof States.NimbusUpdaterApplyPendingState)) {
             throw new Error("Can only apply if there's finalization pending");
         }
 
         this.state.busy = true;
 
-        const step = new Steps.ValetudoUpdaterApplyStep({
+        const step = new Steps.NimbusUpdaterApplyStep({
             downloadPath: this.state.downloadPath
         });
 
         step.execute().catch(err => { //no .then() required as the system will reboot
-            this.state = new States.ValetudoUpdaterErrorState({
+            this.state = new States.NimbusUpdaterErrorState({
                 type: err.type,
                 message: err.message
             });

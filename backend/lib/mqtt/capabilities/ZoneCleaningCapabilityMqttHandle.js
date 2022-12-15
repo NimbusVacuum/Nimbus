@@ -1,14 +1,14 @@
 const CapabilityMqttHandle = require("./CapabilityMqttHandle");
 const DataType = require("../homie/DataType");
 const PropertyMqttHandle = require("../handles/PropertyMqttHandle");
-const ValetudoZone = require("../../entities/core/ValetudoZone");
+const NimbusZone = require("../../entities/core/NimbusZone");
 
 class ZoneCleaningCapabilityMqttHandle extends CapabilityMqttHandle {
     /**
      * @param {object} options
      * @param {import("../handles/RobotMqttHandle")} options.parent
      * @param {import("../MqttController")} options.controller MqttController instance
-     * @param {import("../../core/ValetudoRobot")} options.robot
+     * @param {import("../../core/NimbusRobot")} options.robot
      * @param {import("../../core/capabilities/ZoneCleaningCapability")} options.capability
      */
     constructor(options) {
@@ -33,7 +33,7 @@ class ZoneCleaningCapabilityMqttHandle extends CapabilityMqttHandle {
                             throw new Error("Invalid Zone");
                         }
 
-                        return new ValetudoZone({
+                        return new NimbusZone({
                             points: {
                                 pA: {
                                     x: z.points.pA?.x,
@@ -60,7 +60,7 @@ class ZoneCleaningCapabilityMqttHandle extends CapabilityMqttHandle {
                 }
             },
             helpText: "This handle accepts a JSON object identical to the one used by the REST API.\n\n" +
-                "Please refer to the \"General Help\" section in Valetudo for more information.\n\n" +
+                "Please refer to the \"General Help\" section in Nimbus for more information.\n\n" +
                 "Sample payload:\n\n" +
                 "```json\n" +
                 JSON.stringify({
@@ -97,4 +97,3 @@ class ZoneCleaningCapabilityMqttHandle extends CapabilityMqttHandle {
 ZoneCleaningCapabilityMqttHandle.OPTIONAL = false;
 
 module.exports = ZoneCleaningCapabilityMqttHandle;
-

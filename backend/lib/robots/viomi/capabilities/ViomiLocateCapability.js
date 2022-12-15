@@ -1,7 +1,7 @@
 const LocateCapability = require("../../../core/capabilities/LocateCapability");
 
 /**
- * @extends LocateCapability<import("../ViomiValetudoRobot")>
+ * @extends LocateCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiLocateCapability extends LocateCapability {
     /**

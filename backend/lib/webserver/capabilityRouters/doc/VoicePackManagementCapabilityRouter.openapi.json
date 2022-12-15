@@ -17,7 +17,7 @@
                     "type": "string"
                   },
                   "operationStatus": {
-                    "$ref": "#/components/schemas/ValetudoVoicePackOperationStatus"
+                    "$ref": "#/components/schemas/NimbusVoicePackOperationStatus"
                   }
                 }
               }

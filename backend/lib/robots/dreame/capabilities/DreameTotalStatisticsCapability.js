@@ -1,16 +1,16 @@
 const TotalStatisticsCapability = require("../../../core/capabilities/TotalStatisticsCapability");
 
 const Logger = require("../../../Logger");
-const ValetudoDataPoint = require("../../../entities/core/ValetudoDataPoint");
+const NimbusDataPoint = require("../../../entities/core/NimbusDataPoint");
 
 /**
- * @extends TotalStatisticsCapability<import("../DreameValetudoRobot")>
+ * @extends TotalStatisticsCapability<import("../DreameNimbusRobot")>
  */
 class DreameTotalStatisticsCapability extends TotalStatisticsCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {object} options.miot_properties
      * @param {object} options.miot_properties.time
@@ -31,10 +31,8 @@ class DreameTotalStatisticsCapability extends TotalStatisticsCapability {
         this.miot_properties = options.miot_properties;
     }
 
-
-
     /**
-     * @return {Promise<Array<ValetudoDataPoint>>}
+     * @return {Promise<Array<NimbusDataPoint>>}
      */
     async getStatistics() {
         const response = await this.robot.sendCommand("get_properties", [
@@ -53,28 +51,27 @@ class DreameTotalStatisticsCapability extends TotalStatisticsCapability {
                     return this.parseTotalStatisticsMessage(elem);
                 })
                 .filter(elem => {
-                    return elem instanceof ValetudoDataPoint;
+                    return elem instanceof NimbusDataPoint;
                 });
         } else {
             throw new Error("Failed to fetch total statistics");
         }
     }
 
-
     parseTotalStatisticsMessage(msg) {
         if (msg.siid === this.miot_properties.time.siid && msg.piid === this.miot_properties.time.piid) {
-            return new ValetudoDataPoint({
-                type: ValetudoDataPoint.TYPES.TIME,
+            return new NimbusDataPoint({
+                type: NimbusDataPoint.TYPES.TIME,
                 value: msg.value * 60
             });
         } else if (msg.siid === this.miot_properties.area.siid && msg.piid === this.miot_properties.area.piid) {
-            return new ValetudoDataPoint({
-                type: ValetudoDataPoint.TYPES.AREA,
+            return new NimbusDataPoint({
+                type: NimbusDataPoint.TYPES.AREA,
                 value: msg.value * 10000
             });
         } else if (msg.siid === this.miot_properties.count.siid && msg.piid === this.miot_properties.count.piid) {
-            return new ValetudoDataPoint({
-                type: ValetudoDataPoint.TYPES.COUNT,
+            return new NimbusDataPoint({
+                type: NimbusDataPoint.TYPES.COUNT,
                 value: msg.value
             });
         } else {
@@ -85,9 +82,9 @@ class DreameTotalStatisticsCapability extends TotalStatisticsCapability {
     getProperties() {
         return {
             availableStatistics: [
-                ValetudoDataPoint.TYPES.TIME,
-                ValetudoDataPoint.TYPES.AREA,
-                ValetudoDataPoint.TYPES.COUNT
+                NimbusDataPoint.TYPES.TIME,
+                NimbusDataPoint.TYPES.AREA,
+                NimbusDataPoint.TYPES.COUNT
             ]
         };
     }

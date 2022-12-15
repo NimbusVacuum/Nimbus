@@ -11,7 +11,7 @@ import {
     Typography,
     useTheme,
 } from "@mui/material";
-import {Capability, useTotalStatisticsQuery, ValetudoDataPoint} from "../api";
+import {Capability, useTotalStatisticsQuery, NimbusDataPoint} from "../api";
 import {useCapabilitiesSupported} from "../CapabilitiesProvider";
 import PaperContainer from "../components/PaperContainer";
 import LoadingFade from "../components/LoadingFade";
@@ -43,7 +43,7 @@ achievementColors.dark = {
     background: adjustColorBrightness(achievementColors.light.background, -20),
 };
 
-const StatisticsGridItem: React.FunctionComponent<{ dataPoint: ValetudoDataPoint}> = ({ dataPoint}): JSX.Element => {
+const StatisticsGridItem: React.FunctionComponent<{ dataPoint: NimbusDataPoint}> = ({ dataPoint}): JSX.Element => {
     const [overviewDialogOpen, setOverviewDialogOpen] = React.useState(false);
     const mobileView = useIsMobileView();
 

@@ -33,7 +33,7 @@
                   },
                   "implementation": {
                     "type": "string",
-                    "description": "Valetudo robot implementation in use"
+                    "description": "Nimbus robot implementation in use"
                   }
                 }
               }
@@ -98,7 +98,7 @@
                     }
                   },
                   "map": {
-                    "$ref": "#/components/schemas/ValetudoMap"
+                    "$ref": "#/components/schemas/NimbusMap"
                   }
                 }
               }
@@ -157,7 +157,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ValetudoMap"
+                "$ref": "#/components/schemas/NimbusMap"
               }
             }
           }
@@ -220,7 +220,7 @@
           "content": {
             "text/event-stream": {
               "schema": {
-                "$ref": "#/components/schemas/ValetudoMap"
+                "$ref": "#/components/schemas/NimbusMap"
               }
             }
           }

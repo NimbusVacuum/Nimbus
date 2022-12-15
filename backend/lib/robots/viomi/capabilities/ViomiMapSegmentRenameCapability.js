@@ -1,11 +1,11 @@
 const MapSegmentRenameCapability = require("../../../core/capabilities/MapSegmentRenameCapability");
 
 /**
- * @extends MapSegmentRenameCapability<import("../ViomiValetudoRobot")>
+ * @extends MapSegmentRenameCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiMapSegmentRenameCapability extends MapSegmentRenameCapability {
     /**
-     * @param {import("../../../entities/core/ValetudoMapSegment")} segment
+     * @param {import("../../../entities/core/NimbusMapSegment")} segment
      * @param {string} name
      */
     async renameSegment(segment, name) {

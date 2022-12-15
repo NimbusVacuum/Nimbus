@@ -1,7 +1,6 @@
 const express = require("express");
 
-
-const ValetudoRobot = require("../core/ValetudoRobot");
+const NimbusRobot = require("../core/NimbusRobot");
 
 const CapabilitiesRouter = require("./CapabilitiesRouter");
 const {SSEHub, SSEMiddleware} = require("./middlewares/sse");
@@ -10,7 +9,7 @@ class RobotRouter {
     /**
      *
      * @param {object} options
-     * @param {import("../core/ValetudoRobot")} options.robot
+     * @param {import("../core/NimbusRobot")} options.robot
      * @param {*} options.validator
      */
     constructor(options) {
@@ -22,7 +21,6 @@ class RobotRouter {
         this.initRoutes();
         this.initSSE();
     }
-
 
     initRoutes() {
         this.router.get("/", (req, res) => {
@@ -68,7 +66,6 @@ class RobotRouter {
             }
         });
 
-
         this.router.use("/capabilities/", new CapabilitiesRouter({
             robot: this.robot,
             validator: this.validator
@@ -84,21 +81,21 @@ class RobotRouter {
 
         this.robot.onStateUpdated(() => {
             this.sseHubs.state.event(
-                ValetudoRobot.EVENTS.StateUpdated,
+                NimbusRobot.EVENTS.StateUpdated,
                 JSON.stringify(this.robot.state)
             );
         });
 
         this.robot.onStateAttributesUpdated(() => {
             this.sseHubs.attributes.event(
-                ValetudoRobot.EVENTS.StateAttributesUpdated,
+                NimbusRobot.EVENTS.StateAttributesUpdated,
                 JSON.stringify(this.robot.state.attributes)
             );
         });
 
         this.robot.onMapUpdated(() => {
             this.sseHubs.map.event(
-                ValetudoRobot.EVENTS.MapUpdated,
+                NimbusRobot.EVENTS.MapUpdated,
                 JSON.stringify(this.robot.state.map)
             );
         });

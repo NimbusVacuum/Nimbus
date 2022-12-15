@@ -6,7 +6,6 @@ const Logger = require("./Logger");
 const States = require("./entities/core/ntpClient");
 const Tools = require("./utils/Tools");
 
-
 class NTPClient {
     /**
      * @param {object} options
@@ -24,12 +23,12 @@ class NTPClient {
         });
 
         if (this.config.get("ntpClient").enabled) {
-            this.state = new States.ValetudoNTPClientEnabledState({});
+            this.state = new States.NimbusNTPClientEnabledState({});
         } else {
-            this.state = new States.ValetudoNTPClientDisabledState({});
+            this.state = new States.NimbusNTPClientDisabledState({});
         }
 
-        // On startup, we need to wait for a while for Valetudo to fully start up (at least when using pkg) or else
+        // On startup, we need to wait for a while for Nimbus to fully start up (at least when using pkg) or else
         // we will get ntp sync timeouts in the log due to something blocking the process for a while
         setTimeout(() => {
             this.reconfigure();
@@ -41,7 +40,7 @@ class NTPClient {
         const ntpConfig = this.config.get("ntpClient");
 
         if (ntpConfig.enabled === true) {
-            this.state = new States.ValetudoNTPClientEnabledState({});
+            this.state = new States.NimbusNTPClientEnabledState({});
 
             if (this.config.get("embedded") === true) {
                 this.pollTime().then(() => {
@@ -49,7 +48,7 @@ class NTPClient {
                 });
             }
         } else {
-            this.state = new States.ValetudoNTPClientDisabledState({});
+            this.state = new States.NimbusNTPClientDisabledState({});
         }
     }
 
@@ -77,7 +76,7 @@ class NTPClient {
 
             this.setTime(currentNTPTime);
 
-            this.state = new States.ValetudoNTPClientSyncedState({
+            this.state = new States.NimbusNTPClientSyncedState({
                 offset: currentNTPTime.getTime() - preSyncTime.getTime()
             });
 
@@ -88,7 +87,7 @@ class NTPClient {
             }, ntpConfig.interval);
         } catch (e) {
             let error = {
-                type: States.ValetudoNTPClientErrorState.ERROR_TYPE.UNKNOWN,
+                type: States.NimbusNTPClientErrorState.ERROR_TYPE.UNKNOWN,
                 message: e.message
             };
 
@@ -101,27 +100,27 @@ class NTPClient {
                     case "ECONNABORTED":
                     case "ECONNRESET":
                     case "EPIPE":
-                        error.type = States.ValetudoNTPClientErrorState.ERROR_TYPE.TRANSIENT;
+                        error.type = States.NimbusNTPClientErrorState.ERROR_TYPE.TRANSIENT;
                         break;
                     case "ENOTFOUND":
-                        error.type = States.ValetudoNTPClientErrorState.ERROR_TYPE.NAME_RESOLUTION;
+                        error.type = States.NimbusNTPClientErrorState.ERROR_TYPE.NAME_RESOLUTION;
                         break;
                 }
             } else if (typeof e.message === "string" && e.message.indexOf("Timeout waiting") === 0) {
-                error.type = States.ValetudoNTPClientErrorState.ERROR_TYPE.CONNECTION;
+                error.type = States.NimbusNTPClientErrorState.ERROR_TYPE.CONNECTION;
                 error.message = e.message;
             } else if (e.stdout !== undefined) {
-                error.type = States.ValetudoNTPClientErrorState.ERROR_TYPE.PERSISTING;
+                error.type = States.NimbusNTPClientErrorState.ERROR_TYPE.PERSISTING;
                 error.message = e.stdout.toString() + " " + e.stderr.toString();
             }
 
-            if (error.type !== States.ValetudoNTPClientErrorState.ERROR_TYPE.TRANSIENT) {
+            if (error.type !== States.NimbusNTPClientErrorState.ERROR_TYPE.TRANSIENT) {
                 Logger.warn(`${Tools.CAPITALIZE(error.type)} error during time sync: ${error.message}`);
             } else {
                 Logger.debug(`${Tools.CAPITALIZE(error.type)} error during time sync: ${error.message}`);
             }
 
-            this.state = new States.ValetudoNTPClientErrorState(error);
+            this.state = new States.NimbusNTPClientErrorState(error);
 
             Logger.debug("Next NTP sync in " + FAILURE_RETRY_INTERVAL + " ms");
 
@@ -130,7 +129,6 @@ class NTPClient {
             }, FAILURE_RETRY_INTERVAL);
         }
     }
-
 
     setTime(date) {
         if (this.config.get("embedded") === true) {
@@ -147,7 +145,6 @@ class NTPClient {
             dateString += date.getMinutes().toString().padStart(2,0);
             dateString += ":";
             dateString += date.getSeconds().toString().padStart(2,0);
-
 
             execSync("date -s \""+dateString+"\"");
 

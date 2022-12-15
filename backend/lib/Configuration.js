@@ -17,7 +17,7 @@ class Configuration {
         this.eventEmitter = new EventEmitter();
         this.settings = DEFAULT_SETTINGS;
 
-        this.location = process.env.VALETUDO_CONFIG_PATH ?? path.join(os.tmpdir(), "valetudo_config.json");
+        this.location = process.env.NIMBUS_CONFIG_PATH ?? path.join(os.tmpdir(), "nimbus_config.json");
 
         this.loadConfig();
     }

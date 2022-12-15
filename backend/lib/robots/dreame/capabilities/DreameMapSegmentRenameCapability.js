@@ -2,13 +2,13 @@ const MapSegmentRenameCapability = require("../../../core/capabilities/MapSegmen
 const RobotFirmwareError = require("../../../core/RobotFirmwareError");
 
 /**
- * @extends MapSegmentRenameCapability<import("../DreameValetudoRobot")>
+ * @extends MapSegmentRenameCapability<import("../DreameNimbusRobot")>
  */
 class DreameMapSegmentRenameCapability extends MapSegmentRenameCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {object} options.miot_actions
      * @param {object} options.miot_actions.map_edit
@@ -30,7 +30,7 @@ class DreameMapSegmentRenameCapability extends MapSegmentRenameCapability {
     }
 
     /**
-     * @param {import("../../../entities/core/ValetudoMapSegment")} segment
+     * @param {import("../../../entities/core/NimbusMapSegment")} segment
      * @param {string} name
      * @returns {Promise<void>}
      */

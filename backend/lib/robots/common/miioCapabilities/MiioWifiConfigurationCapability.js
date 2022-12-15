@@ -1,13 +1,13 @@
 const LinuxWifiConfigurationCapability = require("../linuxCapabilities/LinuxWifiConfigurationCapability");
-const ValetudoWifiConfiguration = require("../../../entities/core/ValetudoWifiConfiguration");
-const ValetudoWifiStatus = require("../../../entities/core/ValetudoWifiStatus");
+const NimbusWifiConfiguration = require("../../../entities/core/NimbusWifiConfiguration");
+const NimbusWifiStatus = require("../../../entities/core/NimbusWifiStatus");
 
 /**
- * @extends LinuxWifiConfigurationCapability<import("../../MiioValetudoRobot")>
+ * @extends LinuxWifiConfigurationCapability<import("../../MiioNimbusRobot")>
  */
 class MiioWifiConfigurationCapability extends LinuxWifiConfigurationCapability {
     /**
-     * @returns {Promise<ValetudoWifiStatus>}
+     * @returns {Promise<NimbusWifiStatus>}
      */
     async getWifiStatus() {
         if (this.robot.config.get("embedded") === true) {
@@ -15,7 +15,7 @@ class MiioWifiConfigurationCapability extends LinuxWifiConfigurationCapability {
         }
 
         const output = {
-            state: ValetudoWifiStatus.STATE.UNKNOWN,
+            state: NimbusWifiStatus.STATE.UNKNOWN,
             details: {}
         };
 
@@ -23,27 +23,27 @@ class MiioWifiConfigurationCapability extends LinuxWifiConfigurationCapability {
 
         if (typeof res === "object") {
             if (res.ap.bssid !== "") {
-                output.state = ValetudoWifiStatus.STATE.CONNECTED;
+                output.state = NimbusWifiStatus.STATE.CONNECTED;
                 output.details.ips = [res.netif.localIp];
                 output.details.ssid = res.ap.ssid;
-                output.details.frequency = ValetudoWifiStatus.FREQUENCY_TYPE.W2_4Ghz;
+                output.details.frequency = NimbusWifiStatus.FREQUENCY_TYPE.W2_4Ghz;
                 output.details.signal = res.ap.rssi;
             } else {
-                output.state = ValetudoWifiStatus.STATE.NOT_CONNECTED;
+                output.state = NimbusWifiStatus.STATE.NOT_CONNECTED;
             }
         }
 
-        return new ValetudoWifiStatus(output);
+        return new NimbusWifiStatus(output);
     }
 
     /**
-     * @param {import("../../../entities/core/ValetudoWifiConfiguration")} wifiConfig
+     * @param {import("../../../entities/core/NimbusWifiConfiguration")} wifiConfig
      * @returns {Promise<void>}
      */
     async setWifiConfiguration(wifiConfig) {
         if (
             wifiConfig?.ssid !== undefined &&
-            wifiConfig.credentials?.type === ValetudoWifiConfiguration.CREDENTIALS_TYPE.WPA2_PSK &&
+            wifiConfig.credentials?.type === NimbusWifiConfiguration.CREDENTIALS_TYPE.WPA2_PSK &&
             wifiConfig.credentials.typeSpecificSettings?.password !== undefined
         ) {
             if (!MiioWifiConfigurationCapability.IS_VALID_PARAMETER(wifiConfig.ssid)) {
@@ -53,7 +53,6 @@ class MiioWifiConfigurationCapability extends LinuxWifiConfigurationCapability {
             if (!MiioWifiConfigurationCapability.IS_VALID_PARAMETER(wifiConfig.credentials.typeSpecificSettings.password)) {
                 throw new Error(`Password must not contain any of the following characters: ${INVALID_CHARACTERS.join(" ")}`);
             }
-
 
             await this.robot.sendCommand(
                 "miIO.config_router",

@@ -4,7 +4,7 @@ const ThreeIRobotixMapParser = require("../../3irobotix/ThreeIRobotixMapParser")
 const ZoneCleaningCapability = require("../../../core/capabilities/ZoneCleaningCapability");
 
 /**
- * @extends ZoneCleaningCapability<import("../ViomiValetudoRobot")>
+ * @extends ZoneCleaningCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiZoneCleaningCapability extends ZoneCleaningCapability {
     /**
@@ -16,10 +16,10 @@ class ViomiZoneCleaningCapability extends ZoneCleaningCapability {
     }
 
     /**
-     * @param {Array<import("../../../entities/core/ValetudoZone")>} valetudoZones
+     * @param {Array<import("../../../entities/core/NimbusZone")>} nimbusZones
      * @returns {Promise<void>}
      */
-    async start(valetudoZones) {
+    async start(nimbusZones) {
         let areas = [];
         const basicControlCap = this.getBasicControlCapability();
 
@@ -28,7 +28,7 @@ class ViomiZoneCleaningCapability extends ZoneCleaningCapability {
         // The robot seems to end up in a weird state if we don't do this.
         await this.robot.sendCommand("set_uploadmap", [1]);
 
-        valetudoZones.forEach(zone => {
+        nimbusZones.forEach(zone => {
             const pA = ThreeIRobotixMapParser.CONVERT_TO_THREEIROBOTIX_COORDINATES(zone.points.pA.x, zone.points.pA.y);
             const pC = ThreeIRobotixMapParser.CONVERT_TO_THREEIROBOTIX_COORDINATES(zone.points.pC.x, zone.points.pC.y);
 

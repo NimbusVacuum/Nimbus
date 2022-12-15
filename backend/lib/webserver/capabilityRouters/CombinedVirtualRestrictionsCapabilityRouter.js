@@ -1,7 +1,7 @@
 const CapabilityRouter = require("./CapabilityRouter");
-const ValetudoRestrictedZone = require("../../entities/core/ValetudoRestrictedZone");
-const ValetudoVirtualRestrictions = require("../../entities/core/ValetudoVirtualRestrictions");
-const ValetudoVirtualWall = require("../../entities/core/ValetudoVirtualWall");
+const NimbusRestrictedZone = require("../../entities/core/NimbusRestrictedZone");
+const NimbusVirtualRestrictions = require("../../entities/core/NimbusVirtualRestrictions");
+const NimbusVirtualWall = require("../../entities/core/NimbusVirtualWall");
 
 class CombinedVirtualRestrictionsCapabilityRouter extends CapabilityRouter {
     initRoutes() {
@@ -15,9 +15,9 @@ class CombinedVirtualRestrictionsCapabilityRouter extends CapabilityRouter {
 
         this.router.put("/", this.validator, async (req, res) => {
             if (Array.isArray(req.body.virtualWalls) && Array.isArray(req.body.restrictedZones)) {
-                const virtualRestrictions = new ValetudoVirtualRestrictions({
+                const virtualRestrictions = new NimbusVirtualRestrictions({
                     virtualWalls: req.body.virtualWalls.map(requestWall => {
-                        return new ValetudoVirtualWall({
+                        return new NimbusVirtualWall({
                             points: {
                                 pA: {
                                     x: requestWall.points.pA.x,
@@ -31,7 +31,7 @@ class CombinedVirtualRestrictionsCapabilityRouter extends CapabilityRouter {
                         });
                     }),
                     restrictedZones: req.body.restrictedZones.map(requestZone => {
-                        return new ValetudoRestrictedZone({
+                        return new NimbusRestrictedZone({
                             points: {
                                 pA: {
                                     x: requestZone.points.pA.x,

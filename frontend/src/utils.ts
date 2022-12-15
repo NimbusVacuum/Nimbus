@@ -1,5 +1,5 @@
 //Adapted from https://stackoverflow.com/a/34270811/10951033
-import {ValetudoDataPoint} from "./api";
+import {NimbusDataPoint} from "./api";
 import {useCallback, useLayoutEffect, useRef} from "react";
 
 export function convertSecondsToHumans(seconds: number, showSeconds = true, showDays = true): string {
@@ -21,7 +21,6 @@ export function convertSecondsToHumans(seconds: number, showSeconds = true, show
             }
         ];
 
-
         if (showSeconds) {
             levels.push(
                 {
@@ -42,7 +41,6 @@ export function convertSecondsToHumans(seconds: number, showSeconds = true, show
             }
         ];
 
-
         if (showSeconds) {
             levels.push(
                 {
@@ -52,7 +50,6 @@ export function convertSecondsToHumans(seconds: number, showSeconds = true, show
             );
         }
     }
-
 
     let humanReadableTimespan = "";
 
@@ -169,7 +166,7 @@ export const median = (numbers: Array<number>): number => { //Note that this wil
     return numbers[middle];
 };
 
-export function getFriendlyStatName(stat: ValetudoDataPoint) : string {
+export function getFriendlyStatName(stat: NimbusDataPoint) : string {
     switch (stat.type) {
         case "area":
             return "Area";
@@ -180,7 +177,7 @@ export function getFriendlyStatName(stat: ValetudoDataPoint) : string {
     }
 }
 
-export function getHumanReadableStatValue(stat: ValetudoDataPoint): string {
+export function getHumanReadableStatValue(stat: NimbusDataPoint): string {
     switch (stat.type) {
         case "area":
             return (stat.value / 10000).toFixed(2).padStart(6, "0") + " m²";
@@ -232,4 +229,3 @@ export const useGetter = <S>(value: S): (() => S) => {
         return ref.current;
     }, [ref]);
 };
-

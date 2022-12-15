@@ -21,7 +21,7 @@
                   "type": "array",
                   "description": "Zones clean",
                   "items": {
-                    "$ref": "#/components/schemas/ValetudoZone"
+                    "$ref": "#/components/schemas/NimbusZone"
                   }
                 }
               }

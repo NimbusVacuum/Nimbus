@@ -6,7 +6,7 @@ const SimpleToggleCapability = require("./SimpleToggleCapability");
  *
  * Why would you turn this off? Stop!
  *
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends SimpleToggleCapability<T>
  */
 class PersistentMapControlCapability extends SimpleToggleCapability {

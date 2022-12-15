@@ -2,7 +2,7 @@
 
 const entities = require("../entities");
 
-module.exports = new entities.map.ValetudoMap({
+module.exports = new entities.map.NimbusMap({
     size: {
         x: 5120,
         y: 5120

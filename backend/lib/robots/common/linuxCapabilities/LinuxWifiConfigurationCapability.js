@@ -1,11 +1,11 @@
 const NotImplementedError = require("../../../core/NotImplementedError");
 const spawnSync = require("child_process").spawnSync;
 const Tools = require("../../../utils/Tools");
-const ValetudoWifiStatus = require("../../../entities/core/ValetudoWifiStatus");
+const NimbusWifiStatus = require("../../../entities/core/NimbusWifiStatus");
 const WifiConfigurationCapability = require("../../../core/capabilities/WifiConfigurationCapability");
 
 /**
- * @template {import("../../../core/ValetudoRobot")} T
+ * @template {import("../../../core/NimbusRobot")} T
  * @extends WifiConfigurationCapability<T>
  */
 class LinuxWifiConfigurationCapability extends WifiConfigurationCapability {
@@ -22,7 +22,7 @@ class LinuxWifiConfigurationCapability extends WifiConfigurationCapability {
     }
 
     /**
-     * @returns {Promise<ValetudoWifiStatus>}
+     * @returns {Promise<NimbusWifiStatus>}
      */
     async getWifiStatus() {
         if (this.robot.config.get("embedded") !== true) {
@@ -40,7 +40,7 @@ class LinuxWifiConfigurationCapability extends WifiConfigurationCapability {
         const wifiStatus = this.parseIwStdout(iwOutput);
 
         //IPs are not part of the iw output
-        if (wifiStatus.state === ValetudoWifiStatus.STATE.CONNECTED) {
+        if (wifiStatus.state === NimbusWifiStatus.STATE.CONNECTED) {
             wifiStatus.details.ips = Tools.GET_CURRENT_HOST_IP_ADDRESSES().sort().filter(ip => {
                 return ip !== "127.0.0.1" && ip !== "::1";
             });
@@ -50,7 +50,7 @@ class LinuxWifiConfigurationCapability extends WifiConfigurationCapability {
     }
 
     /**
-     * @param {import("../../../entities/core/ValetudoWifiConfiguration")} wifiConfig
+     * @param {import("../../../entities/core/NimbusWifiConfiguration")} wifiConfig
      * @returns {Promise<void>}
      * @abstract
      */
@@ -61,11 +61,11 @@ class LinuxWifiConfigurationCapability extends WifiConfigurationCapability {
     /**
      *
      * @param {string} stdout
-     * @return {ValetudoWifiStatus}
+     * @return {NimbusWifiStatus}
      */
     parseIwStdout(stdout) {
         const output = {
-            state: ValetudoWifiStatus.STATE.UNKNOWN,
+            state: NimbusWifiStatus.STATE.UNKNOWN,
             details: {}
         };
 
@@ -75,17 +75,17 @@ class LinuxWifiConfigurationCapability extends WifiConfigurationCapability {
 
         const extractedWifiData = stdout.match(WIFI_CONNECTED_IW_REGEX);
         if (extractedWifiData) {
-            output.state = ValetudoWifiStatus.STATE.CONNECTED;
+            output.state = NimbusWifiStatus.STATE.CONNECTED;
             output.details.upspeed = parseFloat(extractedWifiData.groups.txbitrate);
             output.details.signal = parseInt(extractedWifiData.groups.signal);
             output.details.ssid = extractedWifiData.groups.ssid.trim();
             output.details.bssid = extractedWifiData.groups.bssid.trim();
-            output.details.frequency = ValetudoWifiStatus.FREQUENCY_TYPE.W2_4Ghz;
+            output.details.frequency = NimbusWifiStatus.FREQUENCY_TYPE.W2_4Ghz;
         } else if (stdout.trim().match(WIFI_NOT_CONNECTED_IW_REGEX)) {
-            output.state = ValetudoWifiStatus.STATE.NOT_CONNECTED;
+            output.state = NimbusWifiStatus.STATE.NOT_CONNECTED;
         }
 
-        return new ValetudoWifiStatus(output);
+        return new NimbusWifiStatus(output);
     }
 }
 

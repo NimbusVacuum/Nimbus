@@ -1,14 +1,14 @@
 const DoNotDisturbCapability = require("../../../core/capabilities/DoNotDisturbCapability");
 const DreameMiotHelper = require("../DreameMiotHelper");
-const ValetudoDNDConfiguration = require("../../../entities/core/ValetudoDNDConfiguration");
+const NimbusDNDConfiguration = require("../../../entities/core/NimbusDNDConfiguration");
 
 /**
- * @extends DoNotDisturbCapability<import("../DreameValetudoRobot")>
+ * @extends DoNotDisturbCapability<import("../DreameNimbusRobot")>
  */
 class DreameDoNotDisturbCapability extends DoNotDisturbCapability {
     /**
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {object} options.miot_properties
      * @param {object} options.miot_properties.dnd_enabled
@@ -31,7 +31,7 @@ class DreameDoNotDisturbCapability extends DoNotDisturbCapability {
 
     /**
      *
-     * @returns {Promise<ValetudoDNDConfiguration>}
+     * @returns {Promise<NimbusDNDConfiguration>}
      */
     async getDndConfiguration() {
         const res = await this.robot.sendCommand("get_properties", [
@@ -80,7 +80,7 @@ class DreameDoNotDisturbCapability extends DoNotDisturbCapability {
                     }
                 });
 
-                return new ValetudoDNDConfiguration(dndObj);
+                return new NimbusDNDConfiguration(dndObj);
             } else {
                 throw new Error("Error fetching DND settings");
             }
@@ -90,7 +90,7 @@ class DreameDoNotDisturbCapability extends DoNotDisturbCapability {
     }
 
     /**
-     * @param {ValetudoDNDConfiguration} dndConfig
+     * @param {NimbusDNDConfiguration} dndConfig
      * @returns {Promise<void>}
      */
     async setDndConfiguration(dndConfig) {

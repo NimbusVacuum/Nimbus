@@ -5,7 +5,7 @@
   'on': ['workflow_dispatch'],
   'jobs':
     {
-      'build-valetudo':
+      'build-nimbus':
         {
           'runs-on': 'ubuntu-latest',
           'steps':
@@ -22,19 +22,19 @@
                 'run': 'npm run build_openapi_schema',
               },
               {
-                'name': 'Build Valetudo frontend',
+                'name': 'Build Nimbus frontend',
                 'run': 'npm run build --workspace=frontend',
               },
               {
-                'name': 'Build Valetudo armv7',
+                'name': 'Build Nimbus armv7',
                 'run': 'npm run build_armv7 --workspace=backend',
               },
               {
-                'name': 'Build Valetudo armv7 lowmem',
+                'name': 'Build Nimbus armv7 lowmem',
                 'run': 'npm run build_armv7_lowmem --workspace=backend',
               },
               {
-                'name': 'Build Valetudo aarch64',
+                'name': 'Build Nimbus aarch64',
                 'run': 'npm run build_aarch64 --workspace=backend',
               },
 
@@ -43,8 +43,8 @@
                 'uses': 'actions/upload-artifact@v2',
                 'with':
                   {
-                    'name': 'valetudo-armv7',
-                    'path': './build/armv7/valetudo',
+                    'name': 'nimbus-armv7',
+                    'path': './build/armv7/nimbus',
                   },
               },
               {
@@ -52,8 +52,8 @@
                 'uses': 'actions/upload-artifact@v2',
                 'with':
                   {
-                    'name': 'valetudo-armv7-lowmem',
-                    'path': './build/armv7/valetudo-lowmem',
+                    'name': 'nimbus-armv7-lowmem',
+                    'path': './build/armv7/nimbus-lowmem',
                   },
               },
               {
@@ -61,13 +61,13 @@
                 'uses': 'actions/upload-artifact@v2',
                 'with':
                   {
-                    'name': 'valetudo-aarch64',
-                    'path': './build/aarch64/valetudo',
+                    'name': 'nimbus-aarch64',
+                    'path': './build/aarch64/nimbus',
                   },
               },
 
               {
-                'name': 'UPX-compress valetudo binaries',
+                'name': 'UPX-compress nimbus binaries',
                 'run': 'npm run upx',
               },
               {
@@ -75,8 +75,8 @@
                 'uses': 'actions/upload-artifact@v2',
                 'with':
                   {
-                    'name': 'valetudo-armv7.upx',
-                    'path': './build/armv7/valetudo.upx',
+                    'name': 'nimbus-armv7.upx',
+                    'path': './build/armv7/nimbus.upx',
                   },
               },
               {
@@ -84,8 +84,8 @@
                 'uses': 'actions/upload-artifact@v2',
                 'with':
                   {
-                    'name': 'valetudo-armv7-lowmem.upx',
-                    'path': './build/armv7/valetudo-lowmem.upx',
+                    'name': 'nimbus-armv7-lowmem.upx',
+                    'path': './build/armv7/nimbus-lowmem.upx',
                   },
               },
               {
@@ -93,8 +93,8 @@
                 'uses': 'actions/upload-artifact@v2',
                 'with':
                   {
-                    'name': 'valetudo-aarch64.upx',
-                    'path': './build/aarch64/valetudo.upx',
+                    'name': 'nimbus-aarch64.upx',
+                    'path': './build/aarch64/nimbus.upx',
                   },
               },
 
@@ -107,8 +107,8 @@
                 'uses': 'actions/upload-artifact@v2',
                 'with':
                   {
-                    'name': 'valetudo_release_manifest.json',
-                    'path': './build/valetudo_release_manifest.json',
+                    'name': 'nimbus_release_manifest.json',
+                    'path': './build/nimbus_release_manifest.json',
                   },
               },
             ],

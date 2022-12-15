@@ -5,7 +5,7 @@ const ManualControlCapability = require("../../../core/capabilities/ManualContro
 const StatusStateAttribute = require("../../../entities/state/attributes/StatusStateAttribute");
 
 /**
- * @extends ManualControlCapability<import("../DreameGen2ValetudoRobot")>
+ * @extends ManualControlCapability<import("../DreameGen2NimbusRobot")>
  */
 class DreameManualControlCapability extends ManualControlCapability {
     /**
@@ -16,7 +16,7 @@ class DreameManualControlCapability extends ManualControlCapability {
      * @param {number} options.miot_properties.manual_control.siid
      * @param {number} options.miot_properties.manual_control.piid
      *
-     * @param {import("../DreameGen2ValetudoRobot")} options.robot
+     * @param {import("../DreameGen2NimbusRobot")} options.robot
      * @class
      */
     constructor(options) {
@@ -98,7 +98,7 @@ class DreameManualControlCapability extends ManualControlCapability {
     }
 
     /**
-     * @param {import("../../../core/capabilities/ManualControlCapability").ValetudoManualControlMovementCommandType} movementCommand
+     * @param {import("../../../core/capabilities/ManualControlCapability").NimbusManualControlMovementCommandType} movementCommand
      * @returns {Promise<void>}
      */
     async manualControl(movementCommand) {

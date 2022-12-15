@@ -1,0 +1,22 @@
+{
+  "components": {
+    "schemas": {
+      "NimbusNTPClientSyncedState": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NimbusNTPClientState"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "offset": {
+                "type": "number",
+                "description": "The offset of the previous time on sync"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

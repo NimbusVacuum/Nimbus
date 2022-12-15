@@ -13,16 +13,16 @@
               "schema": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/ValetudoNTPClientDisabledState"
+                    "$ref": "#/components/schemas/NimbusNTPClientDisabledState"
                   },
                   {
-                    "$ref": "#/components/schemas/ValetudoNTPClientEnabledState"
+                    "$ref": "#/components/schemas/NimbusNTPClientEnabledState"
                   },
                   {
-                    "$ref": "#/components/schemas/ValetudoNTPClientErrorState"
+                    "$ref": "#/components/schemas/NimbusNTPClientErrorState"
                   },
                   {
-                    "$ref": "#/components/schemas/ValetudoNTPClientSyncedState"
+                    "$ref": "#/components/schemas/NimbusNTPClientSyncedState"
                   }
                 ]
               }

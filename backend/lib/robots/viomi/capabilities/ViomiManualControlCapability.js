@@ -2,15 +2,14 @@ const ManualControlCapability = require("../../../core/capabilities/ManualContro
 const stateAttrs = require("../../../entities/state/attributes");
 const ViomiManualControlDirection = require("../ViomiCommonAttributes").ViomiManualControlDirection;
 
-
 /**
- * @extends ManualControlCapability<import("../ViomiValetudoRobot")>
+ * @extends ManualControlCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiManualControlCapability extends ManualControlCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../ViomiValetudoRobot")} options.robot
+     * @param {import("../ViomiNimbusRobot")} options.robot
      * @class
      */
     constructor(options) {
@@ -68,7 +67,7 @@ class ViomiManualControlCapability extends ManualControlCapability {
     }
 
     /**
-     * @param {import("../../../core/capabilities/ManualControlCapability").ValetudoManualControlMovementCommandType} movementCommand
+     * @param {import("../../../core/capabilities/ManualControlCapability").NimbusManualControlMovementCommandType} movementCommand
      * @returns {Promise<void>}
      */
     async manualControl(movementCommand) {

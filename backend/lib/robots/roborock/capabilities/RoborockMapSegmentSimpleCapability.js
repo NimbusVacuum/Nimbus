@@ -1,14 +1,14 @@
 const MapSegmentationCapability = require("../../../core/capabilities/MapSegmentationCapability");
 
 /**
- * @extends MapSegmentationCapability<import("../RoborockValetudoRobot")>
+ * @extends MapSegmentationCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockMapSegmentSimpleCapability extends MapSegmentationCapability {
     /**
      * Could be phrased as "cleanSegments" for vacuums or "mowSegments" for lawnmowers
      *
      *
-     * @param {Array<import("../../../entities/core/ValetudoMapSegment")>} segments
+     * @param {Array<import("../../../entities/core/NimbusMapSegment")>} segments
      * @param {object} [options]
      * @param {number} [options.iterations]
      * @param {boolean} [options.customOrder]

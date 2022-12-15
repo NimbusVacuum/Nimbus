@@ -1,12 +1,12 @@
 module.exports = {
-    "RoborockM1SValetudoRobot": require("./RoborockM1SValetudoRobot"),
-    "RoborockS4MaxValetudoRobot": require("./RoborockS4MaxValetudoRobot"),
-    "RoborockS4ValetudoRobot": require("./RoborockS4ValetudoRobot"),
-    "RoborockS5MaxValetudoRobot": require("./RoborockS5MaxValetudoRobot"),
-    "RoborockS5ValetudoRobot": require("./RoborockS5ValetudoRobot"),
-    "RoborockS6MaxVValetudoRobot": require("./RoborockS6MaxVValetudoRobot"),
-    "RoborockS6PureValetudoRobot": require("./RoborockS6PureValetudoRobot"),
-    "RoborockS6ValetudoRobot": require("./RoborockS6ValetudoRobot"),
-    "RoborockS7ValetudoRobot": require("./RoborockS7ValetudoRobot"),
-    "RoborockV1ValetudoRobot": require("./RoborockV1ValetudoRobot")
+    "RoborockM1SNimbusRobot": require("./RoborockM1SNimbusRobot"),
+    "RoborockS4MaxNimbusRobot": require("./RoborockS4MaxNimbusRobot"),
+    "RoborockS4NimbusRobot": require("./RoborockS4NimbusRobot"),
+    "RoborockS5MaxNimbusRobot": require("./RoborockS5MaxNimbusRobot"),
+    "RoborockS5NimbusRobot": require("./RoborockS5NimbusRobot"),
+    "RoborockS6MaxVNimbusRobot": require("./RoborockS6MaxVNimbusRobot"),
+    "RoborockS6PureNimbusRobot": require("./RoborockS6PureNimbusRobot"),
+    "RoborockS6NimbusRobot": require("./RoborockS6NimbusRobot"),
+    "RoborockS7NimbusRobot": require("./RoborockS7NimbusRobot"),
+    "RoborockV1NimbusRobot": require("./RoborockV1NimbusRobot")
 };

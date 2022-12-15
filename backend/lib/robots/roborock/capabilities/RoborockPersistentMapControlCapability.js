@@ -1,12 +1,12 @@
 const PersistentMapControlCapability = require("../../../core/capabilities/PersistentMapControlCapability");
 
 /**
- * @extends PersistentMapControlCapability<import("../RoborockValetudoRobot")>
+ * @extends PersistentMapControlCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockPersistentMapControlCapability extends PersistentMapControlCapability {
     /**
      * @param {object} options
-     * @param {import("../RoborockValetudoRobot")} options.robot
+     * @param {import("../RoborockNimbusRobot")} options.robot
      */
     constructor(options) {
         super(options);

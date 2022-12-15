@@ -9,9 +9,8 @@ const NotImplementedError = require("../NotImplementedError");
  * to do anything with it such as overwriting the old one.
  */
 
-
 /**
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class PendingMapChangeHandlingCapability extends Capability {
@@ -47,7 +46,7 @@ class PendingMapChangeHandlingCapability extends Capability {
      */
     markEventsAsProcessed() {
         try {
-            this.robot.valetudoEventStore.setProcessed("pending_map_change");
+            this.robot.nimbusEventStore.setProcessed("pending_map_change");
         } catch (e) {
             //intentional
         }

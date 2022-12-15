@@ -12,7 +12,7 @@ class NetworkAdvertisementManager {
      *
      * @param {object} options
      * @param {import("./Configuration")} options.config
-     * @param {import("./core/ValetudoRobot")} options.robot
+     * @param {import("./core/NimbusRobot")} options.robot
      */
     constructor(options) {
         this.config = options.config;
@@ -96,10 +96,10 @@ class NetworkAdvertisementManager {
             });
         });
 
-        Logger.info("Valetudo can be reached via: " + Tools.GET_ZEROCONF_HOSTNAME());
+        Logger.info("Nimbus can be reached via: " + Tools.GET_ZEROCONF_HOSTNAME());
 
-        this.publishBonjourService(`Valetudo ${Tools.GET_HUMAN_READABLE_SYSTEM_ID()} Web`, "http");
-        this.publishBonjourService(`Valetudo ${Tools.GET_HUMAN_READABLE_SYSTEM_ID()}`, "valetudo");
+        this.publishBonjourService(`Nimbus ${Tools.GET_HUMAN_READABLE_SYSTEM_ID()} Web`, "http");
+        this.publishBonjourService(`Nimbus ${Tools.GET_HUMAN_READABLE_SYSTEM_ID()}`, "nimbus");
     }
 
     /**
@@ -118,7 +118,7 @@ class NetworkAdvertisementManager {
                 id: Tools.GET_HUMAN_READABLE_SYSTEM_ID(),
                 model: this.robot.getModelName(),
                 manufacturer: this.robot.getManufacturer(),
-                version: Tools.GET_VALETUDO_VERSION()
+                version: Tools.GET_NIMBUS_VERSION()
             }
         });
 

@@ -1,5 +1,5 @@
 const CapabilityRouter = require("./CapabilityRouter");
-const ValetudoMapSegment = require("../../entities/core/ValetudoMapSegment");
+const NimbusMapSegment = require("../../entities/core/NimbusMapSegment");
 
 class MapSegmentationCapabilityRouter extends CapabilityRouter {
     initRoutes() {
@@ -26,7 +26,7 @@ class MapSegmentationCapabilityRouter extends CapabilityRouter {
                         }
 
                         await this.capability.executeSegmentAction(req.body.segment_ids.map(sid => {
-                            return new ValetudoMapSegment({
+                            return new NimbusMapSegment({
                                 id: sid
                             });
                         }), options);

@@ -1,5 +1,5 @@
 const CapabilityRouter = require("./CapabilityRouter");
-const ValetudoMapSegment = require("../../entities/core/ValetudoMapSegment");
+const NimbusMapSegment = require("../../entities/core/NimbusMapSegment");
 
 class MapSegmentRenameCapabilityRouter extends CapabilityRouter {
     initRoutes() {
@@ -8,7 +8,7 @@ class MapSegmentRenameCapabilityRouter extends CapabilityRouter {
                 if ( req.body.segment_id && req.body.name !== undefined) {
                     try {
                         await this.capability.renameSegment(
-                            new ValetudoMapSegment({id: req.body.segment_id}),
+                            new NimbusMapSegment({id: req.body.segment_id}),
                             req.body.name
                         );
 

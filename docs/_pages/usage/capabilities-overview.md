@@ -14,7 +14,7 @@ Your robot will probably have multiple but not all of these.
 
 ## BasicControlCapability <a id="BasicControlCapability"></a>
 
-Basic robot controls. This should be something that all supported ValetudoRobots implement.
+Basic robot controls. This should be something that all supported NimbusRobots implement.
 
 Its methods are:
 
@@ -84,7 +84,7 @@ This capability enables you to reset the current map.
 
 This capability enables you to join and split detected segments.
 
-If you're new to Valetudo, you might be referring to Segments as Rooms. It's the same thing.
+If you're new to Nimbus, you might be referring to Segments as Rooms. It's the same thing.
 I just didn't like the term room, because they don't necessarily have to actually be rooms.
 
 ## MapSegmentRenameCapability <a id="MapSegmentRenameCapability"></a>
@@ -96,7 +96,7 @@ distinguish them.
 
 This capability enables you to clean detected segments.
 
-If you're new to Valetudo, you might be referring to Segments as Rooms. It's the same thing.
+If you're new to Nimbus, you might be referring to Segments as Rooms. It's the same thing.
 I just didn't like the term room, because they don't necessarily have to actually be rooms.
 
 ## MapSnapshotCapability <a id="MapSnapshotCapability"></a>

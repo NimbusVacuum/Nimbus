@@ -7,7 +7,7 @@ order: 12
 
 This page contains a general overview of vacuum robot rooting.
 
-To find the correct rooting instructions for your specific model of robot, check out the [supported robot](https://valetudo.cloud/pages/general/supported-robots.html) page.
+To find the correct rooting instructions for your specific model of robot, check out the [supported robot](https://nimbus.cleaning/pages/general/supported-robots.html) page.
 
 ## Requirements
 
@@ -17,16 +17,16 @@ Rooting robots is an advanced topic the same way working on a car, your electric
 All these things require prior knowledge before attempting to do them or else they may fail catastrophically killing you and/or other people in the process.
 
 While messing up the robot root procedure likely won't harm you, it may still cause a **permanently bricked robot** or
-at least annoy the people supporting other Valetudo users in their free time.
+at least annoy the people supporting other Nimbus users in their free time.
 
-Thus, to safely root your robot and install Valetudo, you will need prior knowledge in:
+Thus, to safely root your robot and install Nimbus, you will need prior knowledge in:
 - GNU+Linux-based operating systems
 - usage of a text-based shell (the Terminal)
 - an understanding of how networks work, what an IP address is, what a webserver is, etc.
 - and more.
 
 If you don't know these and don't want to research them yourself, consider asking a friend, relative, colleague or your
-nearest computer repair shop for help as teaching these basics is beyond the scope of the Valetudo docs.
+nearest computer repair shop for help as teaching these basics is beyond the scope of the Nimbus docs.
 
 It's also not feasible, since different people might start with different knowledge and therefore would require different information.
 We can't mirror half of Wikipedia here.
@@ -34,7 +34,7 @@ We can't mirror half of Wikipedia here.
 
 ### Software
 
-Valetudo rooting instructions expect you to run some **GNU+Linux distribution** such as Debian, Fedora, Arch, Ubuntu or similar.
+Nimbus rooting instructions expect you to run some **GNU+Linux distribution** such as Debian, Fedora, Arch, Ubuntu or similar.
 You don't have to install it. Booting from a live USB/DVD will be sufficient.
 
 If you're running **Windows**, usage of the Windows Subsystem for Linux (WSL) is also often possible. If you haven't heard of that yet,
@@ -80,7 +80,7 @@ signed executables but also stuff such as firewalls, missing libraries and more
 
 Now that we have full and easy access to the system, we can finally do what we came there for.
 
-This means deploying Valetudo, figuring some way of running it on system start, modifying the vendor software so that it stops talking to the cloud and more
+This means deploying Nimbus, figuring some way of running it on system start, modifying the vendor software so that it stops talking to the cloud and more
 
 During research for a new root, the challenging part here is understanding the whole business logic of the robots operating system
 and of course getting it to work without the cloud.

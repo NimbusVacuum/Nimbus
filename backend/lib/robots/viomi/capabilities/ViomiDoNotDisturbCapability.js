@@ -1,19 +1,19 @@
 const DoNotDisturbCapability = require("../../../core/capabilities/DoNotDisturbCapability");
-const ValetudoDNDConfiguration = require("../../../entities/core/ValetudoDNDConfiguration");
+const NimbusDNDConfiguration = require("../../../entities/core/NimbusDNDConfiguration");
 
 /**
- * @extends DoNotDisturbCapability<import("../ViomiValetudoRobot")>
+ * @extends DoNotDisturbCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiDoNotDisturbCapability extends DoNotDisturbCapability {
     /**
      *
      * @abstract
-     * @returns {Promise<ValetudoDNDConfiguration>}
+     * @returns {Promise<NimbusDNDConfiguration>}
      */
     async getDndConfiguration() {
         const res = await this.robot.sendCommand("get_notdisturb", []);
 
-        return new ValetudoDNDConfiguration({
+        return new NimbusDNDConfiguration({
             enabled: (res[0] === 1),
             start: {
                 hour: res[1],
@@ -28,7 +28,7 @@ class ViomiDoNotDisturbCapability extends DoNotDisturbCapability {
 
     /**
      * @abstract
-     * @param {ValetudoDNDConfiguration} dndConfig
+     * @param {NimbusDNDConfiguration} dndConfig
      * @returns {Promise<void>}
      */
     async setDndConfiguration(dndConfig) {

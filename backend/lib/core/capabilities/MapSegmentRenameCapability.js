@@ -2,12 +2,12 @@ const Capability = require("./Capability");
 const NotImplementedError = require("../NotImplementedError");
 
 /**
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class MapSegmentRenameCapability extends Capability {
     /**
-     * @param {import("../../entities/core/ValetudoMapSegment")} segment
+     * @param {import("../../entities/core/NimbusMapSegment")} segment
      * @param {string} name
      */
     async renameSegment(segment, name) {

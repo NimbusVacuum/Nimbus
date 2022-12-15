@@ -22,7 +22,7 @@
                   }
                 },
                 {
-                  "$ref": "#/components/schemas/ValetudoGoToLocation"
+                  "$ref": "#/components/schemas/NimbusGoToLocation"
                 }
               ]
             }

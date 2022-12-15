@@ -2,13 +2,13 @@ const AutoEmptyDockManualTriggerCapability = require("../../../core/capabilities
 const DreameMiotHelper = require("../DreameMiotHelper");
 
 /**
- * @extends AutoEmptyDockManualTriggerCapability<import("../DreameValetudoRobot")>
+ * @extends AutoEmptyDockManualTriggerCapability<import("../DreameNimbusRobot")>
  */
 class DreameAutoEmptyDockManualTriggerCapability extends AutoEmptyDockManualTriggerCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {number} options.siid MIOT Service ID
      * @param {number} options.aiid MIOT Action ID

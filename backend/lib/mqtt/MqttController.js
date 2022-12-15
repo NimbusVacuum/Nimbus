@@ -21,7 +21,7 @@ const { CAPABILITY_TYPE_TO_HANDLE_MAPPING } = require("./handles/HandleMappings"
 class MqttController {
     /**
      * @param {object} options
-     * @param {import("../core/ValetudoRobot")} options.robot
+     * @param {import("../core/NimbusRobot")} options.robot
      * @param {import("../Configuration")} options.config
      */
     constructor(options) {
@@ -70,7 +70,7 @@ class MqttController {
                 identifier: Tools.GET_HUMAN_READABLE_SYSTEM_ID()
             },
             customizations: {
-                topicPrefix: "valetudo"
+                topicPrefix: "nimbus"
             }
         };
 
@@ -192,7 +192,7 @@ class MqttController {
 
         /** @type {InternalMQTTConfiguration} **/
         this.currentConfig = structuredClone({
-            clientId: "valetudo_" + Tools.GET_HUMAN_READABLE_SYSTEM_ID(),
+            clientId: "nimbus_" + Tools.GET_HUMAN_READABLE_SYSTEM_ID(),
             qos: MqttCommonAttributes.QOS.AT_LEAST_ONCE,
 
             enabled: mqttConfig.enabled,
@@ -456,7 +456,6 @@ class MqttController {
         ]);
         clearTimeout(forceDisconnectTimeout);
 
-
         if (this.client && !this.client.disconnected) {
             Logger.warn("MQTT.js is pretending to be disconnected");
             this.client.end(true);
@@ -619,7 +618,6 @@ class MqttController {
             return;
         }
 
-
         try {
             for (const topic of Object.keys(topics)) {
                 // @ts-ignore
@@ -642,7 +640,6 @@ class MqttController {
                 throw e;
             }
         }
-
 
         Object.assign(this.subscriptions, topics);
     }
@@ -780,7 +777,6 @@ class MqttController {
         }
     }
 
-
     /**
      * @callback withHassCb
      * @param {import("./homeassistant/HassController")} hass
@@ -798,7 +794,6 @@ class MqttController {
             callback(this.hassController);
         }
     }
-
 
     /**
      * This is effectively a wrapper around mqtt.publish. However, this is intended for *exclusive* usage by
@@ -858,7 +853,6 @@ class MqttController {
         }
     }
 }
-
 
 module.exports = MqttController;
 

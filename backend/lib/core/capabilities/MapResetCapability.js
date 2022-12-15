@@ -2,7 +2,7 @@ const Capability = require("./Capability");
 const NotImplementedError = require("../NotImplementedError");
 
 /**
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class MapResetCapability extends Capability {

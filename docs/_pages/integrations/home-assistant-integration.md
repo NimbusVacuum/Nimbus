@@ -9,14 +9,14 @@ order: 21
 At first you need a MQTT Broker (if not already present). It is recommended to use Mosquitto for this.
 Mosquitto is part of basically every linux distributions repositories. It can also be installed via docker.
 
-### Valetudo Settings
+### Nimbus Settings
 Enable MQTT, and add the IP of your MQTT Broker to the Server.
 Ensure the Autodiscovery Settings (For Homeassistant AND Homie) are enabled. Then Save the Settings to let the magic happen.
 
 ### Homeassistant
 Homeassistant will now discover lots of entities you can now read and use.
 Some basic functions like starting, stopping or returning to base can now be called with the appropriate homeassistant vacuum integration.
-Since Valetudo 2021.04.0 "vacuum.send_command" is no longer supported (which was used for things like segment cleaning or goto location).
+Since Nimbus 2021.04.0 "vacuum.send_command" is no longer supported (which was used for things like segment cleaning or goto location).
 Now the MQTT publish Homeassistant Component must be used for advanced commands.
 
 For more information about how the MQTT discovery works, check out the [Home Assistant documentation](https://www.home-assistant.io/docs/mqtt/discovery/#discovery-topic).
@@ -42,11 +42,11 @@ target:
 
 #### Advanced Services
 
-For using the Homeassistant MQTT Publish component, you need to know the topic prefix and the identifier. These Settings can be found in the Valetudo MQTT settings.
+For using the Homeassistant MQTT Publish component, you need to know the topic prefix and the identifier. These Settings can be found in the Nimbus MQTT settings.
 
-For these examples we are assuming topic prefix=valetudo and identifier=robot
+For these examples we are assuming topic prefix=nimbus and identifier=robot
 
-For the segment cleaning capability, you should first go ahead to valetudo and rename your segments (rooms). Then you can go and check out the entity "sensor.map_segments" which provides a list of your rooms like this:
+For the segment cleaning capability, you should first go ahead to nimbus and rename your segments (rooms). Then you can go and check out the entity "sensor.map_segments" which provides a list of your rooms like this:
 
 ```
 '16': livingroom
@@ -61,7 +61,7 @@ The resulting Homeassistant Service to clean the bathroom, floor and livingroom 
 ```
 service: mqtt.publish
 data:
-  topic: valetudo/robot/MapSegmentationCapability/clean/set
+  topic: nimbus/robot/MapSegmentationCapability/clean/set
   payload: '{"segment_ids": ["20", "18", "16"], "iterations": 2, "customOrder": true}'
 ```
 
@@ -198,7 +198,7 @@ vacuum_clean_segments_message:
   sequence:
   - service: mqtt.publish
     data:
-      topic: valetudo/robot/MapSegmentationCapability/clean/set
+      topic: nimbus/robot/MapSegmentationCapability/clean/set
       payload_template: '{"segment_ids": {{segments}}}'
   mode: single
 {% endraw %}
@@ -240,7 +240,7 @@ vacuum_trigger_autoempty:
   sequence:
   - service: mqtt.publish
     data:
-      topic: valetudo/robot/AutoEmptyDockManualTriggerCapability/trigger/set
+      topic: nimbus/robot/AutoEmptyDockManualTriggerCapability/trigger/set
       payload: PERFORM
   mode: single
 {% endraw %}

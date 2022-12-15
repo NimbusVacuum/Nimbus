@@ -1,11 +1,11 @@
 const Logger = require("../../../Logger");
 const Semaphore = require("semaphore");
 const spawn = require("child_process").spawn;
-const ValetudoWifiNetwork = require("../../../entities/core/ValetudoWifiNetwork");
+const NimbusWifiNetwork = require("../../../entities/core/NimbusWifiNetwork");
 const WifiScanCapability = require("../../../core/capabilities/WifiScanCapability");
 
 /**
- * @template {import("../../../core/ValetudoRobot")} T
+ * @template {import("../../../core/NimbusRobot")} T
  * @extends WifiScanCapability<T>
  */
 class LinuxWifiScanCapability extends WifiScanCapability {
@@ -30,14 +30,14 @@ class LinuxWifiScanCapability extends WifiScanCapability {
 
             Moreover, we only allow one concurrent scanning process
          */
-        /** @type {Array<ValetudoWifiNetwork>} */
+        /** @type {Array<NimbusWifiNetwork>} */
         this.cache = [];
 
         this.mutex = Semaphore(1);
     }
 
     /**
-     * @returns {Promise<Array<ValetudoWifiNetwork>>}
+     * @returns {Promise<Array<NimbusWifiNetwork>>}
      */
     scan() {
         return new Promise((resolve) => {
@@ -125,7 +125,7 @@ class LinuxWifiScanCapability extends WifiScanCapability {
     /**
      * @private
      * @param {string} scanOutput
-     * @returns {Array<ValetudoWifiNetwork>}
+     * @returns {Array<NimbusWifiNetwork>}
      */
     parseScanData(scanOutput) {
         const networks = [];
@@ -150,7 +150,6 @@ class LinuxWifiScanCapability extends WifiScanCapability {
                 }
                 const trimmedLine = line.trim();
 
-
                 let match = trimmedLine.match(BSSID_REGEX);
 
                 if (match) {
@@ -167,7 +166,6 @@ class LinuxWifiScanCapability extends WifiScanCapability {
                     return;
                 }
 
-
                 match = trimmedLine.match(SSID_REGEX);
 
                 if (match) {
@@ -182,7 +180,7 @@ class LinuxWifiScanCapability extends WifiScanCapability {
                 filling up our cache with nonsense, potentially exhausting memory
              */
             if (mappedStation.bssid !== undefined && networks.length < MAX_NETWORK_COUNT) {
-                networks.push(new ValetudoWifiNetwork({
+                networks.push(new NimbusWifiNetwork({
                     bssid: mappedStation.bssid,
                     details: mappedStation.details
                 }));
@@ -200,6 +198,5 @@ const MAX_OUTPUT_LENGTH = 128 * 1024; //128 KiB
 const BSSID_REGEX = /^(?<bssid>[\da-f]{2}:[\da-f]{2}:[\da-f]{2}:[\da-f]{2}:[\da-f]{2}:[\da-f]{2})/;
 const SSID_REGEX = /^SSID: (?<ssid>.+)$/;
 const SIGNAL_REGEX = /^signal: (?<signal>.+) dBm$/;
-
 
 module.exports = LinuxWifiScanCapability;

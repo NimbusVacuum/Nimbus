@@ -7,10 +7,10 @@ const PointMapEntity = require("../../../entities/map/PointMapEntity");
  */
 class MockGoToLocationCapability extends GoToLocationCapability {
     /**
-     * @param {import("../../../entities/core/ValetudoGoToLocation")} valetudoGoToLocation
+     * @param {import("../../../entities/core/NimbusGoToLocation")} nimbusGoToLocation
      * @returns {Promise<void>}
      */
-    async goTo(valetudoGoToLocation) {
+    async goTo(nimbusGoToLocation) {
         let map = this.robot.state.map;
         let robotEntity = map.entities.find(e => {
             return e.type === PointMapEntity.TYPE.ROBOT_POSITION;
@@ -20,7 +20,7 @@ class MockGoToLocationCapability extends GoToLocationCapability {
             type: PathMapEntity.TYPE.PREDICTED_PATH,
             points: [
                 robotEntity.points[0], robotEntity.points[1],
-                valetudoGoToLocation.coordinates.x, valetudoGoToLocation.coordinates.y]
+                nimbusGoToLocation.coordinates.x, nimbusGoToLocation.coordinates.y]
         });
         map.addEntity(predictedPath);
         this.robot.emitMapUpdated();
@@ -38,8 +38,8 @@ class MockGoToLocationCapability extends GoToLocationCapability {
 
         setTimeout(() => {
             map.entities.splice(map.entities.indexOf(predictedPath), 1);
-            path.points.push(valetudoGoToLocation.coordinates.x, valetudoGoToLocation.coordinates.y);
-            robotEntity.points = [valetudoGoToLocation.coordinates.x, valetudoGoToLocation.coordinates.y];
+            path.points.push(nimbusGoToLocation.coordinates.x, nimbusGoToLocation.coordinates.y);
+            robotEntity.points = [nimbusGoToLocation.coordinates.x, nimbusGoToLocation.coordinates.y];
             this.robot.emitMapUpdated();
         }, 2000);
     }

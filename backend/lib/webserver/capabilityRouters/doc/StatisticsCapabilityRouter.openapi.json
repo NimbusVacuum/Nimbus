@@ -13,7 +13,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/ValetudoDataPoint"
+                  "$ref": "#/components/schemas/NimbusDataPoint"
                 }
               }
             }
@@ -70,7 +70,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/ValetudoDataPoint"
+                  "$ref": "#/components/schemas/NimbusDataPoint"
                 }
               }
             }

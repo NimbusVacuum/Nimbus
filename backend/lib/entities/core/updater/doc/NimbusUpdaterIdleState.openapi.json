@@ -1,0 +1,22 @@
+{
+  "components": {
+    "schemas": {
+      "NimbusUpdaterIdleState": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NimbusUpdaterState"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "currentVersion": {
+                "type": "string",
+                "description": "The currently running nimbus version"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

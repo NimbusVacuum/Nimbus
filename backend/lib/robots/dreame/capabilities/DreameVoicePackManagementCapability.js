@@ -1,16 +1,16 @@
-const ValetudoVoicePackOperationStatus = require("../../../entities/core/ValetudoVoicePackOperationStatus");
+const NimbusVoicePackOperationStatus = require("../../../entities/core/NimbusVoicePackOperationStatus");
 const VoicePackManagementCapability = require("../../../core/capabilities/VoicePackManagementCapability");
 
 const DreameMiotHelper = require("../DreameMiotHelper");
 const Logger = require("../../../Logger");
 
 /**
- * @extends VoicePackManagementCapability<import("../DreameValetudoRobot")>
+ * @extends VoicePackManagementCapability<import("../DreameNimbusRobot")>
  */
 class DreameVoicePackManagementCapability extends VoicePackManagementCapability {
     /**
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {number} options.siid MIOT Service ID
      * @param {number} options.active_voicepack_piid
@@ -66,11 +66,11 @@ class DreameVoicePackManagementCapability extends VoicePackManagementCapability 
     /**
      * This method should return the status of the current voice pack operation, if one is ongoing.
      *
-     * @returns {Promise<ValetudoVoicePackOperationStatus>}
+     * @returns {Promise<NimbusVoicePackOperationStatus>}
      */
     async getVoicePackOperationStatus() {
         let statusOptions = {
-            type: ValetudoVoicePackOperationStatus.TYPE.IDLE,
+            type: NimbusVoicePackOperationStatus.TYPE.IDLE,
             progress: undefined,
         };
 
@@ -87,24 +87,23 @@ class DreameVoicePackManagementCapability extends VoicePackManagementCapability 
             switch (response.state) {
                 case "success":
                 case "idle":
-                    statusOptions.type = ValetudoVoicePackOperationStatus.TYPE.IDLE;
+                    statusOptions.type = NimbusVoicePackOperationStatus.TYPE.IDLE;
                     break;
                 case "fail":
-                    statusOptions.type = ValetudoVoicePackOperationStatus.TYPE.ERROR;
+                    statusOptions.type = NimbusVoicePackOperationStatus.TYPE.ERROR;
                     break;
                 case "downloading":
-                    statusOptions.type = ValetudoVoicePackOperationStatus.TYPE.DOWNLOADING;
+                    statusOptions.type = NimbusVoicePackOperationStatus.TYPE.DOWNLOADING;
                     statusOptions.progress = response.progress;
                     break;
                 default:
                     Logger.warn("DreameVoicePackManagementCapability: Unhandled state", response);
             }
         } else {
-            statusOptions.type = ValetudoVoicePackOperationStatus.TYPE.ERROR;
+            statusOptions.type = NimbusVoicePackOperationStatus.TYPE.ERROR;
         }
 
-
-        return new ValetudoVoicePackOperationStatus(statusOptions);
+        return new NimbusVoicePackOperationStatus(statusOptions);
     }
 }
 

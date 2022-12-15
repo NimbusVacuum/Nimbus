@@ -3,7 +3,7 @@ const NotImplementedError = require("../NotImplementedError");
 
 /**
  *
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class AutoEmptyDockManualTriggerCapability extends Capability {

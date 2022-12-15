@@ -44,7 +44,7 @@
                   ]
                 },
                 "movementCommand": {
-                  "$ref": "#/components/schemas/ValetudoManualControlMovementCommandType"
+                  "$ref": "#/components/schemas/NimbusManualControlMovementCommandType"
                 }
               }
             },
@@ -121,7 +121,7 @@
                     "type": "array",
                     "description": "Supported movement commands",
                     "items": {
-                      "$ref": "#/components/schemas/ValetudoManualControlMovementCommandType"
+                      "$ref": "#/components/schemas/NimbusManualControlMovementCommandType"
                     }
                   }
                 }

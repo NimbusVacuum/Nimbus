@@ -1,21 +1,21 @@
 /**
- * @typedef {import("../../../entities/core/ValetudoVirtualRestrictions")} ValetudoVirtualRestrictions
+ * @typedef {import("../../../entities/core/NimbusVirtualRestrictions")} NimbusVirtualRestrictions
  */
 
 const CombinedVirtualRestrictionsCapability = require("../../../core/capabilities/CombinedVirtualRestrictionsCapability");
 const DreameMapParser = require("../DreameMapParser");
 const RobotFirmwareError = require("../../../core/RobotFirmwareError");
-const ValetudoRestrictedZone = require("../../../entities/core/ValetudoRestrictedZone");
+const NimbusRestrictedZone = require("../../../entities/core/NimbusRestrictedZone");
 
 /**
- * @extends CombinedVirtualRestrictionsCapability<import("../DreameValetudoRobot")>
+ * @extends CombinedVirtualRestrictionsCapability<import("../DreameNimbusRobot")>
  */
 class DreameCombinedVirtualRestrictionsCapability extends CombinedVirtualRestrictionsCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
-     * @param {Array<import("../../../entities/core/ValetudoRestrictedZone").ValetudoRestrictedZoneType>} [options.supportedRestrictedZoneTypes]
+     * @param {import("../DreameNimbusRobot")} options.robot
+     * @param {Array<import("../../../entities/core/NimbusRestrictedZone").NimbusRestrictedZoneType>} [options.supportedRestrictedZoneTypes]
      *
      * @param {object} options.miot_actions
      * @param {object} options.miot_actions.map_edit
@@ -38,7 +38,7 @@ class DreameCombinedVirtualRestrictionsCapability extends CombinedVirtualRestric
 
     /**
      *
-     * @param {ValetudoVirtualRestrictions} virtualRestrictions
+     * @param {NimbusVirtualRestrictions} virtualRestrictions
      * @returns {Promise<void>}
      */
     async setVirtualRestrictions(virtualRestrictions) {
@@ -76,10 +76,10 @@ class DreameCombinedVirtualRestrictionsCapability extends CombinedVirtualRestric
             let destination;
 
             switch (zone.type) {
-                case ValetudoRestrictedZone.TYPE.REGULAR:
+                case NimbusRestrictedZone.TYPE.REGULAR:
                     destination = dreamePayload.rect;
                     break;
-                case ValetudoRestrictedZone.TYPE.MOP:
+                case NimbusRestrictedZone.TYPE.MOP:
                     destination = dreamePayload.mop;
                     break;
             }

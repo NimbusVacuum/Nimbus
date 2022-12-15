@@ -1,7 +1,7 @@
 const AutoEmptyDockAutoEmptyControlCapability = require("../../../core/capabilities/AutoEmptyDockAutoEmptyControlCapability");
 
 /**
- * @extends AutoEmptyDockAutoEmptyControlCapability<import("../RoborockValetudoRobot")>
+ * @extends AutoEmptyDockAutoEmptyControlCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockAutoEmptyDockAutoEmptyControlCapability extends AutoEmptyDockAutoEmptyControlCapability {
     /**

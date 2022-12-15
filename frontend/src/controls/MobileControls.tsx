@@ -1,6 +1,6 @@
 import {Box, Grid, Icon, Paper, styled} from "@mui/material";
 import ControlsBody from "./ControlsBody";
-import {ReactComponent as Logo} from "../assets/icons/valetudo_logo_with_name.svg";
+import {ReactComponent as Logo} from "../assets/icons/nimbus_logo_with_name.svg";
 import {ExpandLess as OpenIcon, ExpandMore as CloseIcon,} from "@mui/icons-material";
 import React from "react";
 
@@ -29,7 +29,6 @@ const MobileControls: React.FunctionComponent<{ open: boolean, setOpen: (newOpen
             paddingTop: "0.125rem",
         };
     });
-
 
     return (
         <Paper sx={{

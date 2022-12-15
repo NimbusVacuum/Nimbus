@@ -13,7 +13,7 @@ build/
 # VSCode project files
 .vscode/
 
-/backend/lib/res/valetudo.openapi.schema.json
+/backend/lib/res/nimbus.openapi.schema.json
 
 /docs/vendor
 /docs/_site

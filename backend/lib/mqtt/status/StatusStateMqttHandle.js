@@ -7,14 +7,14 @@ const Logger = require("../../Logger");
 const PropertyMqttHandle = require("../handles/PropertyMqttHandle");
 const RobotStateNodeMqttHandle = require("../handles/RobotStateNodeMqttHandle");
 const stateAttrs = require("../../entities/state/attributes");
-const ValetudoRobotError = require("../../entities/core/ValetudoRobotError");
+const NimbusRobotError = require("../../entities/core/NimbusRobotError");
 
 class StatusStateMqttHandle extends RobotStateNodeMqttHandle {
     /**
      * @param {object} options
      * @param {import("../handles/RobotMqttHandle")} options.parent
      * @param {import("../MqttController")} options.controller MqttController instance
-     * @param {import("../../core/ValetudoRobot")} options.robot
+     * @param {import("../../core/NimbusRobot")} options.robot
      */
     constructor(options) {
         super(Object.assign(options, {
@@ -96,12 +96,12 @@ class StatusStateMqttHandle extends RobotStateNodeMqttHandle {
                     if (statusState?.value === stateAttrs.StatusStateAttribute.VALUE.ERROR) {
                         value = statusState.error;
                     } else {
-                        value = new ValetudoRobotError({
+                        value = new NimbusRobotError({
                             severity: {
-                                kind: ValetudoRobotError.SEVERITY_KIND.NONE,
-                                level: ValetudoRobotError.SEVERITY_LEVEL.NONE
+                                kind: NimbusRobotError.SEVERITY_KIND.NONE,
+                                level: NimbusRobotError.SEVERITY_LEVEL.NONE
                             },
-                            subsystem: ValetudoRobotError.SUBSYSTEM.NONE,
+                            subsystem: NimbusRobotError.SUBSYSTEM.NONE,
                             message: "",
                             vendorErrorCode: "",
                         });
@@ -113,9 +113,9 @@ class StatusStateMqttHandle extends RobotStateNodeMqttHandle {
                         message: value.message
                     };
                 },
-                helpText: "This property contains the current ValetudoRobotError (if any)"
+                helpText: "This property contains the current NimbusRobotError (if any)"
             }).also((prop) => {
-                HassAnchor.getTopicReference(HassAnchor.REFERENCE.VALETUDO_ROBOT_ERROR).post(prop.getBaseTopic()).catch(err => {
+                HassAnchor.getTopicReference(HassAnchor.REFERENCE.NIMBUS_ROBOT_ERROR).post(prop.getBaseTopic()).catch(err => {
                     Logger.error("Error while posting value to HassAnchor", err);
                 });
             })
@@ -133,7 +133,7 @@ class StatusStateMqttHandle extends RobotStateNodeMqttHandle {
                         state_topic: HassAnchor.getTopicReference(HassAnchor.REFERENCE.ERROR_STATE_DESCRIPTION),
                         icon: "mdi:alert",
                         entity_category: EntityCategory.DIAGNOSTIC,
-                        json_attributes_topic: HassAnchor.getTopicReference(HassAnchor.REFERENCE.VALETUDO_ROBOT_ERROR)
+                        json_attributes_topic: HassAnchor.getTopicReference(HassAnchor.REFERENCE.NIMBUS_ROBOT_ERROR)
                     }
                 })
             );

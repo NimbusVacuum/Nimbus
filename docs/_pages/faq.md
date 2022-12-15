@@ -7,7 +7,7 @@ order: 30
 
 ## Why the name?
 
-Valetudo is the roman name for the greek goddess Hygieia, which is the goddess of health, cleanliness and hygiene.
+Nimbus is the roman name for the greek goddess Hygieia, which is the goddess of health, cleanliness and hygiene.
 Also, I'm bad at naming things.
 
 ## Why Javascript? <a name="why-js"></a>
@@ -27,7 +27,7 @@ Roborock V1 and Roborock S5 up to firmware version 1898 hat an issue with random
 This only applies to these two models of vacuum robot. Nothing else.
 
 Those resets were caused by the watchdog of the firmware sometimes noticing that there was less free ram than expected, due to
-Valetudo running on the vacuum. This set a "broken" flag for the partition and if on the daily reboot both system A and B were flagged,
+Nimbus running on the vacuum. This set a "broken" flag for the partition and if on the daily reboot both system A and B were flagged,
 the robot would reset itself to factory defaults.
 
 This isn't happening anymore on the S5 FW 2008+ due to roborock having optimized their software quite significantly
@@ -45,8 +45,8 @@ Therefore, it will never have two "broken" flags, unless stuff is _actually_ bro
 
 The timezone on the device **cannot** be changed. It is always UTC.
 
-Every feature in Valetudo that uses time will automatically use the local time reported by your browser. This means you do not have to worry about it. It is handled by the application itself.
+Every feature in Nimbus that uses time will automatically use the local time reported by your browser. This means you do not have to worry about it. It is handled by the application itself.
 
-The only instance where the time is relevant, is when looking at the Valetudo logs, which are in UTC (as mentioned above).
+The only instance where the time is relevant, is when looking at the Nimbus logs, which are in UTC (as mentioned above).
 
 On the other hand, when travelling aboard, please be aware that the local time will be different than where the robot is hosted. Keep this in mind.

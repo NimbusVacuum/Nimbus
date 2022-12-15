@@ -1,7 +1,7 @@
 const MapResetCapability = require("../../../core/capabilities/MapResetCapability");
 
 /**
- * @extends MapResetCapability<import("../ViomiValetudoRobot")>
+ * @extends MapResetCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiMapResetCapability extends MapResetCapability {
     /**
@@ -10,7 +10,7 @@ class ViomiMapResetCapability extends MapResetCapability {
     async reset() {
         await this.robot.sendCommand("set_resetmap", [], {});
 
-        this.robot.clearValetudoMap();
+        this.robot.clearNimbusMap();
     }
 }
 

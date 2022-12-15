@@ -1,7 +1,7 @@
 const fs = require("fs");
 const LinuxTools = require("../../utils/LinuxTools");
 const os = require("os");
-const ValetudoUpdaterError = require("./ValetudoUpdaterError");
+const NimbusUpdaterError = require("./NimbusUpdaterError");
 const {default: axios} = require("axios");
 
 const SPACE_REQUIRED_REGULAR = 40 * 1024 * 1024;
@@ -10,7 +10,7 @@ const SPACE_REQUIRED_UPX = 20 * 1024 * 1024;
 /**
  *
  * @returns {{requiresUPX: boolean, downloadPath: string}}
- * @throws {ValetudoUpdaterError}
+ * @throws {NimbusUpdaterError}
  */
 function storageSurvey() {
     const tmpPath = os.tmpdir();
@@ -22,31 +22,29 @@ function storageSurvey() {
     try {
         fs.accessSync(process.argv0, fs.constants.W_OK);
     } catch (e) {
-        throw new ValetudoUpdaterError(
-            ValetudoUpdaterError.ERROR_TYPE.NOT_WRITABLE,
+        throw new NimbusUpdaterError(
+            NimbusUpdaterError.ERROR_TYPE.NOT_WRITABLE,
             `Updating is impossible because binary location "${process.argv0}" is not writable.`
         );
     }
-
 
     const spaceBinaryLocation = LinuxTools.GET_DISK_SPACE_INFO(process.argv0);
     const spaceTmp = LinuxTools.GET_DISK_SPACE_INFO(tmpPath);
     const spaceShm = LinuxTools.GET_DISK_SPACE_INFO(shmPath);
 
     if (spaceBinaryLocation === null) {
-        throw new ValetudoUpdaterError(
-            ValetudoUpdaterError.ERROR_TYPE.NOT_ENOUGH_SPACE,
+        throw new NimbusUpdaterError(
+            NimbusUpdaterError.ERROR_TYPE.NOT_ENOUGH_SPACE,
             `Unable to determine the free space of ${process.argv0}.`
         );
     }
 
     if (spaceTmp === null && spaceShm === null) {
-        throw new ValetudoUpdaterError(
-            ValetudoUpdaterError.ERROR_TYPE.NOT_ENOUGH_SPACE,
+        throw new NimbusUpdaterError(
+            NimbusUpdaterError.ERROR_TYPE.NOT_ENOUGH_SPACE,
             `Unable to determine the free space of both ${tmpPath} and ${shmPath}.`
         );
     }
-
 
     if (spaceBinaryLocation.free > SPACE_REQUIRED_REGULAR) {
         requiresUPX = false;
@@ -55,19 +53,18 @@ function storageSurvey() {
         requiresUPX = true;
         spaceRequired = SPACE_REQUIRED_UPX;
     } else {
-        throw new ValetudoUpdaterError(
-            ValetudoUpdaterError.ERROR_TYPE.NOT_ENOUGH_SPACE,
+        throw new NimbusUpdaterError(
+            NimbusUpdaterError.ERROR_TYPE.NOT_ENOUGH_SPACE,
             `Updating is impossible because there's not enough space to store the new binary at ${process.argv0}.` + "\n" +
             `Required: at least ${SPACE_REQUIRED_UPX} bytes. Available: ${spaceBinaryLocation.free} bytes.`
         );
     }
 
-    // Always use UPX if Valetudo is stored on a small storage
+    // Always use UPX if Nimbus is stored on a small storage
     if (spaceBinaryLocation.total < SPACE_REQUIRED_REGULAR * 3) {
         requiresUPX = true;
         spaceRequired = SPACE_REQUIRED_UPX;
     }
-
 
     if (spaceTmp?.free > spaceRequired) {
         downloadPath = tmpPath;
@@ -85,10 +82,9 @@ function storageSurvey() {
         }
     }
 
-
     if (!downloadPath) {
-        throw new ValetudoUpdaterError(
-            ValetudoUpdaterError.ERROR_TYPE.NOT_ENOUGH_SPACE,
+        throw new NimbusUpdaterError(
+            NimbusUpdaterError.ERROR_TYPE.NOT_ENOUGH_SPACE,
             `
                 Updating is impossible because there's no download location with enough free space available.
                 Required: ${spaceRequired} bytes. 
@@ -102,12 +98,11 @@ function storageSurvey() {
     try {
         fs.accessSync(downloadPath, fs.constants.W_OK);
     } catch (e) {
-        throw new ValetudoUpdaterError(
-            ValetudoUpdaterError.ERROR_TYPE.NOT_WRITABLE,
+        throw new NimbusUpdaterError(
+            NimbusUpdaterError.ERROR_TYPE.NOT_WRITABLE,
             `Updating is impossible because download location "${downloadPath}" is not writable.`
         );
     }
-
 
     return {
         requiresUPX: requiresUPX,
@@ -117,16 +112,16 @@ function storageSurvey() {
 
 /**
  *
- * @param {Array<import("./update_provider/ValetudoRelease")>} releases
+ * @param {Array<import("./update_provider/NimbusRelease")>} releases
  * @param {string} currentVersion
  *
- * @return {{release: import("./update_provider/ValetudoRelease"), updateRequired: boolean}}
- * @throws {ValetudoUpdaterError}
+ * @return {{release: import("./update_provider/NimbusRelease"), updateRequired: boolean}}
+ * @throws {NimbusUpdaterError}
  */
 function determineReleaseToDownload(releases, currentVersion) {
     if (releases.length === 0) {
-        throw new ValetudoUpdaterError(
-            ValetudoUpdaterError.ERROR_TYPE.NO_RELEASE,
+        throw new NimbusUpdaterError(
+            NimbusUpdaterError.ERROR_TYPE.NO_RELEASE,
             "No release found"
         );
     }

@@ -2,7 +2,7 @@ const NotImplementedError = require("../NotImplementedError");
 const PresetSelectionCapability = require("./PresetSelectionCapability");
 
 /**
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends PresetSelectionCapability<T>
  */
 class OperationModeControlCapability extends PresetSelectionCapability {

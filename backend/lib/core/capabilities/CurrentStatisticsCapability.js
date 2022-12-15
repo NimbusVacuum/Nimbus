@@ -1,16 +1,16 @@
 const Capability = require("./Capability");
 const NotImplementedError = require("../NotImplementedError");
-const ValetudoDataPoint = require("../../entities/core/ValetudoDataPoint");
+const NimbusDataPoint = require("../../entities/core/NimbusDataPoint");
 
 /**
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class CurrentStatisticsCapability extends Capability {
     /**
      * The amount and type of stuff returned here depends on the robots implementation
      *
-     * @return {Promise<Array<ValetudoDataPoint>>}
+     * @return {Promise<Array<NimbusDataPoint>>}
      */
     async getStatistics() {
         throw new NotImplementedError();
@@ -21,7 +21,7 @@ class CurrentStatisticsCapability extends Capability {
     }
 
     /**
-     * @return {{availableStatistics: Array<ValetudoDataPoint.TYPES>}}
+     * @return {{availableStatistics: Array<NimbusDataPoint.TYPES>}}
      */
     getProperties() {
         return {

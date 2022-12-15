@@ -3,13 +3,13 @@ const RobotFirmwareError = require("../../../core/RobotFirmwareError");
 const ThreeIRobotixMapParser = require("../../3irobotix/ThreeIRobotixMapParser");
 
 /**
- * @extends MapSegmentEditCapability<import("../ViomiValetudoRobot")>
+ * @extends MapSegmentEditCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiMapSegmentEditCapability extends MapSegmentEditCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../ViomiValetudoRobot")} options.robot
+     * @param {import("../ViomiNimbusRobot")} options.robot
      *
      * @param {string} options.lang the default language for the generated room names
      *
@@ -39,8 +39,8 @@ class ViomiMapSegmentEditCapability extends MapSegmentEditCapability {
     }
 
     /**
-     * @param {import("../../../entities/core/ValetudoMapSegment")} segmentA
-     * @param {import("../../../entities/core/ValetudoMapSegment")} segmentB
+     * @param {import("../../../entities/core/NimbusMapSegment")} segmentA
+     * @param {import("../../../entities/core/NimbusMapSegment")} segmentB
      * @returns {Promise<void>}
      */
     async joinSegments(segmentA, segmentB) {
@@ -66,7 +66,7 @@ class ViomiMapSegmentEditCapability extends MapSegmentEditCapability {
     }
 
     /**
-     * @param {import("../../../entities/core/ValetudoMapSegment")} segment
+     * @param {import("../../../entities/core/NimbusMapSegment")} segment
      * @param {object} pA
      * @param {number} pA.x
      * @param {number} pA.y

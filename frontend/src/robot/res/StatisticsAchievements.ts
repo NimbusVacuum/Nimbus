@@ -1,4 +1,4 @@
-import {ValetudoDataPointType} from "../../api";
+import {NimbusDataPointType} from "../../api";
 
 export interface StatisticsAchievement {
     value: number;
@@ -6,7 +6,7 @@ export interface StatisticsAchievement {
     description: string;
 }
 
-export const statisticsAchievements: Record<ValetudoDataPointType, Array<StatisticsAchievement>> = {
+export const statisticsAchievements: Record<NimbusDataPointType, Array<StatisticsAchievement>> = {
     "area": [
         {
             value: 25_700_000_000,

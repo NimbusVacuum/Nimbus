@@ -8,7 +8,7 @@ const RobotStateNodeMqttHandle = require("../backend/lib/mqtt/handles/RobotState
 const MapNodeMqttHandle = require("../backend/lib/mqtt/handles/MapNodeMqttHandle");
 const MockConsumableMonitoringCapability = require("../backend/lib/robots/mock/capabilities/MockConsumableMonitoringCapability");
 const ConsumableStateAttribute = require("../backend/lib/entities/state/attributes/ConsumableStateAttribute");
-const ValetudoMapSegment = require("../backend/lib/entities/core/ValetudoMapSegment");
+const NimbusMapSegment = require("../backend/lib/entities/core/NimbusMapSegment");
 const PropertyMqttHandle = require("../backend/lib/mqtt/handles/PropertyMqttHandle");
 const DataType = require("../backend/lib/mqtt/homie/DataType");
 const HassController = require("../backend/lib/mqtt/homeassistant/HassController");
@@ -22,8 +22,7 @@ const StatusStateAttribute = require("../backend/lib/entities/state/attributes/S
 const PresetSelectionStateAttribute = require("../backend/lib/entities/state/attributes/PresetSelectionStateAttribute");
 const Unit = require("../backend/lib/mqtt/common/Unit");
 const HomieCommonAttributes = require("../backend/lib/mqtt/homie/HomieCommonAttributes");
-const ValetudoEventStore = require("valetudo-backend/lib/ValetudoEventStore");
-
+const NimbusEventStore = require("nimbus-backend/lib/NimbusEventStore");
 
 function jekyllAlert(type, content) {
     return "{% include alert.html type=\"" + type + "\" content=\"" + content.replace(/"/g, "\\\"") + "\" %}\n\n";
@@ -38,7 +37,7 @@ order: 20
 # MQTT integration
 
 To make your robot talk to your MQTT broker and integrate with home automation software, such as but not limited to
-Home Assistant, openHAB and Node-RED, configure MQTT via Valetudo's web interface (Settings → MQTT).
+Home Assistant, openHAB and Node-RED, configure MQTT via Nimbus's web interface (Settings → MQTT).
 
 ## Autodiscovery
 
@@ -50,7 +49,7 @@ platform:
 - [Node-RED](./node-red)
 
 Other home automation software that follows the [Homie convention](https://homieiot.github.io/) should also be able to
-automatically discover your Valetudo instance.
+automatically discover your Nimbus instance.
 
 <div style="text-align: center;">
     <a href="https://homieiot.github.io" rel="noopener" target="_blank">
@@ -79,7 +78,6 @@ settings page.
 custom integrations or access the MQTT topics directly: the Homie protocol is very readable and self-documenting.
 It will provide additional context and information on how to use specific APIs.
 
-
 Homie autodiscovery info is best viewed with something like [MQTT Explorer](https://mqtt-explorer.com/).
 `);
 
@@ -88,7 +86,7 @@ const fakeConfig = {
     },
     get: key => fakeConfig[key],
 };
-const eventStore = new ValetudoEventStore()
+const eventStore = new NimbusEventStore()
 
 class FakeHassController extends HassController {
     // @ts-ignore
@@ -137,11 +135,10 @@ function keyFn(key) {
     };
 }
 
-
 class FakeMqttController extends MqttController {
     // @ts-ignore
     constructor() {
-        const robot = new MockRobot({config: fakeConfig, valetudoEventStore: eventStore});
+        const robot = new MockRobot({config: fakeConfig, nimbusEventStore: eventStore});
 
         robot.capabilities[ConsumableMonitoringCapability.TYPE].getProperties = () => {
             return {
@@ -162,15 +159,15 @@ class FakeMqttController extends MqttController {
         
         robot.state.map.getSegments = () => {
             return [
-                new ValetudoMapSegment({
+                new NimbusMapSegment({
                     id: "20",
                     name: "Kitchen"
                 }),
-                new ValetudoMapSegment({
+                new NimbusMapSegment({
                     id: "18",
                     name: "Bathroom"
                 }),
-                new ValetudoMapSegment({
+                new NimbusMapSegment({
                     id: "16",
                     name: "Hallway"
                 }),
@@ -371,7 +368,7 @@ class FakeMqttController extends MqttController {
         markdown += `*${attributes.join(", ")}*` + "\n\n";
         
         if (handle.constructor.OPTIONAL === true) {
-            markdown += `**Note:** This is an optional exposed capability handle and thus will only be available via MQTT if enabled in the Valetudo configuration.\n\n`;
+            markdown += `**Note:** This is an optional exposed capability handle and thus will only be available via MQTT if enabled in the Nimbus configuration.\n\n`;
         }
 
         if (handle.helpText) {
@@ -619,7 +616,6 @@ class FakeMqttController extends MqttController {
         this.resolveGenerate(markdown);
     }
 
-
     isInitialized() {
         const stack = new Error().stack;
         
@@ -669,7 +665,7 @@ class FakeMqttController extends MqttController {
                 }
             },
             "identity": {
-                "friendlyName": "Valetudo Robot",
+                "friendlyName": "Nimbus Robot",
                 "identifier": "<IDENTIFIER>"
             },
             "interfaces": {
@@ -730,7 +726,6 @@ class FakeMqttController extends MqttController {
 
     async unsubscribe(handle) {
     }
-
 
     async publishHomieAttributes(handle) {
     }

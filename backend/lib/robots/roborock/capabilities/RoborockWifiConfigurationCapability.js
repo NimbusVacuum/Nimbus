@@ -1,9 +1,9 @@
 const MiioWifiConfigurationCapability = require("../../common/miioCapabilities/MiioWifiConfigurationCapability");
-const ValetudoWifiStatus = require("../../../entities/core/ValetudoWifiStatus");
+const NimbusWifiStatus = require("../../../entities/core/NimbusWifiStatus");
 
 class RoborockWifiConfigurationCapability extends MiioWifiConfigurationCapability {
     /**
-     * @returns {Promise<ValetudoWifiStatus>}
+     * @returns {Promise<NimbusWifiStatus>}
      */
     async getWifiStatus() {
         if (this.robot.config.get("embedded") === true) {
@@ -11,7 +11,7 @@ class RoborockWifiConfigurationCapability extends MiioWifiConfigurationCapabilit
         }
 
         const output = {
-            state: ValetudoWifiStatus.STATE.UNKNOWN,
+            state: NimbusWifiStatus.STATE.UNKNOWN,
             details: {}
         };
 
@@ -19,19 +19,18 @@ class RoborockWifiConfigurationCapability extends MiioWifiConfigurationCapabilit
 
         if (res !== "unknown_method") {
             if (typeof res === "object" && res.bssid !== "") {
-                output.state = ValetudoWifiStatus.STATE.CONNECTED;
+                output.state = NimbusWifiStatus.STATE.CONNECTED;
 
                 output.details.signal = parseInt(res.rssi);
                 output.details.ips = [res.ip];
                 output.details.ssid = res.ssid;
-                output.details.frequency = ValetudoWifiStatus.FREQUENCY_TYPE.W2_4Ghz;
+                output.details.frequency = NimbusWifiStatus.FREQUENCY_TYPE.W2_4Ghz;
             } else {
-                output.details.state = ValetudoWifiStatus.STATE.NOT_CONNECTED;
+                output.details.state = NimbusWifiStatus.STATE.NOT_CONNECTED;
             }
         }
 
-
-        return new ValetudoWifiStatus(output);
+        return new NimbusWifiStatus(output);
     }
 }
 

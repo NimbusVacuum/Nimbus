@@ -1,5 +1,5 @@
 module.exports = {
-    "ViomiV6ValetudoRobot": require("./ViomiV6ValetudoRobot"),
-    "ViomiV7ValetudoRobot": require("./ViomiV7ValetudoRobot"),
-    "ViomiV8ValetudoRobot": require("./ViomiV8ValetudoRobot"),
+    "ViomiV6NimbusRobot": require("./ViomiV6NimbusRobot"),
+    "ViomiV7NimbusRobot": require("./ViomiV7NimbusRobot"),
+    "ViomiV8NimbusRobot": require("./ViomiV8NimbusRobot"),
 };

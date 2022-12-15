@@ -111,7 +111,6 @@ HassAnchor.getAnchor = function (anchor) {
     return HassAnchor._anchors[anchor];
 };
 
-
 /**
  * Retrieve an instance for a topic reference
  *
@@ -196,7 +195,6 @@ HassAnchor.resolveTopicReferences = function (json) {
     return resolve(HassAnchor.TYPE.REFERENCE, json);
 };
 
-
 HassAnchor.TYPE = Object.freeze({
     ANCHOR: "anchor",
     REFERENCE: "topic reference"
@@ -224,7 +222,7 @@ HassAnchor.REFERENCE = Object.freeze({
     FAN_SPEED_SET: "fan_speed_set",
     FAN_SPEED_PRESETS: "fan_speed_presets", // Actually contains the presets, not a topic
     ERROR_STATE_DESCRIPTION: "error_state_description",
-    VALETUDO_ROBOT_ERROR: "valetudo_robot_error",
+    NIMBUS_ROBOT_ERROR: "nimbus_robot_error",
     HASS_CONSUMABLE_STATE: "hass_consumable_state_",
     HASS_MAP_SEGMENTS_STATE: "hass_map_segments_state",
     HASS_WIFI_CONFIG_ATTRS: "hass_wifi_config_attrs",

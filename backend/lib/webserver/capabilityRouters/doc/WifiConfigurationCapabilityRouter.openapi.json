@@ -11,7 +11,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ValetudoWifiStatus"
+                "$ref": "#/components/schemas/NimbusWifiStatus"
               }
             }
           }
@@ -28,7 +28,7 @@
           "application/json": {
             "schema": {               
               "oneOf": [
-                {"$ref": "#/components/schemas/ValetudoWifiConfiguration"},
+                {"$ref": "#/components/schemas/NimbusWifiConfiguration"},
                 {
                   "type": "object",
                   "additionalProperties": false,
@@ -41,7 +41,7 @@
                     },
                     "payload": {
                       "type": "string",
-                      "description": "Base64 stringified ValetudoWifiConfiguration encrypted with the publicKey provided by /getPublicKeyForProvisioning"
+                      "description": "Base64 stringified NimbusWifiConfiguration encrypted with the publicKey provided by /getPublicKeyForProvisioning"
                     }
                   },
                   "required": [

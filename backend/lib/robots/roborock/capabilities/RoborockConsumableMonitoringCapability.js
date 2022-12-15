@@ -3,7 +3,7 @@ const ConsumableMonitoringCapability = require("../../../core/capabilities/Consu
 const ConsumableStateAttribute = require("../../../entities/state/attributes/ConsumableStateAttribute");
 
 /**
- * @extends ConsumableMonitoringCapability<import("../RoborockValetudoRobot")>
+ * @extends ConsumableMonitoringCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockConsumableMonitoringCapability extends ConsumableMonitoringCapability {
     /**

@@ -1,5 +1,5 @@
 const CapabilityRouter = require("./CapabilityRouter");
-const ValetudoDNDConfiguration = require("../../entities/core/ValetudoDNDConfiguration");
+const NimbusDNDConfiguration = require("../../entities/core/NimbusDNDConfiguration");
 
 class DoNotDisturbCapabilityRouter extends CapabilityRouter {
     initRoutes() {
@@ -14,7 +14,7 @@ class DoNotDisturbCapabilityRouter extends CapabilityRouter {
         this.router.put("/", this.validator, async (req, res) => {
             if (req.body.start && req.body.end) {
                 try {
-                    await this.capability.setDndConfiguration(new ValetudoDNDConfiguration({
+                    await this.capability.setDndConfiguration(new NimbusDNDConfiguration({
                         enabled: req.body.enabled,
                         start: {
                             hour: req.body.start.hour,

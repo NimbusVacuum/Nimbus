@@ -5,7 +5,7 @@ const MapSegmentationCapability = require("../../../core/capabilities/MapSegment
 const attributes = require("../ViomiCommonAttributes");
 
 /**
- * @extends MapSegmentationCapability<import("../ViomiValetudoRobot")>
+ * @extends MapSegmentationCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiMapSegmentationCapability extends MapSegmentationCapability {
     /**
@@ -17,7 +17,7 @@ class ViomiMapSegmentationCapability extends MapSegmentationCapability {
     }
 
     /**
-     * @param {Array<import("../../../entities/core/ValetudoMapSegment")>} segments
+     * @param {Array<import("../../../entities/core/NimbusMapSegment")>} segments
      * @param {object} [options]
      * @param {number} [options.iterations]
      * @param {boolean} [options.customOrder]

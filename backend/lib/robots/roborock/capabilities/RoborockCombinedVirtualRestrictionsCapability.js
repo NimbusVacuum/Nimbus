@@ -1,19 +1,19 @@
 /**
- * @typedef {import("../../../entities/core/ValetudoVirtualRestrictions")} ValetudoVirtualRestrictions
+ * @typedef {import("../../../entities/core/NimbusVirtualRestrictions")} NimbusVirtualRestrictions
  */
 
 const CombinedVirtualRestrictionsCapability = require("../../../core/capabilities/CombinedVirtualRestrictionsCapability");
 
 const RoborockMapParser = require("../RoborockMapParser");
-const ValetudoRestrictedZone = require("../../../entities/core/ValetudoRestrictedZone");
+const NimbusRestrictedZone = require("../../../entities/core/NimbusRestrictedZone");
 
 /**
- * @extends CombinedVirtualRestrictionsCapability<import("../RoborockValetudoRobot")>
+ * @extends CombinedVirtualRestrictionsCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockCombinedVirtualRestrictionsCapability extends CombinedVirtualRestrictionsCapability {
     /**
      *
-     * @param {ValetudoVirtualRestrictions} virtualRestrictions
+     * @param {NimbusVirtualRestrictions} virtualRestrictions
      * @returns {Promise<void>}
      */
     async setVirtualRestrictions(virtualRestrictions) {
@@ -37,10 +37,10 @@ class RoborockCombinedVirtualRestrictionsCapability extends CombinedVirtualRestr
             let type;
 
             switch (zone.type) {
-                case ValetudoRestrictedZone.TYPE.REGULAR:
+                case NimbusRestrictedZone.TYPE.REGULAR:
                     type = PERSISTENT_DATA_TYPES.ZONE;
                     break;
-                case ValetudoRestrictedZone.TYPE.MOP:
+                case NimbusRestrictedZone.TYPE.MOP:
                     type = PERSISTENT_DATA_TYPES.NO_MOP;
                     break;
             }
@@ -65,7 +65,6 @@ class RoborockCombinedVirtualRestrictionsCapability extends CombinedVirtualRestr
             throw new Error("Too many vertices to save");
         }
 
-
         await this.robot.sendCommand("save_map", roborockPayload, {timeout: 3500});
 
         this.robot.pollMap();
@@ -78,6 +77,5 @@ const PERSISTENT_DATA_TYPES = {
     "BARRIER": 1,
     "NO_MOP": 2
 };
-
 
 module.exports = RoborockCombinedVirtualRestrictionsCapability;

@@ -28,7 +28,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/ValetudoTimer"
+              "$ref": "#/components/schemas/NimbusTimer"
             },
             "examples": {
               "full_cleanup": {
@@ -101,7 +101,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ValetudoTimer"
+                "$ref": "#/components/schemas/NimbusTimer"
               }
             }
           }
@@ -156,7 +156,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/ValetudoTimer"
+              "$ref": "#/components/schemas/NimbusTimer"
             }
           }
         }

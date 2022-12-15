@@ -10,8 +10,8 @@
         "port": 80,
         "basicAuth": {
             "enabled": false,
-            "username": "valetudo",
-            "password": "valetudo"
+            "username": "nimbus",
+            "password": "nimbus"
         },
         "blockExternalAccess": true
     },

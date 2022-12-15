@@ -1,0 +1,23 @@
+{
+  "components": {
+    "schemas": {
+      "NimbusVirtualRestrictions": {
+        "type": "object",
+        "properties": {
+          "virtualWalls": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NimbusVirtualWall"
+            }
+          },
+          "restrictedZones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NimbusRestrictedZone"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,13 +4,13 @@ const GoToLocationCapability = require("../../../core/capabilities/GoToLocationC
 const DreameMiotHelper = require("../DreameMiotHelper");
 
 /**
- * @extends GoToLocationCapability<import("../DreameValetudoRobot")>
+ * @extends GoToLocationCapability<import("../DreameNimbusRobot")>
  */
 class DreameAICameraGoToLocationCapability extends GoToLocationCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {object} options.miot_actions
      * @param {object} options.miot_actions.start
@@ -36,13 +36,12 @@ class DreameAICameraGoToLocationCapability extends GoToLocationCapability {
         this.helper = new DreameMiotHelper({robot: this.robot});
     }
 
-
     /**
-     * @param {import("../../../entities/core/ValetudoGoToLocation")} valetudoGoToLocation
+     * @param {import("../../../entities/core/NimbusGoToLocation")} nimbusGoToLocation
      * @returns {Promise<void>}
      */
-    async goTo(valetudoGoToLocation) {
-        const dreamePoint = DreameMapParser.CONVERT_TO_DREAME_COORDINATES(valetudoGoToLocation.coordinates.x, valetudoGoToLocation.coordinates.y);
+    async goTo(nimbusGoToLocation) {
+        const dreamePoint = DreameMapParser.CONVERT_TO_DREAME_COORDINATES(nimbusGoToLocation.coordinates.x, nimbusGoToLocation.coordinates.y);
 
         await this.helper.executeAction(
             this.miot_actions.start.siid,

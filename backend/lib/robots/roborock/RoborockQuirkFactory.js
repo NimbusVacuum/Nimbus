@@ -4,7 +4,7 @@ class RoborockQuirkFactory {
     /**
      *
      * @param {object} options
-     * @param {import("./RoborockValetudoRobot")} options.robot
+     * @param {import("./RoborockNimbusRobot")} options.robot
      */
     constructor(options) {
         this.robot = options.robot;

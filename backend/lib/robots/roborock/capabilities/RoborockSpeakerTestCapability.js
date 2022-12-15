@@ -1,7 +1,7 @@
 const SpeakerTestCapability = require("../../../core/capabilities/SpeakerTestCapability");
 
 /**
- * @extends SpeakerTestCapability<import("../RoborockValetudoRobot")>
+ * @extends SpeakerTestCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockSpeakerTestCapability extends SpeakerTestCapability {
     /**

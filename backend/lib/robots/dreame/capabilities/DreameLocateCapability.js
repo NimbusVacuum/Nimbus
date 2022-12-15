@@ -2,13 +2,13 @@ const DreameMiotHelper = require("../DreameMiotHelper");
 const LocateCapability = require("../../../core/capabilities/LocateCapability");
 
 /**
- * @extends LocateCapability<import("../DreameValetudoRobot")>
+ * @extends LocateCapability<import("../DreameNimbusRobot")>
  */
 class DreameLocateCapability extends LocateCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {number} options.siid MIOT Service ID
      * @param {number} options.aiid MIOT Action ID

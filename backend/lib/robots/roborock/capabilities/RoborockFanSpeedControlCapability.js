@@ -1,7 +1,7 @@
 const FanSpeedControlCapability = require("../../../core/capabilities/FanSpeedControlCapability");
 
 /**
- * @extends FanSpeedControlCapability<import("../RoborockValetudoRobot")>
+ * @extends FanSpeedControlCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockFanSpeedControlCapability extends FanSpeedControlCapability {
     /**

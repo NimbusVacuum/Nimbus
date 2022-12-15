@@ -1,11 +1,11 @@
 const MapSegmentRenameCapability = require("../../../core/capabilities/MapSegmentRenameCapability");
 
 /**
- * @extends MapSegmentRenameCapability<import("../RoborockValetudoRobot")>
+ * @extends MapSegmentRenameCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockMapSegmentRenameCapability extends MapSegmentRenameCapability {
     /**
-     * @param {import("../../../entities/core/ValetudoMapSegment")} segment
+     * @param {import("../../../entities/core/NimbusMapSegment")} segment
      * @param {string} name
      * @returns {Promise<void>}
      */

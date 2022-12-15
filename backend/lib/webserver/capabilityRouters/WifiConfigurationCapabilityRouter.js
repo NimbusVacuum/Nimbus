@@ -1,7 +1,7 @@
 const CapabilityRouter = require("./CapabilityRouter");
 const crypto = require("crypto");
 const Logger = require("../../Logger");
-const ValetudoWifiConfiguration = require("../../entities/core/ValetudoWifiConfiguration");
+const NimbusWifiConfiguration = require("../../entities/core/NimbusWifiConfiguration");
 
 class WifiConfigurationCapabilityRouter extends CapabilityRouter {
     constructor(options) {
@@ -29,7 +29,6 @@ class WifiConfigurationCapabilityRouter extends CapabilityRouter {
             To combat that, I have prepared this extensive comment to explain what we're doing and why
             You can delete that "omg omg they roll their own crypto they're soooo dumb haha" tweet now
 
-            
             The situation is as follows:
             1. Provisioning of the robot is usually done over an unencrypted Wi-Fi Access Point provided by the robot.
             2. Sending your Wi-Fi password over HTTP REST over that unencrypted Wi-Fi AP allows a passively sniffing
@@ -37,7 +36,6 @@ class WifiConfigurationCapabilityRouter extends CapabilityRouter {
             3. Provisioning is usually only done once, takes very little time and usually happens at home/in a residential
                area instead of a public space like a starbucks or an airport, where it would be likely to encounter
                a malicious actor
-               
                
             Due to 3, the attack surface is actually pretty limited. It is highly unlikely that someone would actually
             sniff your Wi-Fi traffic at your house at the exact moment you're provisioning your new robot.
@@ -78,7 +76,6 @@ class WifiConfigurationCapabilityRouter extends CapabilityRouter {
             If you're still unhappy and want to do something about this heresy against the gods of cryptography,
             consider rallying for an extension of the HTTPS spec to allow for some way of ensuring the identity of
             something without requiring a global domain name so that we may one day have proper HTTPS in non-cloud places.
-            
             
             Side-note:
             Valve does it too ;-)
@@ -124,7 +121,7 @@ class WifiConfigurationCapabilityRouter extends CapabilityRouter {
                 let typeSpecificSettings;
 
                 switch (req.body.credentials.type) {
-                    case ValetudoWifiConfiguration.CREDENTIALS_TYPE.WPA2_PSK:
+                    case NimbusWifiConfiguration.CREDENTIALS_TYPE.WPA2_PSK:
                         typeSpecificSettings = {
                             password: req.body.credentials.typeSpecificSettings.password
                         };
@@ -133,7 +130,7 @@ class WifiConfigurationCapabilityRouter extends CapabilityRouter {
                         typeSpecificSettings = {};
                 }
 
-                await this.capability.setWifiConfiguration(new ValetudoWifiConfiguration({
+                await this.capability.setWifiConfiguration(new NimbusWifiConfiguration({
                     ssid: req.body.ssid,
                     credentials: {
                         type: req.body.credentials.type,

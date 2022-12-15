@@ -4,7 +4,7 @@
       "tags": [
         "System"
       ],
-      "summary": "Information about the underlying host valetudo is running on",
+      "summary": "Information about the underlying host nimbus is running on",
       "responses": {
         "200": {
           "description": "Ok",
@@ -30,13 +30,13 @@
                         "type": "number",
                         "description": "The amount of free memory of the host (free + buffers + caches) in bytes"
                       },
-                      "valetudo_current": {
+                      "nimbus_current": {
                         "type": "number",
-                        "description": "The current Valetudo RSS in bytes"
+                        "description": "The current Nimbus RSS in bytes"
                       },
-                      "valetudo_max": {
+                      "nimbus_max": {
                         "type": "number",
-                        "description": "The maximum observed RSS of the running Valetudo instances in bytes"
+                        "description": "The maximum observed RSS of the running Nimbus instances in bytes"
                       }
                     }
                   },
@@ -74,7 +74,7 @@
       "tags": [
         "System"
       ],
-      "summary": "Information about the underlying host valetudo is running on",
+      "summary": "Information about the underlying host nimbus is running on",
       "responses": {
         "200": {
           "description": "Ok",
@@ -85,7 +85,7 @@
                 "properties": {
                   "uptime": {
                     "type": "number",
-                    "description": "The uptime of the currently running Valetudo process in seconds"
+                    "description": "The uptime of the currently running Nimbus process in seconds"
                   },
                   "argv": {
                     "type": "array",
@@ -104,15 +104,15 @@
                   },
                   "uid": {
                     "type": "number",
-                    "description": "UID of the running Valetudo process"
+                    "description": "UID of the running Nimbus process"
                   },
                   "gid": {
                     "type": "number",
-                    "description": "GID of the running Valetudo process"
+                    "description": "GID of the running Nimbus process"
                   },
                   "pid": {
                     "type": "number",
-                    "description": "PID of the running Valetudo process"
+                    "description": "PID of the running Nimbus process"
                   },
                   "versions": {
                     "type": "object",

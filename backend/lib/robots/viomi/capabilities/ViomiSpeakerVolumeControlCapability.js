@@ -1,7 +1,7 @@
 const SpeakerVolumeControlCapability = require("../../../core/capabilities/SpeakerVolumeControlCapability");
 
 /**
- * @template {import("../ViomiValetudoRobot")} T
+ * @template {import("../ViomiNimbusRobot")} T
  * @extends SpeakerVolumeControlCapability<T>
  */
 class ViomiSpeakerVolumeControlCapability extends SpeakerVolumeControlCapability {

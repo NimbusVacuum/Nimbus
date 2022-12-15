@@ -1,9 +1,8 @@
 const Capability = require("./Capability");
 const NotImplementedError = require("../NotImplementedError");
 
-
 /**
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class ManualControlCapability extends Capability {
@@ -11,7 +10,7 @@ class ManualControlCapability extends Capability {
      *
      * @param {object} options
      * @param {T} options.robot
-     * @param {Array<ValetudoManualControlMovementCommandType>} options.supportedMovementCommands
+     * @param {Array<NimbusManualControlMovementCommandType>} options.supportedMovementCommands
      * @class
      */
     constructor(options) {
@@ -46,7 +45,7 @@ class ManualControlCapability extends Capability {
 
     /**
      * @abstract
-     * @param {ValetudoManualControlMovementCommandType} movementCommand
+     * @param {NimbusManualControlMovementCommandType} movementCommand
      * @returns {Promise<void>}
      */
     async manualControl(movementCommand) {
@@ -67,7 +66,7 @@ class ManualControlCapability extends Capability {
 ManualControlCapability.TYPE = "ManualControlCapability";
 
 /**
- *  @typedef {string} ValetudoManualControlMovementCommandType
+ *  @typedef {string} NimbusManualControlMovementCommandType
  *  @enum {string}
  *
  */
@@ -77,6 +76,5 @@ ManualControlCapability.MOVEMENT_COMMAND_TYPE = Object.freeze({
     ROTATE_CLOCKWISE: "rotate_clockwise",
     ROTATE_COUNTERCLOCKWISE: "rotate_counterclockwise"
 });
-
 
 module.exports = ManualControlCapability;

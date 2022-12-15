@@ -2,13 +2,13 @@ const DreameMiotHelper = require("../DreameMiotHelper");
 const SpeakerTestCapability = require("../../../core/capabilities/SpeakerTestCapability");
 
 /**
- * @extends SpeakerTestCapability<import("../DreameValetudoRobot")>
+ * @extends SpeakerTestCapability<import("../DreameNimbusRobot")>
  */
 class DreameSpeakerTestCapability extends SpeakerTestCapability {
 
     /**
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {number} options.siid MIOT Service ID
      * @param {number} options.aiid MIOT Action ID

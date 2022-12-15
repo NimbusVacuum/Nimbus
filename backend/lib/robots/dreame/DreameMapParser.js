@@ -17,7 +17,7 @@ class DreameMapParser {
      *
      * @param {Buffer} buf
      * @param {MapDataType} [type]
-     * @returns {Promise<null|import("../../entities/map/ValetudoMap")>}
+     * @returns {Promise<null|import("../../entities/map/NimbusMap")>}
      */
     static async PARSE(buf, type) {
         //Maps are always at least 27 bytes in size
@@ -30,7 +30,6 @@ class DreameMapParser {
         }
 
         const parsedHeader = DreameMapParser.PARSE_HEADER(buf.subarray(0, HEADER_SIZE));
-
 
         /**
          * Since P-Frame parsing is much harder than I-Frame parsing, we're skipping them for now
@@ -53,7 +52,7 @@ class DreameMapParser {
                         parsedHeader.robot_position.y
                     ],
                     metaData: {
-                        angle: DreameMapParser.CONVERT_ANGLE_TO_VALETUDO(parsedHeader.robot_position.angle)
+                        angle: DreameMapParser.CONVERT_ANGLE_TO_NIMBUS(parsedHeader.robot_position.angle)
                     },
                     type: Map.PointMapEntity.TYPE.ROBOT_POSITION
                 })
@@ -68,13 +67,12 @@ class DreameMapParser {
                         parsedHeader.charger_position.y
                     ],
                     metaData: {
-                        angle: DreameMapParser.CONVERT_ANGLE_TO_VALETUDO(parsedHeader.charger_position.angle)
+                        angle: DreameMapParser.CONVERT_ANGLE_TO_NIMBUS(parsedHeader.charger_position.angle)
                     },
                     type: Map.PointMapEntity.TYPE.CHARGER_LOCATION
                 })
             );
         }
-
 
         if (buf.length >= HEADER_SIZE + parsedHeader.width * parsedHeader.height) {
             const imageData = buf.subarray(HEADER_SIZE, HEADER_SIZE + parsedHeader.width * parsedHeader.height);
@@ -113,7 +111,7 @@ class DreameMapParser {
             if (additionalData.rism && additionalData.ris === 2) {
                 const rismResult = await DreameMapParser.PARSE(await DreameMapParser.PREPROCESS(additionalData.rism), MAP_DATA_TYPES.RISM);
 
-                if (rismResult instanceof Map.ValetudoMap) {
+                if (rismResult instanceof Map.NimbusMap) {
                     rismResult.entities.forEach(e => {
                         if (e instanceof Map.PointMapEntity) {
                             if (e.type === Map.PointMapEntity.TYPE.ROBOT_POSITION && parsedHeader.robot_position.valid === false) {
@@ -165,7 +163,6 @@ class DreameMapParser {
                     }
                 }
             }
-
 
             if (additionalData.tr) {
                 const paths = DreameMapParser.PARSE_PATH(parsedHeader, additionalData.tr, additionalData.l2r === 1);
@@ -235,7 +232,7 @@ class DreameMapParser {
                 There can also be multiple tpoint points. No idea when or why that happens or what it does either
              */
             if (additionalData.pointinfo && Array.isArray(additionalData.pointinfo.tpoint) && additionalData.pointinfo.tpoint.length === 1) {
-                const goToPoint = DreameMapParser.CONVERT_TO_VALETUDO_COORDINATES(
+                const goToPoint = DreameMapParser.CONVERT_TO_NIMBUS_COORDINATES(
                     additionalData.pointinfo.tpoint[0][0],
                     additionalData.pointinfo.tpoint[0][1],
                 );
@@ -268,7 +265,7 @@ class DreameMapParser {
             return null;
         }
 
-        return new Map.ValetudoMap({
+        return new Map.NimbusMap({
             metaData: metaData,
             size: {
                 x: MAX_X,
@@ -290,11 +287,11 @@ class DreameMapParser {
         parsedHeader.frame_id = buf.readInt16LE(2);
         parsedHeader.frame_type = buf.readInt8(4);
 
-        parsedHeader.robot_position = DreameMapParser.CONVERT_TO_VALETUDO_COORDINATES(buf.readInt16LE(5), buf.readInt16LE(7));
+        parsedHeader.robot_position = DreameMapParser.CONVERT_TO_NIMBUS_COORDINATES(buf.readInt16LE(5), buf.readInt16LE(7));
         parsedHeader.robot_position.angle = buf.readInt16LE(9);
         parsedHeader.robot_position.valid = true;
 
-        parsedHeader.charger_position = DreameMapParser.CONVERT_TO_VALETUDO_COORDINATES(buf.readInt16LE(11), buf.readInt16LE(13));
+        parsedHeader.charger_position = DreameMapParser.CONVERT_TO_NIMBUS_COORDINATES(buf.readInt16LE(11), buf.readInt16LE(13));
         parsedHeader.charger_position.angle = buf.readInt16LE(15);
         parsedHeader.charger_position.valid = true;
 
@@ -305,7 +302,6 @@ class DreameMapParser {
 
         parsedHeader.left = Math.round((buf.readInt16LE(23) + HALF_INT16 )/ 10);
         parsedHeader.top = Math.round((buf.readInt16LE(25) + HALF_INT16) / 10);
-
 
         if (buf.readInt16LE(5) === HALF_INT16_UPPER_HALF && buf.readInt16LE(7) === HALF_INT16_UPPER_HALF) {
             parsedHeader.robot_position.valid = false;
@@ -334,7 +330,7 @@ class DreameMapParser {
                 ];
 
                 /**
-                 * The valetudo map origin is in the top left corner
+                 * The nimbus map origin is in the top left corner
                  * The dreame map origin is in the bottom left corner
                  *
                  * Therefore, we need to flip this and every Y coordinate
@@ -343,8 +339,6 @@ class DreameMapParser {
 
                 coords[0] = Math.round(coords[0]);
                 coords[1] = Math.round(coords[1]);
-
-
 
                 if (type === MAP_DATA_TYPES.REGULAR) {
                     /**
@@ -486,7 +480,7 @@ class DreameMapParser {
             let processedPathPoints = [];
 
             unprocessedPoints.forEach(e => {
-                const p = DreameMapParser.CONVERT_TO_VALETUDO_COORDINATES(e.x, e.y);
+                const p = DreameMapParser.CONVERT_TO_NIMBUS_COORDINATES(e.x, e.y);
 
                 processedPathPoints.push(p.x, p.y);
             });
@@ -504,14 +498,13 @@ class DreameMapParser {
             );
         });
 
-
         return paths;
     }
 
     static PARSE_AREAS(parsedHeader, areas, type) {
         return areas.map(a => {
-            const pA = DreameMapParser.CONVERT_TO_VALETUDO_COORDINATES(a[0], a[1]);
-            const pB = DreameMapParser.CONVERT_TO_VALETUDO_COORDINATES(a[2], a[3]);
+            const pA = DreameMapParser.CONVERT_TO_NIMBUS_COORDINATES(a[0], a[1]);
+            const pB = DreameMapParser.CONVERT_TO_NIMBUS_COORDINATES(a[2], a[3]);
 
             //I'm way too lazy to figure out which dreame model uses which order of coordinates
             const xCoords = [pA.x, pB.x].sort((a, b) => {
@@ -520,7 +513,6 @@ class DreameMapParser {
             const yCoords = [pA.y, pB.y].sort((a, b) => {
                 return a-b;
             });
-
 
             return new Map.PolygonMapEntity({
                 type: type,
@@ -536,9 +528,8 @@ class DreameMapParser {
 
     static PARSE_LINES(parsedHeader, lines, type) {
         return lines.map(a => {
-            const pA = DreameMapParser.CONVERT_TO_VALETUDO_COORDINATES(a[0], a[1]);
-            const pB = DreameMapParser.CONVERT_TO_VALETUDO_COORDINATES(a[2], a[3]);
-
+            const pA = DreameMapParser.CONVERT_TO_NIMBUS_COORDINATES(a[0], a[1]);
+            const pB = DreameMapParser.CONVERT_TO_NIMBUS_COORDINATES(a[2], a[3]);
 
             return new Map.LineMapEntity({
                 type: type,
@@ -618,10 +609,10 @@ const MAX_Y = Math.round(((HALF_INT16 + HALF_INT16_UPPER_HALF)/10));
 DreameMapParser.HALF_INT16 = HALF_INT16;
 
 /**
- * Dreame coordinates are signed INT16. Valetudo coordinates are unsigned
+ * Dreame coordinates are signed INT16. Nimbus coordinates are unsigned
  * Therefore, every absolute position needs to be shifted by half an INT16
  *
- * The valetudo map origin is in the top left corner
+ * The nimbus map origin is in the top left corner
  * The dreame map origin is in the bottom left corner
  *
  * Therefore, we need to flip this and every Y coordinate
@@ -631,7 +622,7 @@ DreameMapParser.HALF_INT16 = HALF_INT16;
  * @param {number} y
  * @returns {{x: number, y: number}}
  */
-DreameMapParser.CONVERT_TO_VALETUDO_COORDINATES = function(x, y) {
+DreameMapParser.CONVERT_TO_NIMBUS_COORDINATES = function(x, y) {
     return {
         x: Math.round((x + HALF_INT16)/10),
         y: MAX_Y - Math.round((y + HALF_INT16)/10)
@@ -651,7 +642,7 @@ DreameMapParser.CONVERT_TO_DREAME_COORDINATES = function(x, y) {
     };
 };
 
-DreameMapParser.CONVERT_ANGLE_TO_VALETUDO = function(angle) {
+DreameMapParser.CONVERT_ANGLE_TO_NIMBUS = function(angle) {
     //This flips the angle at the Y-axis due to our different coordinate system and then substracts 90° from it
     return ((angle < 180 ? 180 - angle : 360 - angle + 180) + 270) % 360;
 };

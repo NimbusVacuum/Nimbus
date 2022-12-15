@@ -150,7 +150,6 @@ const MQTTStatusComponent : React.FunctionComponent<{ status: MQTTStatus | undef
         return <TextInformationGrid items={items}/>;
     };
 
-
     return (
         <>
             <Grid container alignItems="center" direction="column" style={{paddingBottom:"1rem"}}>
@@ -213,7 +212,6 @@ const MQTTStatusComponent : React.FunctionComponent<{ status: MQTTStatus | undef
         </>
     );
 };
-
 
 const GroupBox = (props: { title: string, children: React.ReactNode, checked?: boolean, disabled?: boolean, onChange?: ((event: React.ChangeEvent<HTMLInputElement>) => void) }): JSX.Element => {
     let title = (
@@ -457,7 +455,6 @@ const MQTTConnectivity = (): JSX.Element => {
 
     const [mqttConfiguration, setMQTTConfiguration] = React.useState<MQTTConfiguration | null>(null);
     const [configurationModified, setConfigurationModified] = React.useState<boolean>(false);
-
 
     const [showMQTTAuthPasswordAsPlain, setShowMQTTAuthPasswordAsPlain] = React.useState(false);
 
@@ -821,18 +818,18 @@ const MQTTConnectivity = (): JSX.Element => {
                         }}
                     >
                         <Typography color="info">
-                            Valetudo recommends the use of the Eclipse Mosquitto MQTT Broker, which is FOSS, has a
+                            Nimbus recommends the use of the Eclipse Mosquitto MQTT Broker, which is FOSS, has a
                             tiny resource footprint and is part of basically every GNU/Linux distribution.
                             You can also install it as a container via the container management solution of your choice.
 
                             <br/><br/>
                             If you&apos;re experiencing problems regarding MQTT, make sure to try Mosquitto since some other MQTT
-                            brokers only implement a subset of the MQTT spec, which often leads to issues when used with Valetudo.
+                            brokers only implement a subset of the MQTT spec, which often leads to issues when used with Nimbus.
 
                             <br/><br/>
                             If you&apos;re using Mosquitto but still experience issues, make sure that your ACLs (if any) are correct and
                             you&apos;re also using the correct login credentials for those.
-                            Valetudo will not receive any feedback from the broker if publishing fails due to ACL restrictions as such feedback
+                            Nimbus will not receive any feedback from the broker if publishing fails due to ACL restrictions as such feedback
                             simply isn&apos;t part of the MQTT v3.1.1 spec. MQTT v5 fixes this issue but isn&apos;t widely available just yet.
                         </Typography>
                     </InfoBox>

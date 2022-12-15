@@ -1,5 +1,5 @@
 const CurrentStatisticsCapability = require("../../../core/capabilities/CurrentStatisticsCapability");
-const ValetudoDataPoint = require("../../../entities/core/ValetudoDataPoint");
+const NimbusDataPoint = require("../../../entities/core/NimbusDataPoint");
 
 /**
  * @extends CurrentStatisticsCapability<import("../MockRobot")>
@@ -19,16 +19,16 @@ class MockCurrentStatisticsCapability extends CurrentStatisticsCapability {
     }
 
     /**
-     * @return {Promise<Array<ValetudoDataPoint>>}
+     * @return {Promise<Array<NimbusDataPoint>>}
      */
     async getStatistics() {
         return [
-            new ValetudoDataPoint({
-                type: ValetudoDataPoint.TYPES.TIME,
+            new NimbusDataPoint({
+                type: NimbusDataPoint.TYPES.TIME,
                 value: this.currentStatistics.time
             }),
-            new ValetudoDataPoint({
-                type: ValetudoDataPoint.TYPES.AREA,
+            new NimbusDataPoint({
+                type: NimbusDataPoint.TYPES.AREA,
                 value: this.currentStatistics.area
             })
         ];
@@ -37,8 +37,8 @@ class MockCurrentStatisticsCapability extends CurrentStatisticsCapability {
     getProperties() {
         return {
             availableStatistics: [
-                ValetudoDataPoint.TYPES.TIME,
-                ValetudoDataPoint.TYPES.AREA
+                NimbusDataPoint.TYPES.TIME,
+                NimbusDataPoint.TYPES.AREA
             ]
         };
     }

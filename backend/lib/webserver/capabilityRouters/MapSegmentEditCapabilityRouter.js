@@ -1,5 +1,5 @@
 const CapabilityRouter = require("./CapabilityRouter");
-const ValetudoMapSegment = require("../../entities/core/ValetudoMapSegment");
+const NimbusMapSegment = require("../../entities/core/NimbusMapSegment");
 
 class MapSegmentEditCapabilityRouter extends CapabilityRouter {
     initRoutes() {
@@ -9,8 +9,8 @@ class MapSegmentEditCapabilityRouter extends CapabilityRouter {
                     if (req.body.segment_a_id && req.body.segment_b_id) {
                         try {
                             await this.capability.joinSegments(
-                                new ValetudoMapSegment({id: req.body.segment_a_id}),
-                                new ValetudoMapSegment({id: req.body.segment_b_id}),
+                                new NimbusMapSegment({id: req.body.segment_a_id}),
+                                new NimbusMapSegment({id: req.body.segment_b_id}),
                             );
 
                             res.sendStatus(200);
@@ -25,7 +25,7 @@ class MapSegmentEditCapabilityRouter extends CapabilityRouter {
                     if (req.body.pA && req.body.pB && req.body.segment_id) {
                         try {
                             await this.capability.splitSegment(
-                                new ValetudoMapSegment({id: req.body.segment_id}),
+                                new NimbusMapSegment({id: req.body.segment_id}),
                                 {
                                     x: req.body.pA.x,
                                     y: req.body.pA.y,

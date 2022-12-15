@@ -1,5 +1,5 @@
 {
-  "name": "valetudo-frontend",
+  "name": "nimbus-frontend",
   "homepage": ".",
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
@@ -7,8 +7,8 @@
     "eject": "react-scripts eject",
     "watch": "cra-build-watch -p ''",
     "ts-check": "tsc --noEmit --skipLibCheck",
-    "lint": "eslint -c .automated.eslintrc.json .",
-    "lint_fix": "eslint -c .automated.eslintrc.json . --fix",
+    "lint": "eslint -c .automated.eslintrc.json src/",
+    "lint_fix": "eslint -c .automated.eslintrc.json src/ --fix",
     "lint_pedantic": "eslint -c .pedantic.eslintrc.json .",
     "prepare_commit": "npm run lint_fix && npm run ts-check"
   },
@@ -31,14 +31,14 @@
     ]
   },
   "dependencies": {
+    "@emotion/react": "11.10.4",
+    "@emotion/styled": "11.10.4",
     "@fontsource/jetbrains-mono": "4.5.11",
     "@fontsource/roboto": "4.5.8",
-    "@mui/material": "5.10.9",
     "@mui/base": "5.0.0-alpha.81",
     "@mui/icons-material": "5.10.9",
     "@mui/lab": "5.0.0-alpha.82",
-    "@emotion/styled": "11.10.4",
-    "@emotion/react": "11.10.4",
+    "@mui/material": "5.10.9",
     "axios": "0.27.2",
     "date-fns": "2.29.3",
     "jsencrypt": "3.2.1",
@@ -46,13 +46,13 @@
     "react": "18.2.0",
     "react-div-100vh": "0.7.0",
     "react-dom": "18.2.0",
-    "reconnecting-eventsource": "1.5.2",
-    "rehype-raw": "6.1.1",
     "react-markdown": "8.0.3",
-    "remark-gfm": "3.0.1",
     "react-query": "3.39.2",
     "react-router-dom": "5.3.3",
     "react-scripts": "5.0.1",
+    "reconnecting-eventsource": "1.5.2",
+    "rehype-raw": "6.1.1",
+    "remark-gfm": "3.0.1",
     "semaphore": "1.1.0",
     "use-long-press": "2.0.2",
     "uuid": "9.0.0",
@@ -62,8 +62,14 @@
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
     "@types/react-router-dom": "5.3.3",
+    "@types/semaphore": "^1.1.1",
     "@types/uuid": "8.3.4",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "cra-build-watch": "git+https://npm@github.com/Hypfer/cra-build-watch.git#5.0.0",
+    "cross-env": "^7.0.3",
+    "source-map-explorer": "^2.5.3",
     "tsutils": "3.21.0",
-    "cra-build-watch": "git+https://npm@github.com/Hypfer/cra-build-watch.git#5.0.0"
+    "typescript": "^4.9.4"
   }
 }

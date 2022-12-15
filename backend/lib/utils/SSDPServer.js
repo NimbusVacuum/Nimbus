@@ -13,7 +13,7 @@ class SSDPServer {
     /**
      *
      * This is a very basic SSDP/UPNP server implementation, which works well enough
-     * to make valetudo show up in the network tab of the Windows explorer
+     * to make nimbus show up in the network tab of the Windows explorer
      *
      * For now, it only supports IPv4
      *
@@ -40,7 +40,7 @@ class SSDPServer {
 
             /*
                 For some reason that is beyond me, we need to wait before we add the multicast membership,
-                as otherwise Valetudo simply won't receive the UDP packages
+                as otherwise Nimbus simply won't receive the UDP packages
              */
             this.addMembershipTimeout = setTimeout(() => {
                 for (let iface of this.interfaces) {
@@ -66,8 +66,8 @@ class SSDPServer {
                     "ST: upnp:rootdevice",
                     `USN: uuid:${Tools.GET_SYSTEM_ID()}::upnp:rootdevice`,
                     "CACHE-CONTROL: max-age=1800",
-                    `SERVER: Valetudo/${Tools.GET_VALETUDO_VERSION()} UPnP/1.1`,
-                    `LOCATION: http://${this.ip}:${this.webserverPort}/_ssdp/valetudo.xml`,
+                    `SERVER: Nimbus/${Tools.GET_NIMBUS_VERSION()} UPnP/1.1`,
+                    `LOCATION: http://${this.ip}:${this.webserverPort}/_ssdp/nimbus.xml`,
 
                     "",
                     "" //Empty line at the end. Without this it won't work!!
@@ -97,6 +97,5 @@ class SSDPServer {
 
 const MULTICAST_SSDP_ADDRESS_v4 = "239.255.255.250";
 const MULTICAST_SSDP_PORT = 1900;
-
 
 module.exports = SSDPServer;

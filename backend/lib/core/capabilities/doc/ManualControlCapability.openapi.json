@@ -1,7 +1,7 @@
 {
   "components": {
     "schemas": {
-      "ValetudoManualControlMovementCommandType": {
+      "NimbusManualControlMovementCommandType": {
         "type": "string",
         "enum": [
           "forward",

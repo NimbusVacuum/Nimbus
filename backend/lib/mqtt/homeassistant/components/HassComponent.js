@@ -8,7 +8,7 @@ class HassComponent {
     /**
      * @param {object} options
      * @param {import("../HassController")} options.hass
-     * @param {import("../../../core/ValetudoRobot")} options.robot
+     * @param {import("../../../core/NimbusRobot")} options.robot
      * @param {string} options.componentType
      * @param {string} options.componentId
      */
@@ -212,7 +212,6 @@ class HassComponent {
     getTopics() {
         return null;
     }
-
 
     /**
      * Return topics that this component is interested in.

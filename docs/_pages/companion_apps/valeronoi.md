@@ -5,7 +5,7 @@ order: 16
 ---
 # Valeronoi
 
-Valeronoi (Valetudo + Voronoi) is a companion for [Valetudo](https://valetudo.cloud) for generating WiFi signal strength maps. It visualizes them using a [Voronoi diagram](https://en.wikipedia.org/wiki/Voronoi_diagram).
+Valeronoi (Nimbus + Voronoi) is a companion for [Nimbus](https://nimbus.cleaning) for generating WiFi signal strength maps. It visualizes them using a [Voronoi diagram](https://en.wikipedia.org/wiki/Voronoi_diagram).
 
 ![image](./img/valeronoi.png)
 

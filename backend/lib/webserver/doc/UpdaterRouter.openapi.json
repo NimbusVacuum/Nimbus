@@ -13,25 +13,25 @@
               "schema": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/ValetudoUpdaterIdleState"
+                    "$ref": "#/components/schemas/NimbusUpdaterIdleState"
                   },
                   {
-                    "$ref": "#/components/schemas/ValetudoUpdaterErrorState"
+                    "$ref": "#/components/schemas/NimbusUpdaterErrorState"
                   },
                   {
-                    "$ref": "#/components/schemas/ValetudoUpdaterApprovalPendingState"
+                    "$ref": "#/components/schemas/NimbusUpdaterApprovalPendingState"
                   },
                   {
-                    "$ref": "#/components/schemas/ValetudoUpdaterDownloadingState"
+                    "$ref": "#/components/schemas/NimbusUpdaterDownloadingState"
                   },
                   {
-                    "$ref": "#/components/schemas/ValetudoUpdaterApplyPendingState"
+                    "$ref": "#/components/schemas/NimbusUpdaterApplyPendingState"
                   },
                   {
-                    "$ref": "#/components/schemas/ValetudoUpdaterDisabledState"
+                    "$ref": "#/components/schemas/NimbusUpdaterDisabledState"
                   },
                   {
-                    "$ref": "#/components/schemas/ValetudoUpdaterNoUpdateRequiredState"
+                    "$ref": "#/components/schemas/NimbusUpdaterNoUpdateRequiredState"
                   }
                 ]
               }
@@ -46,7 +46,7 @@
       "tags": [
         "Updater"
       ],
-      "summary": "Request and execute an update of Valetudo",
+      "summary": "Request and execute an update of Nimbus",
       "description": "Please do keep in mind that this is a potentially dangerous operation.",
       "requestBody": {
         "content": {

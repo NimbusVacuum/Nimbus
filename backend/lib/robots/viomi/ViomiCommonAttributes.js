@@ -1,6 +1,6 @@
 const ManualControlCapability = require("../../core/capabilities/ManualControlCapability");
 const stateAttrs = require("../../entities/state/attributes");
-const ValetudoSensor = require("../../entities/core/ValetudoSensor");
+const NimbusSensor = require("../../entities/core/NimbusSensor");
 
 // Common Viomi enums
 
@@ -47,8 +47,8 @@ const ViomiZoneCleaningCommand = Object.freeze({
 });
 
 const ViomiSensorTypes = Object.freeze([
-    new ValetudoSensor({
-        type: ValetudoSensor.TYPE.ACCELEROMETER,
+    new NimbusSensor({
+        type: NimbusSensor.TYPE.ACCELEROMETER,
         value: null,
     }),
 ]);

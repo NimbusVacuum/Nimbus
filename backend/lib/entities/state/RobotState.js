@@ -10,7 +10,7 @@ class RobotState extends ContainerEntity {
     /**
      *
      * @param {object} options
-     * @param {import("../map/ValetudoMap")} options.map
+     * @param {import("../map/NimbusMap")} options.map
      * @param {Array<import("./attributes/StateAttribute")>} [options.attributes]
      * @param {object} [options.metaData]
      */

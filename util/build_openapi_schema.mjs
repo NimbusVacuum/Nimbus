@@ -16,19 +16,19 @@ const options = {
     definition: {
         openapi: "3.0.0",
         info: {
-            title: "Valetudo REST API",
-            version: Tools.GET_VALETUDO_VERSION()
+            title: "Nimbus REST API",
+            version: Tools.GET_NIMBUS_VERSION()
         },
         tags: [ //Swagger UI respects the order of these
-            {name: "Valetudo", description: "Valetudo management API"},
-            {name: "ValetudoEvents", description: "Valetudo Events"},
+            {name: "Nimbus", description: "Nimbus management API"},
+            {name: "NimbusEvents", description: "Nimbus Events"},
             {name: "Robot", description: "Robot API"},
             {name: "System", description: "System API"},
             {name: "MQTT", description: "MQTT Controller API"},
             {name: "NetworkAdvertisement", description: "Network Advertisement Manager API"},
             {name: "NTP", description: "NTP Client API"},
             {name: "Timers", description: "Timers API"},
-            {name: "Updater", description: "Update Valetudo using Valetudo"},
+            {name: "Updater", description: "Update Nimbus using Nimbus"},
 
             {name: "BasicControlCapability", description: "Basic control capability"},
             {name: "FanSpeedControlCapability", description: "Fan speed control capability"},
@@ -101,10 +101,7 @@ const spec = await swaggerJsdoc(options);
 
 await SwaggerParser.validate(spec);
 
-
 fs.writeFileSync(
-    path.join(__dirname, "./backend/lib/res/valetudo.openapi.schema.json"),
+    path.join(__dirname, "./backend/lib/res/nimbus.openapi.schema.json"),
     JSON.stringify(spec)
 );
-
-

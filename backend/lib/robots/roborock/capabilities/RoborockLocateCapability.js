@@ -1,7 +1,7 @@
 const LocateCapability = require("../../../core/capabilities/LocateCapability");
 
 /**
- * @extends LocateCapability<import("../RoborockValetudoRobot")>
+ * @extends LocateCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockLocateCapability extends LocateCapability {
     /**

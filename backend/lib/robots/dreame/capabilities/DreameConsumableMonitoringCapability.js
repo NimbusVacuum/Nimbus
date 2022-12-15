@@ -6,13 +6,13 @@ const ConsumableStateAttribute = require("../../../entities/state/attributes/Con
 const Logger = require("../../../Logger");
 
 /**
- * @extends ConsumableMonitoringCapability<import("../DreameValetudoRobot")>
+ * @extends ConsumableMonitoringCapability<import("../DreameNimbusRobot")>
  */
 class DreameConsumableMonitoringCapability extends ConsumableMonitoringCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {object} options.miot_actions
      * @param {object} options.miot_actions.reset_main_brush

@@ -2,14 +2,14 @@ const Capability = require("./Capability");
 const NotImplementedError = require("../NotImplementedError");
 
 /**
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class DoNotDisturbCapability extends Capability {
     /**
      *
      * @abstract
-     * @returns {Promise<import("../../entities/core/ValetudoDNDConfiguration")>}
+     * @returns {Promise<import("../../entities/core/NimbusDNDConfiguration")>}
      */
     async getDndConfiguration() {
         throw new NotImplementedError();
@@ -17,7 +17,7 @@ class DoNotDisturbCapability extends Capability {
 
     /**
      * @abstract
-     * @param {import("../../entities/core/ValetudoDNDConfiguration")} dndConfig
+     * @param {import("../../entities/core/NimbusDNDConfiguration")} dndConfig
      * @returns {Promise<void>}
      */
     async setDndConfiguration(dndConfig) {

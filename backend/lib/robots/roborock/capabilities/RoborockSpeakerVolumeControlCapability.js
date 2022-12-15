@@ -1,7 +1,7 @@
 const SpeakerVolumeControlCapability = require("../../../core/capabilities/SpeakerVolumeControlCapability");
 
 /**
- * @extends SpeakerVolumeControlCapability<import("../RoborockValetudoRobot")>
+ * @extends SpeakerVolumeControlCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockSpeakerVolumeControlCapability extends SpeakerVolumeControlCapability {
     /**

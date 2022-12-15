@@ -17,7 +17,7 @@ However, since Xiaomi disabled local OTA in newer versions of the `miio_client` 
 Unfortunately, robots made after 2020-03 come with a non-local-OTA capable recovery firmware version so for those robots
 you will need to follow the instructions below.
 
-This works by using the official OTA update mechanism to push a customized (rooted + valetudo) firmware image to the robot.
+This works by using the official OTA update mechanism to push a customized (rooted + nimbus) firmware image to the robot.
 It will happily accept that, because they aren't signed. For more information, check out the talk
 [Unleash your smart-home devices: Vacuum Cleaning Robot Hacking](https://media.ccc.de/v/34c3-9147-unleash_your_smart-home_devices_vacuum_cleaning_robot_hacking).
 
@@ -30,9 +30,9 @@ See [https://github.com/dgiese/dustcloud/wiki/Xiaomi-Vacuum-Robots-Factory-Reset
 It is recommended to use the Dustbuilder to build your firmware image.
 It can be found here: [https://builder.dontvacuum.me/](https://builder.dontvacuum.me/)
 
-In DustBuilder, make sure to use the "Build update package" option, as it is the only file type supported by valetudo-helper-miioota.
+In DustBuilder, make sure to use the "Build update package" option, as it is the only file type supported by nimbus-helper-miioota.
 
-The service is provided by Dennis who is also the reason, why Valetudo can exist in the first place.
+The service is provided by Dennis who is also the reason, why Nimbus can exist in the first place.
 
 The reason this guide switched to Dustbuilder only is that it provides a controlled environment, which eliminates common support issues.
 The irony that this guide suggests using "the cloud" to uncloud your device is not lost on me.
@@ -40,14 +40,14 @@ The irony that this guide suggests using "the cloud" to uncloud your device is n
 
 ### Flashing the firmware image
 
-Flashing the firmware .pkg file can easily be done by using [valetudo-helper-miioota](https://github.com/Hypfer/valetudo-helper-miioota),
+Flashing the firmware .pkg file can easily be done by using [nimbus-helper-miioota](https://github.com/Hypfer/nimbus-helper-miioota),
 which is a standalone tool that does the right thing.
 
 Just connect your laptop to the robots Wi-Fi access point and use the tool to install the firmware.
 A successful run should look similar to this:
 
 ```
-./valetudo-helper-miioota install-firmware v11_2034.pkg 
+./nimbus-helper-miioota install-firmware v11_2034.pkg 
 Starting installer.
 If you experience issues, make sure to disable your firewall and/or VPN.
 Also, make sure that the robot is docked during the firmware update procedure.
@@ -73,7 +73,7 @@ Please keep the distance between your WiFi antenna and your robot as short as po
 After the successful transfer of the image to the robot, the robot will start flashing the image. This will take about 5~10 minutes.
 After the process is done, the robot will state that the update was successful.
 
-You can now return to the [getting started guide](https://valetudo.cloud/pages/general/getting-started.html#joining_wifi).
+You can now return to the [getting started guide](https://nimbus.cleaning/pages/general/getting-started.html#joining_wifi).
 
 #### Troubleshooting
 
@@ -164,7 +164,7 @@ For this root you will need:
 First, head over to the [Dustbuilder](https://builder.dontvacuum.me/) and request a rooted firmware image for your specific robot.
 Make sure to select the `Create FEL image (for initial rooting via USB)` option.
 
-Next, download the latest [valetudo-armv7-lowmem.upx binary](https://github.com/Hypfer/Valetudo/releases/latest/download/valetudo-armv7-lowmem.upx).
+Next, download the latest [nimbus-armv7-lowmem.upx binary](https://github.com/NimbusVacuum/Nimbus/releases/latest/download/nimbus-armv7-lowmem.upx).
 
 
 With the dustbuilder now building your image, you can start the disassembly of the robot until you reach the mainboard.
@@ -278,24 +278,24 @@ reboot
 
 Once again wait for it to reboot and reconnect to the robots' Wi-Fi AP.
 
-Push the downloaded Valetudo binary to the robot using `scp` like so:
+Push the downloaded Nimbus binary to the robot using `scp` like so:
 ```
-scp -O -i ~/.ssh/your_keyfile Downloads/valetudo-armv7-lowmem.upx root@192.168.8.1:/mnt/data/valetudo
+scp -O -i ~/.ssh/your_keyfile Downloads/nimbus-armv7-lowmem.upx root@192.168.8.1:/mnt/data/nimbus
 ```
 
-Connect to the robot via `ssh`. You will now clean up the installer files and setup valetudo to autostart on boot:
+Connect to the robot via `ssh`. You will now clean up the installer files and setup nimbus to autostart on boot:
 ```
 cd /mnt/data
 rm roborock.vacuum.*.gz boot.img firmware.md5sum rootfs.img install.sh
 
 cp /root/_root.sh.tpl /mnt/reserve/_root.sh
-chmod +x /mnt/reserve/_root.sh /mnt/data/valetudo
+chmod +x /mnt/reserve/_root.sh /mnt/data/nimbus
 
 reboot
 ```
 
 After the robot has rebooted, connect to its Wi-Fi AP for the final time, wait for a minute or two and then open the
-Valetudo Webinterface in your browser to connect the robot to your Wi-Fi network.<br/>
+Nimbus Webinterface in your browser to connect the robot to your Wi-Fi network.<br/>
 For that, just browse to `http://192.168.8.1`.
 
-After reassembling the robot you can continue with the <a href="https://valetudo.cloud/pages/general/getting-started.html#using-valetudo">getting started guide</a>.
+After reassembling the robot you can continue with the <a href="https://nimbus.cleaning/pages/general/getting-started.html#using-nimbus">getting started guide</a>.

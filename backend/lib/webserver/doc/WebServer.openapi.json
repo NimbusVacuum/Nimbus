@@ -2,7 +2,7 @@
   "/api/v2": {
     "get": {
       "tags": [
-        "Valetudo"
+        "Nimbus"
       ],
       "summary": "List available API endpoints",
       "responses": {

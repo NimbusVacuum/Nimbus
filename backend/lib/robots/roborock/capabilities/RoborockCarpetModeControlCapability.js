@@ -1,7 +1,7 @@
 const CarpetModeControlCapability = require("../../../core/capabilities/CarpetModeControlCapability");
 
 /**
- * @extends CarpetModeControlCapability<import("../RoborockValetudoRobot")>
+ * @extends CarpetModeControlCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockCarpetModeControlCapability extends CarpetModeControlCapability {
     /**

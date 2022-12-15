@@ -83,12 +83,12 @@ export interface RobotInformation {
     implementation: string;
 }
 
-export interface ValetudoInformation {
+export interface NimbusInformation {
     embedded: boolean;
     systemId: string;
 }
 
-export interface ValetudoVersion {
+export interface NimbusVersion {
     release: string;
     commit: string;
 }
@@ -99,8 +99,8 @@ export interface SystemHostInfo {
     mem: {
         total: number;
         free: number;
-        valetudo_current: number;
-        valetudo_max: number;
+        nimbus_current: number;
+        nimbus_max: number;
     };
     uptime: number;
     load: {
@@ -273,7 +273,7 @@ export interface NetworkAdvertisementProperties {
 }
 
 export interface NTPClientState {
-    __class: "ValetudoNTPClientDisabledState" | "ValetudoNTPClientEnabledState" | "ValetudoNTPClientErrorState" | "ValetudoNTPClientSyncedState";
+    __class: "NimbusNTPClientDisabledState" | "NimbusNTPClientEnabledState" | "NimbusNTPClientErrorState" | "NimbusNTPClientSyncedState";
     timestamp: string;
     type?: "unknown" | "transient" | "name_resolution" | "connection" | "persisting";
     message?: string;
@@ -288,7 +288,7 @@ export interface NTPClientConfiguration {
     timeout: number;
 }
 
-export interface ValetudoEvent {
+export interface NimbusEvent {
     __class: string;
     id: string;
     timestamp: string;
@@ -298,14 +298,14 @@ export interface ValetudoEvent {
     message?: string;
 }
 
-export interface ValetudoEventInteraction {
+export interface NimbusEventInteraction {
     interaction: "ok" | "yes" | "no" | "reset";
 }
 
 // Helper for Hook
-export interface ValetudoEventInteractionContext {
+export interface NimbusEventInteractionContext {
     id: string;
-    interaction: ValetudoEventInteraction;
+    interaction: NimbusEventInteraction;
 }
 
 export enum LogLevel {
@@ -397,7 +397,7 @@ export interface WifiProvisioningEncryptionKey {
     publicKey: string;
 }
 
-export interface ValetudoWifiNetwork {
+export interface NimbusWifiNetwork {
     bssid: string,
     details: {
         ssid?: string,
@@ -418,13 +418,13 @@ export interface ManualControlInteraction {
     movementCommand?: ManualControlCommand;
 }
 
-export enum ValetudoRestrictedZoneType {
+export enum NimbusRestrictedZoneType {
     Regular = "regular",
     Mop = "mop"
 }
 
-export interface ValetudoRestrictedZone {
-    type: ValetudoRestrictedZoneType,
+export interface NimbusRestrictedZone {
+    type: NimbusRestrictedZoneType,
     points: {
         pA: Point,
         pB: Point,
@@ -440,15 +440,15 @@ export interface CombinedVirtualRestrictionsUpdateRequestParameters {
             pB: Point
         }
     }>,
-    restrictedZones: Array<ValetudoRestrictedZone>
+    restrictedZones: Array<NimbusRestrictedZone>
 }
 
 export interface CombinedVirtualRestrictionsProperties {
-    supportedRestrictedZoneTypes: Array<ValetudoRestrictedZoneType>
+    supportedRestrictedZoneTypes: Array<NimbusRestrictedZoneType>
 }
 
 export interface UpdaterState {
-    __class: "ValetudoUpdaterIdleState" | "ValetudoUpdaterErrorState" | "ValetudoUpdaterApprovalPendingState" | "ValetudoUpdaterDownloadingState" | "ValetudoUpdaterApplyPendingState" | "ValetudoUpdaterDisabledState" | "ValetudoUpdaterNoUpdateRequiredState";
+    __class: "NimbusUpdaterIdleState" | "NimbusUpdaterErrorState" | "NimbusUpdaterApprovalPendingState" | "NimbusUpdaterDownloadingState" | "NimbusUpdaterApplyPendingState" | "NimbusUpdaterDisabledState" | "NimbusUpdaterNoUpdateRequiredState";
     timestamp: string;
     busy: boolean;
     type?: "unknown" | "not_embedded" | "not_docked" | "not_writable" | "not_enough_space" | "download_failed" | "no_matching_binary" | "missing_manifest" | "invalid_manifest" | "invalid_checksum";
@@ -462,16 +462,16 @@ export interface UpdaterState {
     downloadPath?: string;
 }
 
-export type ValetudoDataPointType = "count" | "time" | "area"
+export type NimbusDataPointType = "count" | "time" | "area"
 
-export interface ValetudoDataPoint {
+export interface NimbusDataPoint {
     timestamp: string,
-    type: ValetudoDataPointType,
+    type: NimbusDataPointType,
     value: number
 }
 
 export interface StatisticsProperties {
-    availableStatistics: Array<ValetudoDataPointType>
+    availableStatistics: Array<NimbusDataPointType>
 }
 
 export interface Quirk {

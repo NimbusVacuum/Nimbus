@@ -1,7 +1,7 @@
 const SimpleToggleCapability = require("./SimpleToggleCapability");
 
 /**
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends SimpleToggleCapability<T>
  */
 class CarpetModeControlCapability extends SimpleToggleCapability {

@@ -1,6 +1,6 @@
 const TotalStatisticsCapability = require("../../../core/capabilities/TotalStatisticsCapability");
 
-const ValetudoDataPoint = require("../../../entities/core/ValetudoDataPoint");
+const NimbusDataPoint = require("../../../entities/core/NimbusDataPoint");
 
 /**
  * @extends TotalStatisticsCapability<import("../MockRobot")>
@@ -18,20 +18,20 @@ class MockTotalStatisticsCapability extends TotalStatisticsCapability {
     }
 
     /**
-     * @return {Promise<Array<ValetudoDataPoint>>}
+     * @return {Promise<Array<NimbusDataPoint>>}
      */
     async getStatistics() {
         return [
-            new ValetudoDataPoint({
-                type: ValetudoDataPoint.TYPES.TIME,
+            new NimbusDataPoint({
+                type: NimbusDataPoint.TYPES.TIME,
                 value: this.totalStatistics.time
             }),
-            new ValetudoDataPoint({
-                type: ValetudoDataPoint.TYPES.AREA,
+            new NimbusDataPoint({
+                type: NimbusDataPoint.TYPES.AREA,
                 value: this.totalStatistics.area
             }),
-            new ValetudoDataPoint({
-                type: ValetudoDataPoint.TYPES.COUNT,
+            new NimbusDataPoint({
+                type: NimbusDataPoint.TYPES.COUNT,
                 value: this.totalStatistics.count
             })
         ];
@@ -40,9 +40,9 @@ class MockTotalStatisticsCapability extends TotalStatisticsCapability {
     getProperties() {
         return {
             availableStatistics: [
-                ValetudoDataPoint.TYPES.TIME,
-                ValetudoDataPoint.TYPES.AREA,
-                ValetudoDataPoint.TYPES.COUNT
+                NimbusDataPoint.TYPES.TIME,
+                NimbusDataPoint.TYPES.AREA,
+                NimbusDataPoint.TYPES.COUNT
             ]
         };
     }

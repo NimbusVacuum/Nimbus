@@ -1,16 +1,16 @@
 /**
- * @typedef {import("../../../entities/core/ValetudoVirtualRestrictions")} ValetudoVirtualRestrictions
+ * @typedef {import("../../../entities/core/NimbusVirtualRestrictions")} NimbusVirtualRestrictions
  */
 
 const CombinedVirtualRestrictionsCapability = require("../../../core/capabilities/CombinedVirtualRestrictionsCapability");
 const ThreeIRobotixMapParser = require("../../3irobotix/ThreeIRobotixMapParser");
 
 /**
- * @extends CombinedVirtualRestrictionsCapability<import("../ViomiValetudoRobot")>
+ * @extends CombinedVirtualRestrictionsCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiCombinedVirtualRestrictionsCapability extends CombinedVirtualRestrictionsCapability {
     /**
-     * @param {ValetudoVirtualRestrictions} virtualRestrictions
+     * @param {NimbusVirtualRestrictions} virtualRestrictions
      * @returns {Promise<void>}
      */
     async setVirtualRestrictions(virtualRestrictions) {

@@ -3,8 +3,8 @@ import {
     StatusState,
     useCombinedVirtualRestrictionsMutation,
     useCombinedVirtualRestrictionsPropertiesQuery,
-    ValetudoRestrictedZone,
-    ValetudoRestrictedZoneType
+    NimbusRestrictedZone,
+    NimbusRestrictedZoneType
 } from "../../../api";
 import React from "react";
 import {Box, Button, CircularProgress, Container, Grid, Typography} from "@mui/material";
@@ -70,13 +70,13 @@ const VirtualRestrictionActions = (
         if (!canEdit) {
             return;
         }
-        const restrictedZones : Array<ValetudoRestrictedZone> = [];
+        const restrictedZones : Array<NimbusRestrictedZone> = [];
 
         [...noGoAreas, ...noMopAreas].forEach((rZ : RestrictedZoneClientStructure) => {
-            let type : ValetudoRestrictedZoneType = ValetudoRestrictedZoneType.Regular;
+            let type : NimbusRestrictedZoneType = NimbusRestrictedZoneType.Regular;
 
             if (rZ.getType() === NoMopAreaClientStructure.TYPE) {
-                type = ValetudoRestrictedZoneType.Mop;
+                type = NimbusRestrictedZoneType.Mop;
             }
 
             restrictedZones.push({
@@ -190,7 +190,7 @@ const VirtualRestrictionActions = (
             }
             {
                 canEdit &&
-                combinedVirtualRestrictionsProperties.supportedRestrictedZoneTypes.includes(ValetudoRestrictedZoneType.Regular) &&
+                combinedVirtualRestrictionsProperties.supportedRestrictedZoneTypes.includes(NimbusRestrictedZoneType.Regular) &&
 
                 <Grid item>
                     <ActionButton
@@ -205,7 +205,7 @@ const VirtualRestrictionActions = (
             }
             {
                 canEdit &&
-                combinedVirtualRestrictionsProperties.supportedRestrictedZoneTypes.includes(ValetudoRestrictedZoneType.Mop) &&
+                combinedVirtualRestrictionsProperties.supportedRestrictedZoneTypes.includes(NimbusRestrictedZoneType.Mop) &&
 
                 <Grid item>
                     <ActionButton

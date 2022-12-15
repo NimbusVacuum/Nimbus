@@ -2,7 +2,7 @@ const DreameMiotHelper = require("../DreameMiotHelper");
 const ManualControlCapability = require("../../../core/capabilities/ManualControlCapability");
 
 /**
- * @extends ManualControlCapability<import("../Dreame1CValetudoRobot")>
+ * @extends ManualControlCapability<import("../Dreame1CNimbusRobot")>
  */
 class Dreame1CManualControlCapability extends ManualControlCapability {
     /**
@@ -22,7 +22,7 @@ class Dreame1CManualControlCapability extends ManualControlCapability {
      * @param {object} options.miot_properties.angle
      * @param {number} options.miot_properties.angle.piid
      *
-     * @param {import("../Dreame1CValetudoRobot")} options.robot
+     * @param {import("../Dreame1CNimbusRobot")} options.robot
      * @class
      */
     constructor(options) {
@@ -77,7 +77,7 @@ class Dreame1CManualControlCapability extends ManualControlCapability {
     }
 
     /**
-     * @param {import("../../../core/capabilities/ManualControlCapability").ValetudoManualControlMovementCommandType} movementCommand
+     * @param {import("../../../core/capabilities/ManualControlCapability").NimbusManualControlMovementCommandType} movementCommand
      * @returns {Promise<void>}
      */
     async manualControl(movementCommand) {

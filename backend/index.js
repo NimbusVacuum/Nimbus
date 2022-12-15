@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 const Logger = require("./lib/Logger");
-const Valetudo = require("./lib/Valetudo");
+const Nimbus = require("./lib/Nimbus");
 
-const valetudo = new Valetudo();
+const nimbus = new Nimbus();
 
 /*
     This is the easiest and most complete Mitigation against CWE-1321 Prototype Pollution
-    We do that after new Valetudo() to not interfere with any (library) code.
+    We do that after new Nimbus() to not interfere with any (library) code.
     
     This way, this should only interfere with malicious user input (if any)
  */
@@ -24,7 +24,7 @@ process.on("unhandledRejection", (reason, promise) => {
 
 async function shutdown() {
     try {
-        await valetudo.shutdown();
+        await nimbus.shutdown();
         // need to exit here because otherwise the process would stay open
         process.exit(0);
     } catch (err) {
@@ -35,7 +35,7 @@ async function shutdown() {
 }
 
 // Signal termination handler - used if the process is killed
-// (e.g. kill command, service valetudo stop, reboot (via upstart),...)
+// (e.g. kill command, service nimbus stop, reboot (via upstart),...)
 process.on("SIGTERM", shutdown);
 
 // Signal interrupt handler -

@@ -11,7 +11,7 @@ of consistency.
 
 ## General
 
-This project is called <em style="font-weight: bold;">Valetudo</em> with a capital V.
+This project is called <em style="font-weight: bold;">Nimbus</em> with a capital V.
 
 It should always be capitalized.<br/>
 There also shouldn't be any spaces in between, as "vale tudo" is a style of mixed martial arts.
@@ -24,11 +24,11 @@ This is the main logo including the full project name.
 
 
 <div style="text-align: center; margin-bottom: 0.5em;">
-<img src="../img/valetudo_logo_with_name.svg" alt="Valetudo Full Logo">
+<img src="../img/nimbus_logo_with_name.svg" alt="Nimbus Full Logo">
 </div>
 
 The font used is <a href="https://en.wikipedia.org/wiki/Ubuntu_(typeface)" rel="noopener" target="_blank">Ubuntu Medium</a>,
-which nicely picks up the round-ish-ness of the Valetudo logo.
+which nicely picks up the round-ish-ness of the Nimbus logo.
 
 
 ### Minimal Logo
@@ -37,10 +37,10 @@ This is the minimal variant of the logo featuring only the actual logo part.
 It is usually used for icons or when the full logo is simply too large to make sense.
 
 <div style="text-align: center; margin-bottom: 0.5em;">
-<img src="../img/valetudo_logo_small.svg" width="128em" alt="Valetudo Minimal Logo">
+<img src="../img/nimbus_logo_small.svg" width="128em" alt="Nimbus Minimal Logo">
 </div>
 
-The logo embodies both a V-shape for Valetudo and a round-ish shape to represent the roundness
+The logo embodies both a V-shape for Nimbus and a round-ish shape to represent the roundness
 of most vacuum robots. Furthermore, it features a styled reference to a LIDAR tower in the middle.
 
 
@@ -68,7 +68,7 @@ This section needs some work. There hasn't been any decision yet.
 
 ### Accent colors
 
-Valetudo's main use of color is the map renderer with the same blue used in the logo representing floor
+Nimbus's main use of color is the map renderer with the same blue used in the logo representing floor
 and additional colors being used to distinguish different segments in the map.
 
 These colors may also be used to emphasize something or add color to other areas.

@@ -3,9 +3,9 @@ title: Upgrading
 category: Usage
 order: 11
 ---
-# Upgrading Valetudo
+# Upgrading Nimbus
 
-If you're using Valetudo 2021.11.0 or later, you should be able to use its integrated updater functionality.
+If you're using Nimbus 2021.11.0 or later, you should be able to use its integrated updater functionality.
 
 Below are manual upgrading instructions for older versions:
 
@@ -13,7 +13,7 @@ Below are manual upgrading instructions for older versions:
 
 ### S5, V1 and S6
 
-If you're using an S5 or V1, the recommended way to upgrade Valetudo is to flash a new image. This requires you to have SSH access to the robot.
+If you're using an S5 or V1, the recommended way to upgrade Nimbus is to flash a new image. This requires you to have SSH access to the robot.
 
 1. Select the `Build for manual installation (requires SSH to install)` option in the [Dustbuilder](https://builder.dontvacuum.me/). You will then receive a link to a tar.gz archive by email.
 2. Login to your robot via SSH.
@@ -40,7 +40,7 @@ Your robot should now be running the latest version.
 
 ---
 
-You can also stop the Valetudo service by running `/etc/init/S11valetudo stop`, and then replace the binary via scp + reboot or restart the service.
+You can also stop the Nimbus service by running `/etc/init/S11nimbus stop`, and then replace the binary via scp + reboot or restart the service.
 
 Just make sure that you try a full reflash **if you encounter any issues such as "No Map Data" or disappearing settings**.
 
@@ -49,10 +49,10 @@ If you don't have ssh available, you will need to do a full factory reset to re-
 
 ## Upgrading Dreame vacuums
 
-1. SSH into the vacuum and kill valetudo: `killall valetudo`
-2. Replace the old Valetudo binary in `/data/valetudo` with the new one
-   - `wget https://github.com/Hypfer/Valetudo/releases/latest/download/valetudo-{armv7,armv7-lowmem,aarch64} -O /data/valetudo`
-   - Make sure to use the correct binary as documented in the [supported robots](https://valetudo.cloud/pages/general/supported-robots.html) section
-   - If you get a "Text file busy" error, it means Valetudo is still running. Try to kill it again.
+1. SSH into the vacuum and kill nimbus: `killall nimbus`
+2. Replace the old Nimbus binary in `/data/nimbus` with the new one
+   - `wget https://github.com/NimbusVacuum/Nimbus/releases/latest/download/nimbus-{armv7,armv7-lowmem,aarch64} -O /data/nimbus`
+   - Make sure to use the correct binary as documented in the [supported robots](https://nimbus.cleaning/pages/general/supported-robots.html) section
+   - If you get a "Text file busy" error, it means Nimbus is still running. Try to kill it again.
    - If the issue still occurs, delete the old binary before uploading the new one
 3. Reboot your vacuum: `reboot`

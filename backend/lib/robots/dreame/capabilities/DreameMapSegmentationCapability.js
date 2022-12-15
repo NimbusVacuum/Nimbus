@@ -4,13 +4,13 @@ const DreameMiotHelper = require("../DreameMiotHelper");
 const entities = require("../../../entities");
 
 /**
- * @extends MapSegmentationCapability<import("../DreameValetudoRobot")>
+ * @extends MapSegmentationCapability<import("../DreameNimbusRobot")>
  */
 class DreameMapSegmentationCapability extends MapSegmentationCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {object} options.miot_actions
      * @param {object} options.miot_actions.start
@@ -41,7 +41,7 @@ class DreameMapSegmentationCapability extends MapSegmentationCapability {
     }
     /**
      *
-     * @param {Array<import("../../../entities/core/ValetudoMapSegment")>} segments
+     * @param {Array<import("../../../entities/core/NimbusMapSegment")>} segments
      * @param {object} [options]
      * @param {number} [options.iterations]
      * @param {boolean} [options.customOrder]

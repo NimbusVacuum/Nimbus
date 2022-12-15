@@ -45,35 +45,35 @@ const NTPClientStateComponent : React.FunctionComponent<{ state: NTPClientState 
 
     const getIconForState = () : JSX.Element => {
         switch (state.__class) {
-            case "ValetudoNTPClientEnabledState":
+            case "NimbusNTPClientEnabledState":
                 return <SyncEnabledIcon sx={{ fontSize: "4rem" }}/>;
-            case "ValetudoNTPClientDisabledState":
+            case "NimbusNTPClientDisabledState":
                 return <SyncDisabledIcon sx={{ fontSize: "4rem" }}/>;
-            case "ValetudoNTPClientSyncedState":
+            case "NimbusNTPClientSyncedState":
                 return <SyncSuccessfulIcon sx={{ fontSize: "4rem" }}/>;
-            case "ValetudoNTPClientErrorState":
+            case "NimbusNTPClientErrorState":
                 return <SyncErrorIcon sx={{ fontSize: "4rem" }}/>;
         }
     };
 
     const getContentForState = () : JSX.Element | undefined => {
         switch (state.__class) {
-            case "ValetudoNTPClientErrorState":
+            case "NimbusNTPClientErrorState":
                 return (
                     <>
                         <Typography variant="h5" color="red">Error: {state.type}</Typography>
                         <Typography color="red">{state.message}</Typography>
                     </>
                 );
-            case "ValetudoNTPClientEnabledState":
+            case "NimbusNTPClientEnabledState":
                 return (
                     <Typography variant="h5">Time sync enabled</Typography>
                 );
-            case "ValetudoNTPClientDisabledState":
+            case "NimbusNTPClientDisabledState":
                 return (
                     <Typography variant="h5">Time sync disabled</Typography>
                 );
-            case "ValetudoNTPClientSyncedState":
+            case "NimbusNTPClientSyncedState":
                 return (
                     <>
                         <Typography variant="h5">Time sync successful</Typography>
@@ -256,7 +256,7 @@ const NTPConnectivity = (): JSX.Element => {
                         }}
                     >
                         <Typography color="info">
-                            Valetudo needs a synchronized clock for timers to work and the log timestamps to make sense.
+                            Nimbus needs a synchronized clock for timers to work and the log timestamps to make sense.
                             Furthermore, the integrated updater may not work if the clock is set wrongly due to SSL
                             certificates usually only being valid within a particular period of time.
                         </Typography>

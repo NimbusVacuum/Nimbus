@@ -1,20 +1,20 @@
 const capabilities = require("./capabilities");
-const DustBinFullValetudoEvent = require("../../valetudo_events/events/DustBinFullValetudoEvent");
+const DustBinFullNimbusEvent = require("../../nimbus_events/events/DustBinFullNimbusEvent");
 const entities = require("../../entities");
-const ErrorStateValetudoEvent = require("../../valetudo_events/events/ErrorStateValetudoEvent");
-const MopAttachmentReminderValetudoEvent = require("../../valetudo_events/events/MopAttachmentReminderValetudoEvent");
-const PendingMapChangeValetudoEvent = require("../../valetudo_events/events/PendingMapChangeValetudoEvent");
+const ErrorStateNimbusEvent = require("../../nimbus_events/events/ErrorStateNimbusEvent");
+const MopAttachmentReminderNimbusEvent = require("../../nimbus_events/events/MopAttachmentReminderNimbusEvent");
+const PendingMapChangeNimbusEvent = require("../../nimbus_events/events/PendingMapChangeNimbusEvent");
 const Tools = require("../../utils/Tools");
-const ValetudoRobot = require("../../core/ValetudoRobot");
-const { MapLayer, PointMapEntity, ValetudoMap } = require("../../entities/map");
+const NimbusRobot = require("../../core/NimbusRobot");
+const { MapLayer, PointMapEntity, NimbusMap } = require("../../entities/map");
 const stateAttrs = entities.state.attributes;
 
-class MockRobot extends ValetudoRobot {
+class MockRobot extends NimbusRobot {
     /**
      *
      * @param {object} options
      * @param {import("../../Configuration")} options.config
-     * @param {import("../../ValetudoEventStore")} options.valetudoEventStore
+     * @param {import("../../NimbusEventStore")} options.nimbusEventStore
      */
     constructor(options) {
         super(options);
@@ -47,16 +47,16 @@ class MockRobot extends ValetudoRobot {
         this.registerCapability(new capabilities.MockTotalStatisticsCapability({robot: this}));
 
         // Raise events to make them visible in the UI
-        options.valetudoEventStore.raise(new DustBinFullValetudoEvent({}));
-        options.valetudoEventStore.raise(new MopAttachmentReminderValetudoEvent({}));
-        options.valetudoEventStore.raise(new PendingMapChangeValetudoEvent({}));
-        options.valetudoEventStore.raise(new ErrorStateValetudoEvent({
+        options.nimbusEventStore.raise(new DustBinFullNimbusEvent({}));
+        options.nimbusEventStore.raise(new MopAttachmentReminderNimbusEvent({}));
+        options.nimbusEventStore.raise(new PendingMapChangeNimbusEvent({}));
+        options.nimbusEventStore.raise(new ErrorStateNimbusEvent({
             message: "This is an error message"
         }));
     }
 
     getManufacturer() {
-        return "Valetudo";
+        return "Nimbus";
     }
 
     getModelName() {
@@ -83,7 +83,7 @@ class MockRobot extends ValetudoRobot {
     getProperties() {
         const superProps = super.getProperties();
         const ourProps = {
-            [ValetudoRobot.WELL_KNOWN_PROPERTIES.FIRMWARE_VERSION]: Tools.GET_VALETUDO_VERSION()
+            [NimbusRobot.WELL_KNOWN_PROPERTIES.FIRMWARE_VERSION]: Tools.GET_NIMBUS_VERSION()
         };
 
         return Object.assign(
@@ -126,7 +126,7 @@ class MockRobot extends ValetudoRobot {
                 max: 800
             }
         };
-        this.state.map = new ValetudoMap({
+        this.state.map = new NimbusMap({
             metaData: {
                 pendingMapChange: true,
             },

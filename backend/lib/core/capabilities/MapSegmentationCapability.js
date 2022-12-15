@@ -2,12 +2,12 @@ const Capability = require("./Capability");
 const NotImplementedError = require("../NotImplementedError");
 
 /**
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class MapSegmentationCapability extends Capability {
     /**
-     * @returns {Promise<Array<import("../../entities/core/ValetudoMapSegment")>>}
+     * @returns {Promise<Array<import("../../entities/core/NimbusMapSegment")>>}
      */
     async getSegments() {
         return this.robot.state.map.getSegments();
@@ -17,7 +17,7 @@ class MapSegmentationCapability extends Capability {
      * Could be phrased as "cleanSegments" for vacuums or "mowSegments" for lawnmowers
      *
      *
-     * @param {Array<import("../../entities/core/ValetudoMapSegment")>} segments
+     * @param {Array<import("../../entities/core/NimbusMapSegment")>} segments
      * @param {object} [options]
      * @param {number} [options.iterations]
      * @param {boolean} [options.customOrder]

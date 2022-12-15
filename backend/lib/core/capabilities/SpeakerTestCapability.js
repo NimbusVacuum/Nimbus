@@ -4,7 +4,7 @@ const NotImplementedError = require("../NotImplementedError");
 /**
  * Plays some kind of sound to test the current audio volume
  * 
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class SpeakerTestCapability extends Capability {

@@ -1,7 +1,7 @@
 const FanSpeedControlCapability = require("../../../core/capabilities/FanSpeedControlCapability");
 
 /**
- * @extends FanSpeedControlCapability<import("../ViomiValetudoRobot")>
+ * @extends FanSpeedControlCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiFanSpeedControlCapability extends FanSpeedControlCapability {
     /**

@@ -17,7 +17,7 @@ const stateAttrs = require("../../../entities/state/attributes");
  * They should instead prepare their data, retrieve this capability and use it to perform the operation.
  * This capability will take care of remembering the parameters for subsequent pause/resume commands.
  *
- * @extends BasicControlCapability<import("../ViomiValetudoRobot")>
+ * @extends BasicControlCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiBasicControlCapability extends BasicControlCapability {
     /**

@@ -2,13 +2,13 @@ const MapResetCapability = require("../../../core/capabilities/MapResetCapabilit
 const RobotFirmwareError = require("../../../core/RobotFirmwareError");
 
 /**
- * @extends MapResetCapability<import("../DreameValetudoRobot")>
+ * @extends MapResetCapability<import("../DreameNimbusRobot")>
  */
 class DreameMapResetCapability extends MapResetCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {object} options.miot_actions
      * @param {object} options.miot_actions.map_edit
@@ -58,7 +58,7 @@ class DreameMapResetCapability extends MapResetCapability {
         ) {
             switch (res.out[0].value) {
                 case 0:
-                    this.robot.clearValetudoMap();
+                    this.robot.clearNimbusMap();
                     this.robot.pollMap();
                     return;
                 default:

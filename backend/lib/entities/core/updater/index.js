@@ -1,10 +1,10 @@
 module.exports = {
-    ValetudoUpdaterApplyPendingState: require("./ValetudoUpdaterApplyPendingState"),
-    ValetudoUpdaterApprovalPendingState: require("./ValetudoUpdaterApprovalPendingState"),
-    ValetudoUpdaterDisabledState: require("./ValetudoUpdaterDisabledState"),
-    ValetudoUpdaterDownloadingState: require("./ValetudoUpdaterDownloadingState"),
-    ValetudoUpdaterErrorState: require("./ValetudoUpdaterErrorState"),
-    ValetudoUpdaterIdleState: require("./ValetudoUpdaterIdleState"),
-    ValetudoUpdaterNoUpdateRequiredState: require("./ValetudoUpdaterNoUpdateRequiredState"),
-    ValetudoUpdaterState: require("./ValetudoUpdaterState")
+    NimbusUpdaterApplyPendingState: require("./NimbusUpdaterApplyPendingState"),
+    NimbusUpdaterApprovalPendingState: require("./NimbusUpdaterApprovalPendingState"),
+    NimbusUpdaterDisabledState: require("./NimbusUpdaterDisabledState"),
+    NimbusUpdaterDownloadingState: require("./NimbusUpdaterDownloadingState"),
+    NimbusUpdaterErrorState: require("./NimbusUpdaterErrorState"),
+    NimbusUpdaterIdleState: require("./NimbusUpdaterIdleState"),
+    NimbusUpdaterNoUpdateRequiredState: require("./NimbusUpdaterNoUpdateRequiredState"),
+    NimbusUpdaterState: require("./NimbusUpdaterState")
 };

@@ -3,7 +3,7 @@ const STATE = Object.freeze({
     INIT: "init",                  // Initial configuration or reconfiguration
     READY: "ready",                // Device is operating normally
     DISCONNECTED: "disconnected",  // Clean shutdown
-    SLEEPING: "sleeping",          // Sleeping - does not apply to Valetudo
+    SLEEPING: "sleeping",          // Sleeping - does not apply to Nimbus
     LOST: "lost",                  // Unclean shutdown - LWT
     ALERT: "alert"                 // Human intervention required - doesn't really apply IMO
 });

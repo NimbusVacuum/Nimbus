@@ -1,4 +1,4 @@
-const ValetudoWifiNetwork = require("../../../entities/core/ValetudoWifiNetwork");
+const NimbusWifiNetwork = require("../../../entities/core/NimbusWifiNetwork");
 const WifiScanCapability = require("../../../core/capabilities/WifiScanCapability");
 
 function getRandomRSSI() {
@@ -21,48 +21,48 @@ class MockWifiScanCapability extends WifiScanCapability {
         }
 
         return [
-            new ValetudoWifiNetwork({
+            new NimbusWifiNetwork({
                 bssid: "23:CF:D7:E0:54:5E",
                 details: {
                     ssid: "SingleAP",
                     signal: getRandomRSSI()
                 }
             }),
-            new ValetudoWifiNetwork({
+            new NimbusWifiNetwork({
                 bssid: "2A:C4:FB:F5:EF:40",
                 details: {
                     ssid: "MultiAP",
                     signal: getRandomRSSI()
                 }
             }),
-            new ValetudoWifiNetwork({
+            new NimbusWifiNetwork({
                 bssid: "AA:A2:21:E8:38:B6",
                 details: {
                     ssid: "MultiAP",
                     signal: getRandomRSSI()
                 }
             }),
-            new ValetudoWifiNetwork({
+            new NimbusWifiNetwork({
                 bssid: "72:87:8F:9D:F1:66",
                 details: {
                     ssid: "ThirtyTwo_CharacterSSID_SendHelp",
                     signal: getRandomRSSI()
                 }
             }),
-            new ValetudoWifiNetwork({
+            new NimbusWifiNetwork({
                 bssid: "66:C6:C5:7D:96:88",
                 details: {
                     ssid: "NoSignal",
                 }
             }),
-            new ValetudoWifiNetwork({
+            new NimbusWifiNetwork({
                 bssid: "AE:02:EE:A8:00:7A",
                 details: {
                     //no ssid
                     signal: getRandomRSSI()
                 }
             }),
-            new ValetudoWifiNetwork({
+            new NimbusWifiNetwork({
                 bssid: "24:77:AF:A3:BF:96",
                 details: {
                     //no details

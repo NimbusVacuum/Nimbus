@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="100"
+   height="95"
+   version="1.1"
+   viewBox="0 0 100 95"
+   id="svg18033"
+   sodipodiDocname="nimbus_logo_small.svg"
+   inkscapeVersion="1.1.2 (b8e25be833, 2022-02-05)"
+   xmlnsInkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlnsSodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlnsXlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlnsSvg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs18037">
+    <linearGradient
+       inkscapeCollect="always"
+       xlinkHref="#linearGradient8204"
+       id="linearGradient8206"
+       x1="11.10372"
+       y1="46.266541"
+       x2="114.95962"
+       y2="46.266541"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.94956165,0,0,1.0498232,-10.012819,-2.1054782)" />
+    <linearGradient
+       inkscapeCollect="always"
+       id="linearGradient8204">
+      <stop
+         style="stop-color:#8affff;stop-opacity:1;"
+         offset="0"
+         id="stop8200" />
+      <stop
+         style="stop-color:#8affff;stop-opacity:0;"
+         offset="1"
+         id="stop8202" />
+    </linearGradient>
+  </defs>
+  <path
+     id="path10000"
+     d="m 40.320884,15.662325 c -7.273933,0 -14.503682,3.562562 -19.647133,9.680427 -3.240576,3.854434 -5.625935,8.693637 -6.948794,13.910216 -3.179611,0.713927 -6.1825512,2.55979 -8.4722936,5.283251 -2.9844556,3.549822 -4.72182147,8.537714 -4.72182147,13.557954 0,5.020285 1.73736587,10.009783 4.72182147,13.559606 2.9844871,3.549825 7.1793186,5.616313 11.3999986,5.616313 h 72.205215 c 2.69407,0 5.372083,-1.318474 7.277053,-3.584236 1.905025,-2.265851 3.013507,-5.451269 3.013507,-8.655701 0,-3.204432 -1.108482,-6.388111 -3.013507,-8.653963 -1.893262,-2.252014 -4.550231,-3.566639 -7.227472,-3.582816 -0.522445,-5.805824 -2.733826,-11.394099 -6.207825,-15.526205 -4.000447,-4.75829 -9.622837,-7.528892 -15.280334,-7.528892 -1.373558,0 -2.744068,0.167517 -4.090784,0.482891 -0.985485,-1.749182 -2.10776,-3.388447 -3.360506,-4.878418 -5.143451,-6.117865 -12.373161,-9.680427 -19.647125,-9.680427 z"
+     style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:url(#linearGradient8206);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.420132px;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+</svg>

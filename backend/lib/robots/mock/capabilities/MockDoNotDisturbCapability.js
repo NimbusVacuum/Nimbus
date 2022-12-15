@@ -1,5 +1,5 @@
 const DoNotDisturbCapability = require("../../../core/capabilities/DoNotDisturbCapability");
-const ValetudoDNDConfiguration = require("../../../entities/core/ValetudoDNDConfiguration");
+const NimbusDNDConfiguration = require("../../../entities/core/NimbusDNDConfiguration");
 
 /**
  * @extends DoNotDisturbCapability<import("../MockRobot")>
@@ -12,7 +12,7 @@ class MockDoNotDisturbCapability extends DoNotDisturbCapability {
     constructor(options) {
         super(options);
 
-        this.dndConfig = new ValetudoDNDConfiguration({
+        this.dndConfig = new NimbusDNDConfiguration({
             enabled: true,
             start: {
                 hour: 22,
@@ -26,14 +26,14 @@ class MockDoNotDisturbCapability extends DoNotDisturbCapability {
     }
 
     /**
-     * @returns {Promise<import("../../../entities/core/ValetudoDNDConfiguration")>}
+     * @returns {Promise<import("../../../entities/core/NimbusDNDConfiguration")>}
      */
     async getDndConfiguration() {
-        return new ValetudoDNDConfiguration(this.dndConfig);
+        return new NimbusDNDConfiguration(this.dndConfig);
     }
 
     /**
-     * @param {import("../../../entities/core/ValetudoDNDConfiguration")} dndConfig
+     * @param {import("../../../entities/core/NimbusDNDConfiguration")} dndConfig
      * @returns {Promise<void>}
      */
     async setDndConfiguration(dndConfig) {

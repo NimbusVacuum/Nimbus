@@ -2,7 +2,7 @@ const MapResetCapability = require("../../../core/capabilities/MapResetCapabilit
 const RobotFirmwareError = require("../../../core/RobotFirmwareError");
 
 /**
- * @extends MapResetCapability<import("../RoborockValetudoRobot")>
+ * @extends MapResetCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockMultiMapMapResetCapability extends MapResetCapability {
     /**
@@ -16,7 +16,6 @@ class RoborockMultiMapMapResetCapability extends MapResetCapability {
         if (this.robot.mapStatus.mapPresent === false) {
             throw new Error("Map doesn't exist. Nothing to reset.");
         }
-
 
         /*
             63 means new map and isn't a proper map slot ID
@@ -33,17 +32,14 @@ class RoborockMultiMapMapResetCapability extends MapResetCapability {
             await this.robot.pollState();
         }
 
-
-
         let res = await this.robot.sendCommand("del_map", [this.robot.mapStatus.mapSlotId], {});
 
         if (!(Array.isArray(res) && res[0] === "ok")) {
             throw new RobotFirmwareError("Failed to reset map: " + res);
         }
 
-        this.robot.clearValetudoMap();
+        this.robot.clearNimbusMap();
     }
 }
-
 
 module.exports = RoborockMultiMapMapResetCapability;

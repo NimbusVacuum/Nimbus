@@ -5,7 +5,7 @@ order: 21
 ---
 # Other Noteworthy Projects
 
-This page lists things that aren't necessarily Valetudo Companion services but might still be interesting to users of Valetudo.
+This page lists things that aren't necessarily Nimbus Companion services but might still be interesting to users of Nimbus.
 
 
 ## Roborock-specific

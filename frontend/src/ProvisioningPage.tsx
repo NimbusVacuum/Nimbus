@@ -20,7 +20,7 @@ import {
     TextField,
     Typography
 } from "@mui/material";
-import {ReactComponent as Logo} from "./assets/icons/valetudo_logo_with_name.svg";
+import {ReactComponent as Logo} from "./assets/icons/nimbus_logo_with_name.svg";
 import React from "react";
 import {
     Refresh as RefreshIcon,
@@ -36,7 +36,7 @@ import {
 import {
     Capability,
     useRobotInformationQuery,
-    useValetudoVersionQuery,
+    useNimbusVersionQuery,
     useWifiConfigurationMutation,
     useWifiScanQuery,
 } from "./api";
@@ -191,8 +191,6 @@ const WifiScan: React.FunctionComponent<{
     );
 };
 
-
-
 const ProvisioningPage = (): JSX.Element => {
     const [wifiScanSupported] = useCapabilitiesSupported(Capability.WifiScan);
     const {
@@ -202,7 +200,7 @@ const ProvisioningPage = (): JSX.Element => {
     const {
         data: version,
         isLoading: versionLoading,
-    } = useValetudoVersionQuery();
+    } = useNimbusVersionQuery();
     const {
         mutate: updateWifiConfiguration,
         isLoading: wifiConfigurationUpdating
@@ -230,7 +228,7 @@ const ProvisioningPage = (): JSX.Element => {
         }
 
         const items: Array<[header: string, body: string]> = [
-            ["Valetudo", version.release],
+            ["Nimbus", version.release],
             ["Manufacturer", robotInformation.manufacturer],
             ["Model", robotInformation.modelName]
         ];
@@ -250,7 +248,6 @@ const ProvisioningPage = (): JSX.Element => {
             </Grid>
         );
     }, [robotInformation, robotInformationLoading, version, versionLoading]);
-
 
     return (
         <>
@@ -288,7 +285,7 @@ const ProvisioningPage = (): JSX.Element => {
                     }}
                     align="center"
                 >
-                    Please join the robot to your Wi-Fi network to start using Valetudo
+                    Please join the robot to your Wi-Fi network to start using Nimbus
                 </Typography>
                 <Divider/>
 

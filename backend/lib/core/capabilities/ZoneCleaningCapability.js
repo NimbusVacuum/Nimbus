@@ -2,16 +2,16 @@ const Capability = require("./Capability");
 const NotImplementedError = require("../NotImplementedError");
 
 /**
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class ZoneCleaningCapability extends Capability {
     /**
      * @abstract
-     * @param {Array<import("../../entities/core/ValetudoZone")>} valetudoZones
+     * @param {Array<import("../../entities/core/NimbusZone")>} nimbusZones
      * @returns {Promise<void>}
      */
-    async start(valetudoZones) {
+    async start(nimbusZones) {
         throw new NotImplementedError();
     }
 

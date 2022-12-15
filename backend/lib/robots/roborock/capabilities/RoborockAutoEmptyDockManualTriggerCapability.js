@@ -1,7 +1,7 @@
 const AutoEmptyDockManualTriggerCapability = require("../../../core/capabilities/AutoEmptyDockManualTriggerCapability");
 
 /**
- * @extends AutoEmptyDockManualTriggerCapability<import("../RoborockValetudoRobot")>
+ * @extends AutoEmptyDockManualTriggerCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockAutoEmptyDockManualTriggerCapability extends AutoEmptyDockManualTriggerCapability {
     async triggerAutoEmpty() {

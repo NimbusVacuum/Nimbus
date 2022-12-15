@@ -39,21 +39,21 @@ class Tools {
         return Buffer.isBuffer(buf) && buf[0] === 0x1f && buf[1] === 0x8b;
     }
 
-    static GET_VALETUDO_VERSION() {
-        let valetudoVersion = "unknown";
+    static GET_NIMBUS_VERSION() {
+        let nimbusVersion = "unknown";
 
         try {
             const rootDirectory = path.resolve(__dirname, "../../..");
             const packageContent = fs.readFileSync(rootDirectory + "/package.json", {"encoding": "utf-8"});
 
             if (packageContent) {
-                valetudoVersion = JSON.parse(packageContent.toString()).version;
+                nimbusVersion = JSON.parse(packageContent.toString()).version;
             }
         } catch (e) {
             //intentional
         }
 
-        return valetudoVersion;
+        return nimbusVersion;
     }
 
     static GET_COMMIT_ID() {
@@ -63,8 +63,8 @@ class Tools {
             const rootDirectory = path.resolve(__dirname, "../../..");
             commitId = fs.readFileSync(rootDirectory + "/.git/HEAD", {"encoding": "utf-8"}).trim();
 
-            if (commitId.match(/^ref: refs\/heads\/master$/) !== null) {
-                commitId = fs.readFileSync(rootDirectory + "/.git/refs/heads/master", {"encoding": "utf-8"}).trim();
+            if (commitId.match(/^ref: refs\/heads\/main$/) !== null) {
+                commitId = fs.readFileSync(rootDirectory + "/.git/refs/heads/main", {"encoding": "utf-8"}).trim();
             }
         } catch (e) {
             //intentional
@@ -91,8 +91,8 @@ class Tools {
                 total: os.totalmem(),
                 free: Tools.GET_FREE_SYSTEM_MEMORY(),
                 //@ts-ignore
-                valetudo_current: process.memoryUsage.rss(),
-                valetudo_max: process.resourceUsage()?.maxRSS * 1024
+                nimbus_current: process.memoryUsage.rss(),
+                nimbus_max: process.resourceUsage()?.maxRSS * 1024
             },
             load: {
                 "1": normalizedLoad[0],
@@ -126,7 +126,7 @@ class Tools {
 
         SYSTEM_ID = uuid.v5(
             macAddresses.join(""),
-            VALETUDO_NAMESPACE
+            NIMBUS_NAMESPACE
         );
 
         return SYSTEM_ID;
@@ -137,7 +137,7 @@ class Tools {
     }
 
     static GET_ZEROCONF_HOSTNAME() {
-        return "valetudo-" + Tools.GET_HUMAN_READABLE_SYSTEM_ID().toLowerCase() + ".local";
+        return "nimbus-" + Tools.GET_HUMAN_READABLE_SYSTEM_ID().toLowerCase() + ".local";
     }
 
     static IS_UPX_COMPRESSED(pathOnDisk) {
@@ -212,6 +212,6 @@ class Tools {
     }
 }
 
-const VALETUDO_NAMESPACE = "be5f1ffc-c150-4785-9ebb-08fcfe90c933";
+const NIMBUS_NAMESPACE = "be5f1ffc-c150-4785-9ebb-08fcfe90c933";
 
 module.exports = Tools;

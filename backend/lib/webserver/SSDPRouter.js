@@ -3,12 +3,11 @@ const jstoxml = require("jstoxml");
 const Logger = require("../Logger");
 const Tools = require("../utils/Tools");
 
-
 class SSDPRouter {
     /**
      *
      * @param {object} options
-     * @param {import("../core/ValetudoRobot")} options.robot
+     * @param {import("../core/NimbusRobot")} options.robot
      * @param {import("../Configuration")} options.config
      */
     constructor(options) {
@@ -20,9 +19,8 @@ class SSDPRouter {
         this.initRoutes();
     }
 
-
     initRoutes() {
-        this.router.get("/valetudo.xml", (req, res) => {
+        this.router.get("/nimbus.xml", (req, res) => {
             Logger.debug(`SSDP: Received device description request from ${req.ip}`);
 
             res.set("Content-Type", "text/xml");
@@ -60,25 +58,25 @@ class SSDPRouter {
                         "deviceType": "urn:schemas-upnp-org:device:Basic:1"
                     },
                     {
-                        "friendlyName": "Valetudo " + this.robot.getModelName()
+                        "friendlyName": "Nimbus " + this.robot.getModelName()
                     },
                     {
                         "manufacturer": this.robot.getManufacturer()
                     },
                     {
-                        "manufacturerURL": "https://valetudo.cloud"
+                        "manufacturerURL": "https://nimbus.cleaning"
                     },
                     {
-                        "modelDescription": "Valetudo-enabled robot"
+                        "modelDescription": "Nimbus-enabled robot"
                     },
                     {
                         "modelName": this.robot.getModelName()
                     },
                     {
-                        "modelNumber": Tools.GET_VALETUDO_VERSION() + " (Valetudo)"
+                        "modelNumber": Tools.GET_NIMBUS_VERSION() + " (Nimbus)"
                     },
                     {
-                        "modelURL": "https://valetudo.cloud"
+                        "modelURL": "https://nimbus.cleaning"
                     },
                     {
                         "UDN": "uuid:" + Tools.GET_SYSTEM_ID()

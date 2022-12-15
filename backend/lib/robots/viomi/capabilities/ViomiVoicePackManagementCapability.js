@@ -1,8 +1,8 @@
-const ValetudoVoicePackOperationStatus = require("../../../entities/core/ValetudoVoicePackOperationStatus");
+const NimbusVoicePackOperationStatus = require("../../../entities/core/NimbusVoicePackOperationStatus");
 const VoicePackManagementCapability = require("../../../core/capabilities/VoicePackManagementCapability");
 
 /**
- * @extends VoicePackManagementCapability<import("../ViomiValetudoRobot")>
+ * @extends VoicePackManagementCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiVoicePackManagementCapability extends VoicePackManagementCapability {
     /**
@@ -44,11 +44,11 @@ class ViomiVoicePackManagementCapability extends VoicePackManagementCapability {
     /**
      * This method should return the status of the current voice pack operation, if one is ongoing.
      *
-     * @returns {Promise<ValetudoVoicePackOperationStatus>}
+     * @returns {Promise<NimbusVoicePackOperationStatus>}
      */
     async getVoicePackOperationStatus() {
         let statusOptions = {
-            type: ValetudoVoicePackOperationStatus.TYPE.IDLE,
+            type: NimbusVoicePackOperationStatus.TYPE.IDLE,
             progress: undefined,
         };
         const res = await this.robot.sendCommand("get_downloadstatus", []);
@@ -58,16 +58,16 @@ class ViomiVoicePackManagementCapability extends VoicePackManagementCapability {
             // noinspection JSUnresolvedVariable
             if (res.progress === 100 || res.targetVoice === "en" || res.targetVoice === "zh") {
                 // en and zh are built-in and won't be downloaded, even if a URL is provided.
-                statusOptions.type = ValetudoVoicePackOperationStatus.TYPE.INSTALLING;
+                statusOptions.type = NimbusVoicePackOperationStatus.TYPE.INSTALLING;
             } else {
-                statusOptions.type = ValetudoVoicePackOperationStatus.TYPE.DOWNLOADING;
+                statusOptions.type = NimbusVoicePackOperationStatus.TYPE.DOWNLOADING;
             }
             // noinspection JSUnresolvedVariable
             statusOptions.progress = res.progress;
         }
 
         // noinspection JSUnresolvedVariable
-        return new ValetudoVoicePackOperationStatus(statusOptions);
+        return new NimbusVoicePackOperationStatus(statusOptions);
     }
 }
 

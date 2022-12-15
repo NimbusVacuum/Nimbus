@@ -2,13 +2,13 @@ const CarpetModeControlCapability = require("../../../core/capabilities/CarpetMo
 const DreameMiotHelper = require("../DreameMiotHelper");
 
 /**
- * @extends CarpetModeControlCapability<import("../DreameValetudoRobot")>
+ * @extends CarpetModeControlCapability<import("../DreameNimbusRobot")>
  */
 class DreameCarpetModeControlCapability extends CarpetModeControlCapability {
 
     /**
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {number} options.siid MIOT Service ID
      * @param {number} options.piid MIOT Property ID

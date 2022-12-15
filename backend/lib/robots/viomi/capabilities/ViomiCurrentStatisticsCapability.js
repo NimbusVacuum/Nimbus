@@ -1,13 +1,13 @@
 const CurrentStatisticsCapability = require("../../../core/capabilities/CurrentStatisticsCapability");
-const ValetudoDataPoint = require("../../../entities/core/ValetudoDataPoint");
+const NimbusDataPoint = require("../../../entities/core/NimbusDataPoint");
 
 /**
- * @extends CurrentStatisticsCapability<import("../ViomiValetudoRobot")>
+ * @extends CurrentStatisticsCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiCurrentStatisticsCapability extends CurrentStatisticsCapability {
     /**
      * @param {object} options
-     * @param {import("../ViomiValetudoRobot")} options.robot
+     * @param {import("../ViomiNimbusRobot")} options.robot
      */
     constructor(options) {
         super(options);
@@ -19,18 +19,18 @@ class ViomiCurrentStatisticsCapability extends CurrentStatisticsCapability {
     }
 
     /**
-     * @return {Promise<Array<ValetudoDataPoint>>}
+     * @return {Promise<Array<NimbusDataPoint>>}
      */
     async getStatistics() {
         await this.robot.pollState(); //fetching robot state populates the capability's internal state. somewhat spaghetti :(
 
         return [
-            new ValetudoDataPoint({
-                type: ValetudoDataPoint.TYPES.TIME,
+            new NimbusDataPoint({
+                type: NimbusDataPoint.TYPES.TIME,
                 value: this.currentStatistics.time
             }),
-            new ValetudoDataPoint({
-                type: ValetudoDataPoint.TYPES.AREA,
+            new NimbusDataPoint({
+                type: NimbusDataPoint.TYPES.AREA,
                 value: this.currentStatistics.area
             })
         ];
@@ -39,8 +39,8 @@ class ViomiCurrentStatisticsCapability extends CurrentStatisticsCapability {
     getProperties() {
         return {
             availableStatistics: [
-                ValetudoDataPoint.TYPES.TIME,
-                ValetudoDataPoint.TYPES.AREA
+                NimbusDataPoint.TYPES.TIME,
+                NimbusDataPoint.TYPES.AREA
             ]
         };
     }

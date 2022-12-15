@@ -1,13 +1,13 @@
 const ManualControlCapability = require("../../../core/capabilities/ManualControlCapability");
 
 /**
- * @extends ManualControlCapability<import("../RoborockValetudoRobot")>
+ * @extends ManualControlCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockManualControlCapability extends ManualControlCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../RoborockValetudoRobot")} options.robot
+     * @param {import("../RoborockNimbusRobot")} options.robot
      * @class
      */
     constructor(options) {
@@ -52,7 +52,7 @@ class RoborockManualControlCapability extends ManualControlCapability {
     }
 
     /**
-     * @param {import("../../../core/capabilities/ManualControlCapability").ValetudoManualControlMovementCommandType} movementCommand
+     * @param {import("../../../core/capabilities/ManualControlCapability").NimbusManualControlMovementCommandType} movementCommand
      * @returns {Promise<void>}
      */
     async manualControl(movementCommand) {
@@ -84,7 +84,6 @@ class RoborockManualControlCapability extends ManualControlCapability {
             default:
                 throw new Error("Invalid movementCommand.");
         }
-
 
         return this.robot.sendCommand("app_rc_move", [{
             omega: angle,

@@ -1,7 +1,7 @@
 const OperationModeControlCapability = require("../../../core/capabilities/OperationModeControlCapability");
 
 /**
- * @extends OperationModeControlCapability<import("../ViomiValetudoRobot")>
+ * @extends OperationModeControlCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiOperationModeControlCapability extends OperationModeControlCapability {
     /**

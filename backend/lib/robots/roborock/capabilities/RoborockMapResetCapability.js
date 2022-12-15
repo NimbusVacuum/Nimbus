@@ -2,7 +2,7 @@ const MapResetCapability = require("../../../core/capabilities/MapResetCapabilit
 const RobotFirmwareError = require("../../../core/RobotFirmwareError");
 
 /**
- * @extends MapResetCapability<import("../RoborockValetudoRobot")>
+ * @extends MapResetCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockMapResetCapability extends MapResetCapability {
     /**
@@ -15,7 +15,7 @@ class RoborockMapResetCapability extends MapResetCapability {
             throw new RobotFirmwareError("Failed to reset map: " + res);
         }
 
-        this.robot.clearValetudoMap();
+        this.robot.clearNimbusMap();
     }
 }
 

@@ -27,7 +27,7 @@ const BlockTypes = {
 class RoborockMapParser {
     /**
      * @param {Buffer} mapBuf Should contain map in RRMap Format
-     * @returns {null|import("../../entities/map/ValetudoMap")}
+     * @returns {null|import("../../entities/map/NimbusMap")}
      */
     static PARSE(mapBuf){
         if (mapBuf[0x00] === 0x72 && mapBuf[0x01] === 0x72) {// rr
@@ -100,7 +100,6 @@ class RoborockMapParser {
 
         return result;
     }
-
 
     /**
      * @param {Block} block
@@ -330,7 +329,7 @@ class RoborockMapParser {
      *
      * @param {object} metaData
      * @param {object} blocks
-     * @returns {null|import("../../entities/map/ValetudoMap")}
+     * @returns {null|import("../../entities/map/NimbusMap")}
      */
     static POST_PROCESS_BLOCKS(metaData, blocks) {
         if (blocks[BlockTypes.IMAGE] && blocks[BlockTypes.IMAGE].pixels) { //We need the image to flip everything else correctly
@@ -378,7 +377,7 @@ class RoborockMapParser {
             });
 
             if (blocks[BlockTypes.PATH]) {
-                const points = TransformRoborockCoordinateArraysToValetudoCoordinateArrays(blocks[BlockTypes.PATH].points);
+                const points = TransformRoborockCoordinateArraysToNimbusCoordinateArrays(blocks[BlockTypes.PATH].points);
 
                 //Fallback angle calculation from path if it's not part of the position block
                 if (
@@ -406,7 +405,7 @@ class RoborockMapParser {
             }
 
             if (blocks[BlockTypes.GOTO_PREDICTED_PATH]) {
-                const predictedPathPoints = TransformRoborockCoordinateArraysToValetudoCoordinateArrays(blocks[BlockTypes.GOTO_PREDICTED_PATH].points);
+                const predictedPathPoints = TransformRoborockCoordinateArraysToNimbusCoordinateArrays(blocks[BlockTypes.GOTO_PREDICTED_PATH].points);
 
                 if (predictedPathPoints?.length > 0) {
                     entities.push(new Map.PathMapEntity({
@@ -461,7 +460,7 @@ class RoborockMapParser {
 
             if (blocks[BlockTypes.CURRENTLY_CLEANED_ZONES]) {
                 blocks[BlockTypes.CURRENTLY_CLEANED_ZONES].forEach(zone => {
-                    zone = TransformRoborockCoordinateArraysToValetudoCoordinateArrays(zone);
+                    zone = TransformRoborockCoordinateArraysToNimbusCoordinateArrays(zone);
 
                     //Roborock specifies zones with only two coordinates so we need to add the missing ones
                     entities.push(new Map.PolygonMapEntity({
@@ -483,7 +482,7 @@ class RoborockMapParser {
             if (blocks[BlockTypes.NO_GO_AREAS]) {
                 blocks[BlockTypes.NO_GO_AREAS].forEach(area => {
                     entities.push(new Map.PolygonMapEntity({
-                        points: TransformRoborockCoordinateArraysToValetudoCoordinateArrays(area),
+                        points: TransformRoborockCoordinateArraysToNimbusCoordinateArrays(area),
                         type: Map.PolygonMapEntity.TYPE.NO_GO_AREA
                     }));
                 });
@@ -492,7 +491,7 @@ class RoborockMapParser {
             if (blocks[BlockTypes.NO_MOP_AREAS]) {
                 blocks[BlockTypes.NO_MOP_AREAS].forEach(area => {
                     entities.push(new Map.PolygonMapEntity({
-                        points: TransformRoborockCoordinateArraysToValetudoCoordinateArrays(area),
+                        points: TransformRoborockCoordinateArraysToNimbusCoordinateArrays(area),
                         type: Map.PolygonMapEntity.TYPE.NO_MOP_AREA
                     }));
                 });
@@ -501,13 +500,13 @@ class RoborockMapParser {
             if (blocks[BlockTypes.VIRTUAL_WALLS]) {
                 blocks[BlockTypes.VIRTUAL_WALLS].forEach(wall => {
                     entities.push(new Map.LineMapEntity({
-                        points: TransformRoborockCoordinateArraysToValetudoCoordinateArrays(wall),
+                        points: TransformRoborockCoordinateArraysToNimbusCoordinateArrays(wall),
                         type: Map.LineMapEntity.TYPE.VIRTUAL_WALL
                     }));
                 });
             }
 
-            return new Map.ValetudoMap({
+            return new Map.NimbusMap({
                 metaData: {
                     vendorMapId: metaData.map_index
                 },
@@ -525,7 +524,7 @@ class RoborockMapParser {
     }
 }
 
-function TransformRoborockCoordinateArraysToValetudoCoordinateArrays(points) {
+function TransformRoborockCoordinateArraysToNimbusCoordinateArrays(points) {
     return points.map((p, i) => {
         if (i % 2 === 0) {
             return Math.round(p/10);

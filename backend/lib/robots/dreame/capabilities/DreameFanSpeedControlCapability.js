@@ -2,14 +2,14 @@ const DreameMiotHelper = require("../DreameMiotHelper");
 const FanSpeedControlCapability = require("../../../core/capabilities/FanSpeedControlCapability");
 
 /**
- * @extends FanSpeedControlCapability<import("../DreameValetudoRobot")>
+ * @extends FanSpeedControlCapability<import("../DreameNimbusRobot")>
  */
 class DreameFanSpeedControlCapability extends FanSpeedControlCapability {
 
     /**
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
-     * @param {Array<import("../../../entities/core/ValetudoSelectionPreset")>} options.presets
+     * @param {import("../DreameNimbusRobot")} options.robot
+     * @param {Array<import("../../../entities/core/NimbusSelectionPreset")>} options.presets
      *
      * @param {number} options.siid MIOT Service ID
      * @param {number} options.piid MIOT Property ID

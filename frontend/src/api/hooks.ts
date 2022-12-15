@@ -42,10 +42,10 @@ import {
     fetchTotalStatistics,
     fetchTotalStatisticsProperties,
     fetchUpdaterState,
-    fetchValetudoEvents,
-    fetchValetudoVersionInformation,
-    fetchValetudoLog,
-    fetchValetudoLogLevel,
+    fetchNimbusEvents,
+    fetchNimbusVersionInformation,
+    fetchNimbusLog,
+    fetchNimbusLogLevel,
     fetchVoicePackManagementState,
     fetchWifiStatus,
     fetchZoneProperties,
@@ -76,15 +76,15 @@ import {
     sendTimerCreation,
     sendTimerUpdate,
     sendUpdaterCommand,
-    sendValetudoEventInteraction,
-    sendValetudoLogLevel,
+    sendNimbusEventInteraction,
+    sendNimbusLogLevel,
     sendVoicePackManagementCommand,
     sendWifiConfiguration,
     subscribeToLogMessages,
     subscribeToMap,
     subscribeToStateAttributes,
     updatePresetSelection,
-    fetchValetudoInformation,
+    fetchNimbusInformation,
     fetchQuirks,
     sendSetQuirkValueCommand,
     fetchRobotProperties,
@@ -124,7 +124,7 @@ import {
     Point,
     SetLogLevelRequest,
     Timer,
-    ValetudoEventInteractionContext,
+    NimbusEventInteractionContext,
     VoicePackManagementCommand,
     WifiConfiguration,
     Zone,
@@ -142,8 +142,8 @@ enum CacheKey {
     MapSegmentationProperties = "map_segmentation_properties",
     PersistentData = "persistent_data",
     RobotInformation = "robot_information",
-    ValetudoInformation = "valetudo_information",
-    ValetudoVersion = "valetudo_version",
+    NimbusInformation = "nimbus_information",
+    NimbusVersion = "nimbus_version",
     CarpetMode = "carpet_mode",
     SpeakerVolume = "speaker_volume",
     VoicePackManagement = "voice_pack",
@@ -159,7 +159,7 @@ enum CacheKey {
     NTPClientConfiguration = "ntp_client_configuration",
     Timers = "timers",
     TimerProperties = "timer_properties",
-    ValetudoEvents = "valetudo_events",
+    NimbusEvents = "nimbus_events",
     Log = "log",
     LogLevel = "log_level",
     KeyLockInformation = "key_lock",
@@ -534,7 +534,7 @@ export const useConsumableStateQuery = () => {
     return useQuery(CacheKey.Consumables, fetchConsumableStateInformation);
 };
 
-const useValetudoFetchingMutation = <TData, TVariables>(onError: ((error: unknown) => void), cacheKey: CacheKey, mutationFn: MutationFunction<TData, TVariables>) => {
+const useNimbusFetchingMutation = <TData, TVariables>(onError: ((error: unknown) => void), cacheKey: CacheKey, mutationFn: MutationFunction<TData, TVariables>) => {
     const queryClient = useQueryClient();
 
     return useMutation(
@@ -551,7 +551,7 @@ const useValetudoFetchingMutation = <TData, TVariables>(onError: ((error: unknow
 };
 
 export const useConsumableResetMutation = () => {
-    return useValetudoFetchingMutation(
+    return useNimbusFetchingMutation(
         useOnCommandError(Capability.ConsumableMonitoring),
         CacheKey.Consumables,
         (parameters: ConsumableId) => {
@@ -572,14 +572,14 @@ export const useRobotInformationQuery = () => {
     });
 };
 
-export const useValetudoInformationQuery = () => {
-    return useQuery(CacheKey.ValetudoInformation, fetchValetudoInformation, {
+export const useNimbusInformationQuery = () => {
+    return useQuery(CacheKey.NimbusInformation, fetchNimbusInformation, {
         staleTime: Infinity,
     });
 };
 
-export const useValetudoVersionQuery = () => {
-    return useQuery(CacheKey.ValetudoVersion, fetchValetudoVersionInformation, {
+export const useNimbusVersionQuery = () => {
+    return useQuery(CacheKey.NimbusVersion, fetchNimbusVersionInformation, {
         staleTime: Infinity,
     });
 };
@@ -599,7 +599,7 @@ export const useMQTTConfigurationQuery = () => {
 };
 
 export const useMQTTConfigurationMutation = () => {
-    return useValetudoFetchingMutation(
+    return useNimbusFetchingMutation(
         useOnSettingsChangeError("MQTT"),
         CacheKey.MQTTConfiguration,
         (mqttConfiguration: MQTTConfiguration) => {
@@ -628,7 +628,7 @@ export const useHTTPBasicAuthConfigurationQuery = () => {
 };
 
 export const useHTTPBasicAuthConfigurationMutation = () => {
-    return useValetudoFetchingMutation(
+    return useNimbusFetchingMutation(
         useOnSettingsChangeError("HTTP Basic Auth"),
         CacheKey.HTTPBasicAuth,
         (configuration: HTTPBasicAuthConfiguration) => {
@@ -644,7 +644,7 @@ export const useNetworkAdvertisementConfigurationQuery = () => {
 };
 
 export const useNetworkAdvertisementConfigurationMutation = () => {
-    return useValetudoFetchingMutation(
+    return useNimbusFetchingMutation(
         useOnSettingsChangeError("Network Advertisement"),
         CacheKey.NetworkAdvertisementConfiguration,
         (networkAdvertisementConfiguration: NetworkAdvertisementConfiguration) => {
@@ -705,7 +705,7 @@ export const useTimerPropertiesQuery = () => {
 };
 
 export const useTimerCreationMutation = () => {
-    return useValetudoFetchingMutation(
+    return useNimbusFetchingMutation(
         useOnSettingsChangeError("Timer"),
         CacheKey.Timers,
         (timer: Timer) => {
@@ -715,7 +715,7 @@ export const useTimerCreationMutation = () => {
 };
 
 export const useTimerModificationMutation = () => {
-    return useValetudoFetchingMutation(
+    return useNimbusFetchingMutation(
         useOnSettingsChangeError("Timer"),
         CacheKey.Timers,
         (timer: Timer) => {
@@ -725,7 +725,7 @@ export const useTimerModificationMutation = () => {
 };
 
 export const useTimerDeletionMutation = () => {
-    return useValetudoFetchingMutation(
+    return useNimbusFetchingMutation(
         useOnSettingsChangeError("Timer"),
         CacheKey.Timers,
         (timerId: string) => {
@@ -734,46 +734,46 @@ export const useTimerDeletionMutation = () => {
     );
 };
 
-export const useValetudoEventsQuery = () => {
-    return useQuery(CacheKey.ValetudoEvents, fetchValetudoEvents, {
+export const useNimbusEventsQuery = () => {
+    return useQuery(CacheKey.NimbusEvents, fetchNimbusEvents, {
         staleTime: 30_000,
         refetchInterval: 30_000
     });
 };
 
-export const useValetudoEventsInteraction = () => {
-    return useValetudoFetchingMutation(
-        useOnSettingsChangeError("Valetudo Events"),
-        CacheKey.ValetudoEvents,
-        (interaction: ValetudoEventInteractionContext) => {
-            return sendValetudoEventInteraction(interaction).then(fetchValetudoEvents);
+export const useNimbusEventsInteraction = () => {
+    return useNimbusFetchingMutation(
+        useOnSettingsChangeError("Nimbus Events"),
+        CacheKey.NimbusEvents,
+        (interaction: NimbusEventInteractionContext) => {
+            return sendNimbusEventInteraction(interaction).then(fetchNimbusEvents);
         }
     );
 };
 
-export function useValetudoLogQuery(): UseQueryResult<string>;
-export function useValetudoLogQuery<T>(
+export function useNimbusLogQuery(): UseQueryResult<string>;
+export function useNimbusLogQuery<T>(
     select: (status: StatusState) => T
 ): UseQueryResult<T>;
-export function useValetudoLogQuery() {
+export function useNimbusLogQuery() {
     useSSECacheAppender(CacheKey.Log, subscribeToLogMessages);
-    return useQuery(CacheKey.Log, fetchValetudoLog, {
+    return useQuery(CacheKey.Log, fetchNimbusLog, {
         staleTime: Infinity,
     });
 }
 
 export const useLogLevelQuery = () => {
-    return useQuery(CacheKey.LogLevel, fetchValetudoLogLevel, {
+    return useQuery(CacheKey.LogLevel, fetchNimbusLogLevel, {
         staleTime: Infinity
     });
 };
 
 export const useLogLevelMutation = () => {
-    return useValetudoFetchingMutation(
+    return useNimbusFetchingMutation(
         useOnSettingsChangeError("Log level"),
         CacheKey.LogLevel,
         (logLevel: SetLogLevelRequest) => {
-            return sendValetudoLogLevel(logLevel).then(fetchValetudoLogLevel);
+            return sendNimbusLogLevel(logLevel).then(fetchNimbusLogLevel);
         }
     );
 };
@@ -785,7 +785,7 @@ export const usePersistentDataQuery = () => {
 };
 
 export const usePersistentDataMutation = () => {
-    return useValetudoFetchingMutation(
+    return useNimbusFetchingMutation(
         useOnCommandError(Capability.PersistentMapControl),
         CacheKey.PersistentData,
         (enable: boolean) => {
@@ -823,7 +823,7 @@ export const useSpeakerVolumeStateQuery = () => {
 };
 
 export const useSpeakerVolumeMutation = () => {
-    return useValetudoFetchingMutation(
+    return useNimbusFetchingMutation(
         useOnCommandError(Capability.SpeakerVolumeControl),
         CacheKey.SpeakerVolume,
         (volume: number) => {
@@ -845,7 +845,7 @@ export const useVoicePackManagementStateQuery = () => {
 };
 
 export const useVoicePackManagementMutation = () => {
-    return useValetudoFetchingMutation(
+    return useNimbusFetchingMutation(
         useOnCommandError(Capability.VoicePackManagement),
         CacheKey.VoicePackManagement,
         (command: VoicePackManagementCommand) => {
@@ -861,7 +861,7 @@ export const useKeyLockStateQuery = () => {
 };
 
 export const useKeyLockStateMutation = () => {
-    return useValetudoFetchingMutation(
+    return useNimbusFetchingMutation(
         useOnCommandError(Capability.KeyLock),
         CacheKey.KeyLockInformation,
         (enable: boolean) => {
@@ -877,7 +877,7 @@ export const useCarpetModeStateQuery = () => {
 };
 
 export const useCarpetModeStateMutation = () => {
-    return useValetudoFetchingMutation(
+    return useNimbusFetchingMutation(
         useOnCommandError(Capability.CarpetModeControl),
         CacheKey.CarpetMode,
         (enable: boolean) => {
@@ -893,7 +893,7 @@ export const useAutoEmptyDockAutoEmptyControlQuery = () => {
 };
 
 export const useAutoEmptyDockAutoEmptyControlMutation = () => {
-    return useValetudoFetchingMutation(
+    return useNimbusFetchingMutation(
         useOnCommandError(Capability.AutoEmptyDockAutoEmptyControl),
         CacheKey.AutoEmptyDockAutoEmpty,
         (enable: boolean) => {
@@ -909,7 +909,7 @@ export const useDoNotDisturbConfigurationQuery = () => {
 };
 
 export const useDoNotDisturbConfigurationMutation = () => {
-    return useValetudoFetchingMutation(
+    return useNimbusFetchingMutation(
         useOnCommandError(Capability.DoNotDisturb),
         CacheKey.DoNotDisturb,
         (configuration: DoNotDisturbConfiguration) => {
@@ -958,7 +958,6 @@ export const useWifiScanQuery = () => {
     });
 };
 
-
 export const useManualControlStateQuery = () => {
     return useQuery(CacheKey.ManualControl, fetchManualControlState, {
         staleTime: 10_000,
@@ -973,7 +972,7 @@ export const useManualControlPropertiesQuery = () => {
 };
 
 export const useManualControlInteraction = () => {
-    return useValetudoFetchingMutation(
+    return useNimbusFetchingMutation(
         useOnCommandError(Capability.ManualControl),
         CacheKey.ManualControl,
         (interaction: ManualControlInteraction) => {

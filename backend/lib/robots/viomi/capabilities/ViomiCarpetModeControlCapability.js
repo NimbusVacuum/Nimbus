@@ -3,12 +3,12 @@ const fs = require("fs");
 const readline = require("readline");
 
 /**
- * @extends CarpetModeControlCapability<import("../ViomiValetudoRobot")>
+ * @extends CarpetModeControlCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiCarpetModeControlCapability extends CarpetModeControlCapability {
     /**
      * @param {object} options
-     * @param {import("../ViomiValetudoRobot")} options.robot
+     * @param {import("../ViomiNimbusRobot")} options.robot
      * @param {string} [options.carpetConfigFile]
      */
     constructor(options) {
@@ -53,7 +53,7 @@ class ViomiCarpetModeControlCapability extends CarpetModeControlCapability {
             }
         }
 
-        throw new Error("Carpet turbo state cannot be remembered by Valetudo. " +
+        throw new Error("Carpet turbo state cannot be remembered by Nimbus. " +
             "If you don't remember what you set it to, set it again.");
     }
 

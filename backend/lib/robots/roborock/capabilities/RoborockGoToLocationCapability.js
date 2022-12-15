@@ -2,19 +2,19 @@ const GoToLocationCapability = require("../../../core/capabilities/GoToLocationC
 const RoborockMapParser = require("../RoborockMapParser");
 
 /**
- * @extends GoToLocationCapability<import("../RoborockValetudoRobot")>
+ * @extends GoToLocationCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockGoToLocationCapability extends GoToLocationCapability {
     /**
-     * @param {import("../../../entities/core/ValetudoGoToLocation")} valetudoGoToLocation
+     * @param {import("../../../entities/core/NimbusGoToLocation")} nimbusGoToLocation
      * @returns {Promise<void>}
      */
-    async goTo(valetudoGoToLocation) {
+    async goTo(nimbusGoToLocation) {
         await this.robot.sendCommand(
             "app_goto_target",
             [
-                Math.floor(valetudoGoToLocation.coordinates.x * 10),
-                Math.floor(RoborockMapParser.DIMENSION_MM - valetudoGoToLocation.coordinates.y * 10)
+                Math.floor(nimbusGoToLocation.coordinates.x * 10),
+                Math.floor(RoborockMapParser.DIMENSION_MM - nimbusGoToLocation.coordinates.y * 10)
             ],
             {}
         );

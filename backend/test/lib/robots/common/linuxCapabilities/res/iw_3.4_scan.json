@@ -1,6 +1,6 @@
 [
   {
-    "__class": "ValetudoWifiNetwork",
+    "__class": "NimbusWifiNetwork",
     "metaData": {},
     "bssid": "18:64:72:d6:dd:23",
     "details": {
@@ -9,7 +9,7 @@
     }
   },
   {
-    "__class": "ValetudoWifiNetwork",
+    "__class": "NimbusWifiNetwork",
     "metaData": {},
     "bssid": "44:4e:6d:4f:32:d7",
     "details": {
@@ -18,7 +18,7 @@
     }
   },
   {
-    "__class": "ValetudoWifiNetwork",
+    "__class": "NimbusWifiNetwork",
     "metaData": {},
     "bssid": "48:4e:fc:ad:55:d5",
     "details": {
@@ -27,7 +27,7 @@
     }
   },
   {
-    "__class": "ValetudoWifiNetwork",
+    "__class": "NimbusWifiNetwork",
     "metaData": {},
     "bssid": "86:5c:44:82:83:7d",
     "details": {
@@ -36,7 +36,7 @@
     }
   },
   {
-    "__class": "ValetudoWifiNetwork",
+    "__class": "NimbusWifiNetwork",
     "metaData": {},
     "bssid": "8a:5c:44:82:83:7d",
     "details": {
@@ -45,7 +45,7 @@
     }
   },
   {
-    "__class": "ValetudoWifiNetwork",
+    "__class": "NimbusWifiNetwork",
     "metaData": {},
     "bssid": "18:64:72:d6:dd:21",
     "details": {
@@ -54,7 +54,7 @@
     }
   },
   {
-    "__class": "ValetudoWifiNetwork",
+    "__class": "NimbusWifiNetwork",
     "metaData": {},
     "bssid": "18:64:72:d6:d9:a3",
     "details": {
@@ -63,7 +63,7 @@
     }
   },
   {
-    "__class": "ValetudoWifiNetwork",
+    "__class": "NimbusWifiNetwork",
     "metaData": {},
     "bssid": "98:da:c4:3d:af:e4",
     "details": {
@@ -71,7 +71,7 @@
     }
   },
   {
-    "__class": "ValetudoWifiNetwork",
+    "__class": "NimbusWifiNetwork",
     "metaData": {},
     "bssid": "18:64:72:d6:dd:20",
     "details": {
@@ -80,7 +80,7 @@
     }
   },
   {
-    "__class": "ValetudoWifiNetwork",
+    "__class": "NimbusWifiNetwork",
     "metaData": {},
     "bssid": "18:64:72:d6:dd:22",
     "details": {
@@ -89,7 +89,7 @@
     }
   },
   {
-    "__class": "ValetudoWifiNetwork",
+    "__class": "NimbusWifiNetwork",
     "metaData": {},
     "bssid": "18:64:72:d6:d9:a0",
     "details": {
@@ -98,7 +98,7 @@
     }
   },
   {
-    "__class": "ValetudoWifiNetwork",
+    "__class": "NimbusWifiNetwork",
     "metaData": {},
     "bssid": "18:64:72:d6:d9:a1",
     "details": {
@@ -107,7 +107,7 @@
     }
   },
   {
-    "__class": "ValetudoWifiNetwork",
+    "__class": "NimbusWifiNetwork",
     "metaData": {},
     "bssid": "18:64:72:d6:d9:a2",
     "details": {
@@ -116,7 +116,7 @@
     }
   },
   {
-    "__class": "ValetudoWifiNetwork",
+    "__class": "NimbusWifiNetwork",
     "metaData": {},
     "bssid": "90:5c:44:82:83:7d",
     "details": {
@@ -125,7 +125,7 @@
     }
   },
   {
-    "__class": "ValetudoWifiNetwork",
+    "__class": "NimbusWifiNetwork",
     "metaData": {},
     "bssid": "a8:f5:ac:5a:ac:c2",
     "details": {
@@ -134,7 +134,7 @@
     }
   },
   {
-    "__class": "ValetudoWifiNetwork",
+    "__class": "NimbusWifiNetwork",
     "metaData": {},
     "bssid": "a8:f5:ac:5a:ac:c0",
     "details": {

@@ -11,7 +11,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ValetudoVirtualRestrictions"
+                "$ref": "#/components/schemas/NimbusVirtualRestrictions"
               }
             }
           }
@@ -27,7 +27,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/ValetudoVirtualRestrictions"
+              "$ref": "#/components/schemas/NimbusVirtualRestrictions"
             },
             "examples": {
               "wall_regular_mop":{

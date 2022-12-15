@@ -1,9 +1,9 @@
 const Logger = require("../Logger");
-const ValetudoFullCleanupTimerAction = require("./actions/ValetudoFullCleanupTimerAction");
-const ValetudoNTPClientDisabledState = require("../entities/core/ntpClient/ValetudoNTPClientDisabledState");
-const ValetudoNTPClientSyncedState = require("../entities/core/ntpClient/ValetudoNTPClientSyncedState");
-const ValetudoSegmentCleanupTimerAction = require("./actions/ValetudoSegmentCleanupTimerAction");
-const ValetudoTimer = require("../entities/core/ValetudoTimer");
+const NimbusFullCleanupTimerAction = require("./actions/NimbusFullCleanupTimerAction");
+const NimbusNTPClientDisabledState = require("../entities/core/ntpClient/NimbusNTPClientDisabledState");
+const NimbusNTPClientSyncedState = require("../entities/core/ntpClient/NimbusNTPClientSyncedState");
+const NimbusSegmentCleanupTimerAction = require("./actions/NimbusSegmentCleanupTimerAction");
+const NimbusTimer = require("../entities/core/NimbusTimer");
 
 const MS_PER_MIN = 60 * 1000;
 
@@ -11,7 +11,7 @@ class Scheduler {
     /**
      * @param {object} options
      * @param {import("../Configuration")} options.config
-     * @param {import("../core/ValetudoRobot")} options.robot
+     * @param {import("../core/NimbusRobot")} options.robot
      * @param {import("../NTPClient")} options.ntpClient
      */
     constructor(options) {
@@ -30,8 +30,8 @@ class Scheduler {
     evaluateTimers() {
         if (
             !(
-                this.ntpClient.state instanceof ValetudoNTPClientSyncedState ||
-                this.ntpClient.state instanceof ValetudoNTPClientDisabledState
+                this.ntpClient.state instanceof NimbusNTPClientSyncedState ||
+                this.ntpClient.state instanceof NimbusNTPClientDisabledState
             ) && this.config.get("embedded") === true
         ) {
             // Since some robots have no rtc, we absolutely require a synced time when embedded
@@ -63,7 +63,7 @@ class Scheduler {
                 minute: checkDate.getUTCMinutes(),
             };
 
-            Object.values(timers).forEach(/** @type {import("../entities/core/ValetudoTimer")} */ timerDefinition => {
+            Object.values(timers).forEach(/** @type {import("../entities/core/NimbusTimer")} */ timerDefinition => {
                 if (
                     timerDefinition.enabled === true &&
                     timerDefinition.dow.includes(checkTime.dow) &&
@@ -80,17 +80,17 @@ class Scheduler {
     }
 
     /**
-     * @param {import("../entities/core/ValetudoTimer")} timerDefinition
+     * @param {import("../entities/core/NimbusTimer")} timerDefinition
      */
     executeTimer(timerDefinition) {
         let action;
 
         switch (timerDefinition.action?.type) {
-            case ValetudoTimer.ACTION_TYPE.FULL_CLEANUP:
-                action = new ValetudoFullCleanupTimerAction({robot: this.robot});
+            case NimbusTimer.ACTION_TYPE.FULL_CLEANUP:
+                action = new NimbusFullCleanupTimerAction({robot: this.robot});
                 break;
-            case ValetudoTimer.ACTION_TYPE.SEGMENT_CLEANUP:
-                action = new ValetudoSegmentCleanupTimerAction({
+            case NimbusTimer.ACTION_TYPE.SEGMENT_CLEANUP:
+                action = new NimbusSegmentCleanupTimerAction({
                     robot: this.robot,
                     segmentIds: timerDefinition.action?.params?.segment_ids,
                     iterations: timerDefinition.action?.params?.iterations,

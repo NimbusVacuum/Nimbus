@@ -1,9 +1,9 @@
-title: Valetudo
+title: Nimbus
 description: >-
   Open source cloud replacement for vacuum robots enabling local-only operation
 baseurl: ""
-url: https://valetudo.cloud
-github_username: Hypfer
+url: https://nimbus.cleaning
+github_username: NimbusVacuum
 
 plugins:
   - jekyll-seo-tag

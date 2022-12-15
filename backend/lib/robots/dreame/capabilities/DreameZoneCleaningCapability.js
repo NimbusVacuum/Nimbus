@@ -5,13 +5,13 @@ const DreameMiotHelper = require("../DreameMiotHelper");
 const entities = require("../../../entities");
 
 /**
- * @extends ZoneCleaningCapability<import("../DreameValetudoRobot")>
+ * @extends ZoneCleaningCapability<import("../DreameNimbusRobot")>
  */
 class DreameZoneCleaningCapability extends ZoneCleaningCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {object} options.miot_actions
      * @param {object} options.miot_actions.start
@@ -40,12 +40,11 @@ class DreameZoneCleaningCapability extends ZoneCleaningCapability {
         this.helper = new DreameMiotHelper({robot: this.robot});
     }
 
-
     /**
-     * @param {Array<import("../../../entities/core/ValetudoZone")>} valetudoZones
+     * @param {Array<import("../../../entities/core/NimbusZone")>} nimbusZones
      * @returns {Promise<void>}
      */
-    async start(valetudoZones) {
+    async start(nimbusZones) {
         const FanSpeedStateAttribute = this.robot.state.getFirstMatchingAttribute({
             attributeClass: entities.state.attributes.PresetSelectionStateAttribute.name,
             attributeType: entities.state.attributes.PresetSelectionStateAttribute.TYPE.FAN_SPEED
@@ -60,7 +59,7 @@ class DreameZoneCleaningCapability extends ZoneCleaningCapability {
 
         const zones = [];
 
-        valetudoZones.forEach((vZ, i) => {
+        nimbusZones.forEach((vZ, i) => {
             const pA = DreameMapParser.CONVERT_TO_DREAME_COORDINATES(vZ.points.pA.x, vZ.points.pA.y);
             const pC = DreameMapParser.CONVERT_TO_DREAME_COORDINATES(vZ.points.pC.x, vZ.points.pC.y);
 

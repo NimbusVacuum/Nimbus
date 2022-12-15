@@ -1,0 +1,13 @@
+{
+  "components": {
+    "schemas": {
+      "NimbusNTPClientEnabledState": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NimbusNTPClientState"
+          }
+        ]
+      }
+    }
+  }
+}

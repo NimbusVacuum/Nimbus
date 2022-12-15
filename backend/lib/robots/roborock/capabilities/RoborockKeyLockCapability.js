@@ -1,7 +1,7 @@
 const KeyLockCapability = require("../../../core/capabilities/KeyLockCapability");
 
 /**
- * @extends KeyLockCapability<import("../RoborockValetudoRobot")>
+ * @extends KeyLockCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockKeyLockCapability extends KeyLockCapability {
 

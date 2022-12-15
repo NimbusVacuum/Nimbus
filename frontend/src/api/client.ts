@@ -41,12 +41,12 @@ import {
     TimerInformation,
     TimerProperties,
     UpdaterState,
-    ValetudoDataPoint,
-    ValetudoEvent,
-    ValetudoEventInteractionContext,
-    ValetudoInformation,
-    ValetudoVersion,
-    ValetudoWifiNetwork,
+    NimbusDataPoint,
+    NimbusEvent,
+    NimbusEventInteractionContext,
+    NimbusInformation,
+    NimbusVersion,
+    NimbusWifiNetwork,
     VoicePackManagementCommand,
     VoicePackManagementStatus,
     WifiConfiguration, WifiConfigurationProperties,
@@ -59,13 +59,13 @@ import { floorObject } from "./utils";
 import {preprocessMap} from "./mapUtils";
 import ReconnectingEventSource from "reconnecting-eventsource";
 
-export const valetudoAPI = axios.create({
+export const nimbusAPI = axios.create({
     baseURL: "./api/v2",
 });
 
 let currentCommitId = "unknown";
 
-valetudoAPI.interceptors.response.use(response => {
+nimbusAPI.interceptors.response.use(response => {
     /*
        As using an outdated frontend with an updated backend might lead to undesirable
        or even catastrophic results, we try to automatically detect this state and
@@ -75,12 +75,12 @@ valetudoAPI.interceptors.response.use(response => {
 
        If something such as a reverse proxy strips these headers, the check will not work.
        Users of advanced setups like these should remember to press ctrl + f5 to force refresh
-       after each Valetudo update
+       after each Nimbus update
     */
-    if (response.headers["x-valetudo-commit-id"]) {
-        if (currentCommitId !== response.headers["x-valetudo-commit-id"]) {
+    if (response.headers["x-nimbus-commit-id"]) {
+        if (currentCommitId !== response.headers["x-nimbus-commit-id"]) {
             if (currentCommitId === "unknown") {
-                currentCommitId = response.headers["x-valetudo-commit-id"];
+                currentCommitId = response.headers["x-nimbus-commit-id"];
             } else {
                 /*
                     While we could display a textbox informing the user that the backend changed,
@@ -111,7 +111,7 @@ const subscribeToSSE = <T>(
         return tracker();
     }
 
-    const source = new ReconnectingEventSource(valetudoAPI.defaults.baseURL + endpoint, {
+    const source = new ReconnectingEventSource(nimbusAPI.defaults.baseURL + endpoint, {
         withCredentials: true,
         max_retry_time: 30000
     });
@@ -142,7 +142,7 @@ const subscribeToSSE = <T>(
 };
 
 export const fetchCapabilities = (): Promise<Capability[]> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<Capability[]>("/robot/capabilities")
         .then(({data}) => {
             return data;
@@ -150,7 +150,7 @@ export const fetchCapabilities = (): Promise<Capability[]> => {
 };
 
 export const fetchMap = (): Promise<RawMapData> => {
-    return valetudoAPI.get<RawMapData>("/robot/state/map").then(({data}) => {
+    return nimbusAPI.get<RawMapData>("/robot/state/map").then(({data}) => {
         return preprocessMap(data);
     });
 };
@@ -167,7 +167,7 @@ export const subscribeToMap = (
 };
 
 export const fetchStateAttributes = async (): Promise<RobotAttribute[]> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<RobotAttribute[]>("/robot/state/attributes")
         .then(({data}) => {
             return data;
@@ -189,7 +189,7 @@ export const subscribeToStateAttributes = (
 export const fetchPresetSelections = async (
     capability: Capability.FanSpeedControl | Capability.WaterUsageControl | Capability.OperationModeControl
 ): Promise<PresetSelectionState["value"][]> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<PresetSelectionState["value"][]>(
             `/robot/capabilities/${capability}/presets`
         )
@@ -202,7 +202,7 @@ export const updatePresetSelection = async (
     capability: Capability.FanSpeedControl | Capability.WaterUsageControl | Capability.OperationModeControl,
     level: PresetSelectionState["value"]
 ): Promise<void> => {
-    await valetudoAPI.put(`/robot/capabilities/${capability}/preset`, {
+    await nimbusAPI.put(`/robot/capabilities/${capability}/preset`, {
         name: level,
     });
 };
@@ -211,7 +211,7 @@ export type BasicControlCommand = "start" | "stop" | "pause" | "home";
 export const sendBasicControlCommand = async (
     command: BasicControlCommand
 ): Promise<void> => {
-    await valetudoAPI.put(
+    await nimbusAPI.put(
         `/robot/capabilities/${Capability.BasicControl}`,
         {
             action: command,
@@ -220,7 +220,7 @@ export const sendBasicControlCommand = async (
 };
 
 export const sendGoToCommand = async (point: Point): Promise<void> => {
-    await valetudoAPI.put(
+    await nimbusAPI.put(
         `/robot/capabilities/${Capability.GoToLocation}`,
         {
             action: "goto",
@@ -230,7 +230,7 @@ export const sendGoToCommand = async (point: Point): Promise<void> => {
 };
 
 export const fetchZoneProperties = async (): Promise<ZoneProperties> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<ZoneProperties>(
             `/robot/capabilities/${Capability.ZoneCleaning}/properties`
         )
@@ -242,7 +242,7 @@ export const fetchZoneProperties = async (): Promise<ZoneProperties> => {
 export const sendCleanTemporaryZonesCommand = async (
     zones: Zone[]
 ): Promise<void> => {
-    await valetudoAPI.put(
+    await nimbusAPI.put(
         `/robot/capabilities/${Capability.ZoneCleaning}`,
         {
             action: "clean",
@@ -252,7 +252,7 @@ export const sendCleanTemporaryZonesCommand = async (
 };
 
 export const fetchSegments = async (): Promise<Segment[]> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<Segment[]>(`/robot/capabilities/${Capability.MapSegmentation}`)
         .then(({data}) => {
             return data;
@@ -260,7 +260,7 @@ export const fetchSegments = async (): Promise<Segment[]> => {
 };
 
 export const fetchMapSegmentationProperties = async (): Promise<MapSegmentationProperties> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<MapSegmentationProperties>(
             `/robot/capabilities/${Capability.MapSegmentation}/properties`
         )
@@ -272,7 +272,7 @@ export const fetchMapSegmentationProperties = async (): Promise<MapSegmentationP
 export const sendCleanSegmentsCommand = async (
     parameters: MapSegmentationActionRequestParameters
 ): Promise<void> => {
-    await valetudoAPI.put(
+    await nimbusAPI.put(
         `/robot/capabilities/${Capability.MapSegmentation}`,
         {
             action: "start_segment_action",
@@ -286,7 +286,7 @@ export const sendCleanSegmentsCommand = async (
 export const sendJoinSegmentsCommand = async (
     parameters: MapSegmentEditJoinRequestParameters
 ): Promise<void> => {
-    await valetudoAPI.put(
+    await nimbusAPI.put(
         `/robot/capabilities/${Capability.MapSegmentEdit}`,
         {
             action: "join_segments",
@@ -299,7 +299,7 @@ export const sendJoinSegmentsCommand = async (
 export const sendSplitSegmentCommand = async (
     parameters: MapSegmentEditSplitRequestParameters
 ): Promise<void> => {
-    await valetudoAPI.put(
+    await nimbusAPI.put(
         `/robot/capabilities/${Capability.MapSegmentEdit}`,
         {
             action: "split_segment",
@@ -313,7 +313,7 @@ export const sendSplitSegmentCommand = async (
 export const sendRenameSegmentCommand = async (
     parameters: MapSegmentRenameRequestParameters
 ): Promise<void> => {
-    await valetudoAPI.put(
+    await nimbusAPI.put(
         `/robot/capabilities/${Capability.MapSegmentRename}`,
         {
             action: "rename_segment",
@@ -324,19 +324,19 @@ export const sendRenameSegmentCommand = async (
 };
 
 export const sendLocateCommand = async (): Promise<void> => {
-    await valetudoAPI.put(`/robot/capabilities/${Capability.Locate}`, {
+    await nimbusAPI.put(`/robot/capabilities/${Capability.Locate}`, {
         action: "locate",
     });
 };
 
 export const sendAutoEmptyDockManualTriggerCommand = async (): Promise<void> => {
-    await valetudoAPI.put(`/robot/capabilities/${Capability.AutoEmptyDockManualTrigger}`, {
+    await nimbusAPI.put(`/robot/capabilities/${Capability.AutoEmptyDockManualTrigger}`, {
         action: "trigger",
     });
 };
 
 export const fetchConsumableStateInformation = async (): Promise<Array<ConsumableState>> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<Array<ConsumableState>>(`/robot/capabilities/${Capability.ConsumableMonitoring}`)
         .then(({data}) => {
             return data;
@@ -348,7 +348,7 @@ export const sendConsumableReset = async (parameters: ConsumableId): Promise<voi
     if (parameters.subType) {
         urlFragment += `/${parameters.subType}`;
     }
-    return valetudoAPI
+    return nimbusAPI
         .put(`/robot/capabilities/${Capability.ConsumableMonitoring}/${urlFragment}`, {
             action: "reset",
         })
@@ -360,28 +360,28 @@ export const sendConsumableReset = async (parameters: ConsumableId): Promise<voi
 };
 
 export const fetchRobotInformation = async (): Promise<RobotInformation> => {
-    return valetudoAPI.get<RobotInformation>("/robot").then(({data}) => {
+    return nimbusAPI.get<RobotInformation>("/robot").then(({data}) => {
         return data;
     });
 };
 
-export const fetchValetudoInformation = async (): Promise<ValetudoInformation> => {
-    return valetudoAPI.get<ValetudoInformation>("/valetudo").then(({data}) => {
+export const fetchNimbusInformation = async (): Promise<NimbusInformation> => {
+    return nimbusAPI.get<NimbusInformation>("/nimbus").then(({data}) => {
         return data;
     });
 };
 
-export const fetchValetudoVersionInformation = async (): Promise<ValetudoVersion> => {
-    return valetudoAPI
-        .get<ValetudoVersion>("/valetudo/version")
+export const fetchNimbusVersionInformation = async (): Promise<NimbusVersion> => {
+    return nimbusAPI
+        .get<NimbusVersion>("/nimbus/version")
         .then(({data}) => {
             return data;
         });
 };
 
-export const fetchValetudoLog = async (): Promise<string> => {
-    return valetudoAPI
-        .get<string>("/valetudo/log/content")
+export const fetchNimbusLog = async (): Promise<string> => {
+    return nimbusAPI
+        .get<string>("/nimbus/log/content")
         .then(({ data }) => {
             return data;
         });
@@ -391,7 +391,7 @@ export const subscribeToLogMessages = (
     listener: (data: string) => void
 ): (() => void) => {
     return subscribeToSSE<string>(
-        "/valetudo/log/content/sse",
+        "/nimbus/log/content/sse",
         "LogMessage",
         (data) => {
             return listener(data);
@@ -400,17 +400,17 @@ export const subscribeToLogMessages = (
     );
 };
 
-export const fetchValetudoLogLevel = async (): Promise<LogLevelResponse> => {
-    return valetudoAPI
-        .get<LogLevelResponse>("/valetudo/log/level")
+export const fetchNimbusLogLevel = async (): Promise<LogLevelResponse> => {
+    return nimbusAPI
+        .get<LogLevelResponse>("/nimbus/log/level")
         .then(({ data }) => {
             return data;
         });
 };
 
-export const sendValetudoLogLevel = async (logLevel: SetLogLevelRequest): Promise<void> => {
-    await valetudoAPI
-        .put("/valetudo/log/level", logLevel)
+export const sendNimbusLogLevel = async (logLevel: SetLogLevelRequest): Promise<void> => {
+    await nimbusAPI
+        .put("/nimbus/log/level", logLevel)
         .then(({ status }) => {
             if (status !== 200) {
                 throw new Error("Could not set new log level");
@@ -419,7 +419,7 @@ export const sendValetudoLogLevel = async (logLevel: SetLogLevelRequest): Promis
 };
 
 export const fetchSystemHostInfo = async (): Promise<SystemHostInfo> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<SystemHostInfo>("/system/host/info")
         .then(({data}) => {
             return data;
@@ -427,7 +427,7 @@ export const fetchSystemHostInfo = async (): Promise<SystemHostInfo> => {
 };
 
 export const fetchSystemRuntimeInfo = async (): Promise<SystemRuntimeInfo> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<SystemRuntimeInfo>("/system/runtime/info")
         .then(({data}) => {
             return data;
@@ -435,16 +435,16 @@ export const fetchSystemRuntimeInfo = async (): Promise<SystemRuntimeInfo> => {
 };
 
 export const fetchMQTTConfiguration = async (): Promise<MQTTConfiguration> => {
-    return valetudoAPI
-        .get<MQTTConfiguration>("/valetudo/config/interfaces/mqtt")
+    return nimbusAPI
+        .get<MQTTConfiguration>("/nimbus/config/interfaces/mqtt")
         .then(({data}) => {
             return data;
         });
 };
 
 export const sendMQTTConfiguration = async (mqttConfiguration: MQTTConfiguration): Promise<void> => {
-    return valetudoAPI
-        .put("/valetudo/config/interfaces/mqtt", mqttConfiguration)
+    return nimbusAPI
+        .put("/nimbus/config/interfaces/mqtt", mqttConfiguration)
         .then(({status}) => {
             if (status !== 200) {
                 throw new Error("Could not update MQTT configuration");
@@ -453,7 +453,7 @@ export const sendMQTTConfiguration = async (mqttConfiguration: MQTTConfiguration
 };
 
 export const fetchMQTTStatus = async (): Promise<MQTTStatus> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<MQTTStatus>("/mqtt/status")
         .then(({data}) => {
             return data;
@@ -461,7 +461,7 @@ export const fetchMQTTStatus = async (): Promise<MQTTStatus> => {
 };
 
 export const fetchMQTTProperties = async (): Promise<MQTTProperties> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<MQTTProperties>("/mqtt/properties")
         .then(({data}) => {
             return data;
@@ -469,16 +469,16 @@ export const fetchMQTTProperties = async (): Promise<MQTTProperties> => {
 };
 
 export const fetchHTTPBasicAuthConfiguration = async (): Promise<HTTPBasicAuthConfiguration> => {
-    return valetudoAPI
-        .get<HTTPBasicAuthConfiguration>("/valetudo/config/interfaces/http/auth/basic")
+    return nimbusAPI
+        .get<HTTPBasicAuthConfiguration>("/nimbus/config/interfaces/http/auth/basic")
         .then(({data}) => {
             return data;
         });
 };
 
 export const sendHTTPBasicAuthConfiguration = async (configuration: HTTPBasicAuthConfiguration): Promise<void> => {
-    return valetudoAPI
-        .put("/valetudo/config/interfaces/http/auth/basic", configuration)
+    return nimbusAPI
+        .put("/nimbus/config/interfaces/http/auth/basic", configuration)
         .then(({status}) => {
             if (status !== 200) {
                 throw new Error("Could not update HTTP basic auth configuration");
@@ -487,7 +487,7 @@ export const sendHTTPBasicAuthConfiguration = async (configuration: HTTPBasicAut
 };
 
 export const fetchNetworkAdvertisementConfiguration = async (): Promise<NetworkAdvertisementConfiguration> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<NetworkAdvertisementConfiguration>("/networkadvertisement/config")
         .then(({data}) => {
             return data;
@@ -495,7 +495,7 @@ export const fetchNetworkAdvertisementConfiguration = async (): Promise<NetworkA
 };
 
 export const sendNetworkAdvertisementConfiguration = async (configuration: NetworkAdvertisementConfiguration): Promise<void> => {
-    return valetudoAPI
+    return nimbusAPI
         .put("/networkadvertisement/config", configuration)
         .then(({status}) => {
             if (status !== 200) {
@@ -505,7 +505,7 @@ export const sendNetworkAdvertisementConfiguration = async (configuration: Netwo
 };
 
 export const fetchNetworkAdvertisementProperties = async (): Promise<NetworkAdvertisementProperties> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<NetworkAdvertisementProperties>("/networkadvertisement/properties")
         .then(({data}) => {
             return data;
@@ -513,7 +513,7 @@ export const fetchNetworkAdvertisementProperties = async (): Promise<NetworkAdve
 };
 
 export const fetchNTPClientState = async (): Promise<NTPClientState> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<NTPClientState>("/ntpclient/state")
         .then(({data}) => {
             return data;
@@ -521,7 +521,7 @@ export const fetchNTPClientState = async (): Promise<NTPClientState> => {
 };
 
 export const fetchNTPClientConfiguration = async (): Promise<NTPClientConfiguration> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<NTPClientConfiguration>("/ntpclient/config")
         .then(({data}) => {
             return data;
@@ -529,7 +529,7 @@ export const fetchNTPClientConfiguration = async (): Promise<NTPClientConfigurat
 };
 
 export const sendNTPClientConfiguration = async (configuration: NTPClientConfiguration): Promise<void> => {
-    return valetudoAPI
+    return nimbusAPI
         .put("/ntpclient/config", configuration)
         .then(({status}) => {
             if (status !== 200) {
@@ -539,17 +539,17 @@ export const sendNTPClientConfiguration = async (configuration: NTPClientConfigu
 };
 
 export const fetchTimerInformation = async (): Promise<TimerInformation> => {
-    return valetudoAPI.get<TimerInformation>("/timers").then(({ data }) => {
+    return nimbusAPI.get<TimerInformation>("/timers").then(({ data }) => {
         return data;
     });
 };
 
 export const deleteTimer = async (id: string): Promise<void> => {
-    await valetudoAPI.delete(`/timers/${id}`);
+    await nimbusAPI.delete(`/timers/${id}`);
 };
 
 export const sendTimerCreation = async (timerData: Timer): Promise<void> => {
-    await valetudoAPI.post("/timers", timerData).then(({ status }) => {
+    await nimbusAPI.post("/timers", timerData).then(({ status }) => {
         if (status !== 200) {
             throw new Error("Could not create timer");
         }
@@ -557,7 +557,7 @@ export const sendTimerCreation = async (timerData: Timer): Promise<void> => {
 };
 
 export const sendTimerUpdate = async (timerData: Timer): Promise<void> => {
-    await valetudoAPI
+    await nimbusAPI
         .put(`/timers/${timerData.id}`, timerData)
         .then(({ status }) => {
             if (status !== 200) {
@@ -567,23 +567,23 @@ export const sendTimerUpdate = async (timerData: Timer): Promise<void> => {
 };
 
 export const fetchTimerProperties = async (): Promise<TimerProperties> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<TimerProperties>("/timers/properties")
         .then(({ data }) => {
             return data;
         });
 };
 
-export const fetchValetudoEvents = async (): Promise<Array<ValetudoEvent>> => {
-    return valetudoAPI
-        .get<Array<ValetudoEvent>>("/events")
+export const fetchNimbusEvents = async (): Promise<Array<NimbusEvent>> => {
+    return nimbusAPI
+        .get<Array<NimbusEvent>>("/events")
         .then(({ data }) => {
             return data;
         });
 };
 
-export const sendValetudoEventInteraction = async (interaction: ValetudoEventInteractionContext): Promise<void> => {
-    await valetudoAPI
+export const sendNimbusEventInteraction = async (interaction: NimbusEventInteractionContext): Promise<void> => {
+    await nimbusAPI
         .put(`/events/${interaction.id}/interact`, interaction.interaction)
         .then(({ status }) => {
             if (status !== 200) {
@@ -593,7 +593,7 @@ export const sendValetudoEventInteraction = async (interaction: ValetudoEventInt
 };
 
 export const fetchPersistentDataState = async (): Promise<SimpleToggleState> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<SimpleToggleState>(`/robot/capabilities/${Capability.PersistentMapControl}`)
         .then(({ data }) => {
             return data;
@@ -601,7 +601,7 @@ export const fetchPersistentDataState = async (): Promise<SimpleToggleState> => 
 };
 
 const sendToggleMutation = async (capability: Capability, enable: boolean): Promise<void> => {
-    await valetudoAPI
+    await nimbusAPI
         .put(`/robot/capabilities/${capability}`, {
             action: enable ? "enable" : "disable"
         })
@@ -617,7 +617,7 @@ export const sendPersistentDataEnable = async (enable: boolean): Promise<void> =
 };
 
 export const sendMapReset = async (): Promise<void> => {
-    await valetudoAPI
+    await nimbusAPI
         .put(`/robot/capabilities/${Capability.MapReset}`, {
             action: "reset"
         })
@@ -629,7 +629,7 @@ export const sendMapReset = async (): Promise<void> => {
 };
 
 export const sendStartMappingPass = async (): Promise<void> => {
-    await valetudoAPI
+    await nimbusAPI
         .put(`/robot/capabilities/${Capability.MappingPass}`, {
             action: "start_mapping"
         })
@@ -641,7 +641,7 @@ export const sendStartMappingPass = async (): Promise<void> => {
 };
 
 export const fetchSpeakerVolumeState = async (): Promise<SpeakerVolumeState> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<SpeakerVolumeState>(`/robot/capabilities/${Capability.SpeakerVolumeControl}`)
         .then(({ data }) => {
             return data;
@@ -649,7 +649,7 @@ export const fetchSpeakerVolumeState = async (): Promise<SpeakerVolumeState> => 
 };
 
 export const sendSpeakerVolume = async (volume: number): Promise<void> => {
-    await valetudoAPI
+    await nimbusAPI
         .put(`/robot/capabilities/${Capability.SpeakerVolumeControl}`, {
             action: "set_volume",
             value: volume,
@@ -662,7 +662,7 @@ export const sendSpeakerVolume = async (volume: number): Promise<void> => {
 };
 
 export const fetchVoicePackManagementState = async (): Promise<VoicePackManagementStatus> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<VoicePackManagementStatus>(`/robot/capabilities/${Capability.VoicePackManagement}`)
         .then(({ data }) => {
             return data;
@@ -670,7 +670,7 @@ export const fetchVoicePackManagementState = async (): Promise<VoicePackManageme
 };
 
 export const sendVoicePackManagementCommand = async (command: VoicePackManagementCommand): Promise<void> => {
-    return valetudoAPI
+    return nimbusAPI
         .put(`/robot/capabilities/${Capability.VoicePackManagement}`, command)
         .then(({status}) => {
             if (status !== 200) {
@@ -680,13 +680,13 @@ export const sendVoicePackManagementCommand = async (command: VoicePackManagemen
 };
 
 export const sendSpeakerTestCommand = async (): Promise<void> => {
-    await valetudoAPI.put(`/robot/capabilities/${Capability.SpeakerTest}`, {
+    await nimbusAPI.put(`/robot/capabilities/${Capability.SpeakerTest}`, {
         action: "play_test_sound",
     });
 };
 
 export const fetchKeyLockState = async (): Promise<SimpleToggleState> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<SimpleToggleState>(`/robot/capabilities/${Capability.KeyLock}`)
         .then(({ data }) => {
             return data;
@@ -698,7 +698,7 @@ export const sendKeyLockEnable = async (enable: boolean): Promise<void> => {
 };
 
 export const fetchCarpetModeState = async (): Promise<SimpleToggleState> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<SimpleToggleState>(`/robot/capabilities/${Capability.CarpetModeControl}`)
         .then(({ data }) => {
             return data;
@@ -710,7 +710,7 @@ export const sendCarpetModeEnable = async (enable: boolean): Promise<void> => {
 };
 
 export const fetchAutoEmptyDockAutoEmptyControlState = async (): Promise<SimpleToggleState> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<SimpleToggleState>(`/robot/capabilities/${Capability.AutoEmptyDockAutoEmptyControl}`)
         .then(({ data }) => {
             return data;
@@ -722,7 +722,7 @@ export const sendAutoEmptyDockAutoEmptyControlEnable = async (enable: boolean): 
 };
 
 export const fetchDoNotDisturbConfiguration = async (): Promise<DoNotDisturbConfiguration> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<DoNotDisturbConfiguration>(`/robot/capabilities/${Capability.DoNotDisturb}`)
         .then(({ data }) => {
             return data;
@@ -730,7 +730,7 @@ export const fetchDoNotDisturbConfiguration = async (): Promise<DoNotDisturbConf
 };
 
 export const sendDoNotDisturbConfiguration = async (configuration: DoNotDisturbConfiguration): Promise<void> => {
-    await valetudoAPI
+    await nimbusAPI
         .put(`/robot/capabilities/${Capability.DoNotDisturb}`, configuration)
         .then(({ status }) => {
             if (status !== 200) {
@@ -740,7 +740,7 @@ export const sendDoNotDisturbConfiguration = async (configuration: DoNotDisturbC
 };
 
 export const fetchWifiStatus = async (): Promise<WifiStatus> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<WifiStatus>(`/robot/capabilities/${Capability.WifiConfiguration}`)
         .then(({ data }) => {
             return data;
@@ -748,13 +748,12 @@ export const fetchWifiStatus = async (): Promise<WifiStatus> => {
 };
 
 export const fetchWifiConfigurationProperties = async (): Promise<WifiConfigurationProperties> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<WifiConfigurationProperties>(`/robot/capabilities/${Capability.WifiConfiguration}/properties`)
         .then(({ data }) => {
             return data;
         });
 };
-
 
 export const sendWifiConfiguration = async (configuration: WifiConfiguration): Promise<void> => {
     const encryptionKey = await fetchWifiProvisioningEncryptionKey();
@@ -768,7 +767,7 @@ export const sendWifiConfiguration = async (configuration: WifiConfiguration): P
         throw new Error("Failed to encrypt Wi-Fi credentials");
     }
 
-    await valetudoAPI
+    await nimbusAPI
         .put(`/robot/capabilities/${Capability.WifiConfiguration}`, {
             encryption: "rsa",
             payload: encryptedPayload
@@ -781,23 +780,23 @@ export const sendWifiConfiguration = async (configuration: WifiConfiguration): P
 };
 
 export const fetchWifiProvisioningEncryptionKey = async (): Promise<WifiProvisioningEncryptionKey> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<WifiProvisioningEncryptionKey>(`/robot/capabilities/${Capability.WifiConfiguration}/getPublicKeyForProvisioning`)
         .then(({ data }) => {
             return data;
         });
 };
 
-export const fetchWifiScan = async (): Promise<Array<ValetudoWifiNetwork>> => {
-    return valetudoAPI
-        .get<Array<ValetudoWifiNetwork>>(`/robot/capabilities/${Capability.WifiScan}`)
+export const fetchWifiScan = async (): Promise<Array<NimbusWifiNetwork>> => {
+    return nimbusAPI
+        .get<Array<NimbusWifiNetwork>>(`/robot/capabilities/${Capability.WifiScan}`)
         .then(({ data }) => {
             return data;
         });
 };
 
 export const fetchManualControlState = async (): Promise<SimpleToggleState> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<SimpleToggleState>(`/robot/capabilities/${Capability.ManualControl}`)
         .then(({ data }) => {
             return data;
@@ -805,7 +804,7 @@ export const fetchManualControlState = async (): Promise<SimpleToggleState> => {
 };
 
 export const fetchManualControlProperties = async (): Promise<ManualControlProperties> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<ManualControlProperties>(`/robot/capabilities/${Capability.ManualControl}/properties`)
         .then(({ data }) => {
             return data;
@@ -813,7 +812,7 @@ export const fetchManualControlProperties = async (): Promise<ManualControlPrope
 };
 
 export const sendManualControlInteraction = async (interaction: ManualControlInteraction): Promise<void> => {
-    await valetudoAPI
+    await nimbusAPI
         .put(`/robot/capabilities/${Capability.ManualControl}`, interaction)
         .then(({ status }) => {
             if (status !== 200) {
@@ -823,7 +822,7 @@ export const sendManualControlInteraction = async (interaction: ManualControlInt
 };
 
 export const fetchCombinedVirtualRestrictionsPropertiesProperties = async (): Promise<CombinedVirtualRestrictionsProperties> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<CombinedVirtualRestrictionsProperties>(
             `/robot/capabilities/${Capability.CombinedVirtualRestrictions}/properties`
         )
@@ -835,14 +834,14 @@ export const fetchCombinedVirtualRestrictionsPropertiesProperties = async (): Pr
 export const sendCombinedVirtualRestrictionsUpdate = async (
     parameters: CombinedVirtualRestrictionsUpdateRequestParameters
 ): Promise<void> => {
-    await valetudoAPI.put(
+    await nimbusAPI.put(
         `/robot/capabilities/${Capability.CombinedVirtualRestrictions}`,
         parameters
     );
 };
 
 export const fetchUpdaterState = async (): Promise<UpdaterState> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<UpdaterState>("/updater/state")
         .then(({data}) => {
             return data;
@@ -852,7 +851,7 @@ export const fetchUpdaterState = async (): Promise<UpdaterState> => {
 export const sendUpdaterCommand = async (
     command: "check" | "download" | "apply"
 ): Promise<void> => {
-    await valetudoAPI.put(
+    await nimbusAPI.put(
         "/updater",
         {
             "action": command
@@ -860,32 +859,32 @@ export const sendUpdaterCommand = async (
     );
 };
 
-export const fetchCurrentStatistics = async (): Promise<Array<ValetudoDataPoint>> => {
-    return valetudoAPI
-        .get<Array<ValetudoDataPoint>>(`/robot/capabilities/${Capability.CurrentStatistics}`)
+export const fetchCurrentStatistics = async (): Promise<Array<NimbusDataPoint>> => {
+    return nimbusAPI
+        .get<Array<NimbusDataPoint>>(`/robot/capabilities/${Capability.CurrentStatistics}`)
         .then(({ data }) => {
             return data;
         });
 };
 
 export const fetchCurrentStatisticsProperties = async (): Promise<StatisticsProperties> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<StatisticsProperties>(`/robot/capabilities/${Capability.CurrentStatistics}/properties`)
         .then(({ data }) => {
             return data;
         });
 };
 
-export const fetchTotalStatistics = async (): Promise<Array<ValetudoDataPoint>> => {
-    return valetudoAPI
-        .get<Array<ValetudoDataPoint>>(`/robot/capabilities/${Capability.TotalStatistics}`)
+export const fetchTotalStatistics = async (): Promise<Array<NimbusDataPoint>> => {
+    return nimbusAPI
+        .get<Array<NimbusDataPoint>>(`/robot/capabilities/${Capability.TotalStatistics}`)
         .then(({ data }) => {
             return data;
         });
 };
 
 export const fetchTotalStatisticsProperties = async (): Promise<StatisticsProperties> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<StatisticsProperties>(`/robot/capabilities/${Capability.TotalStatistics}/properties`)
         .then(({ data }) => {
             return data;
@@ -893,7 +892,7 @@ export const fetchTotalStatisticsProperties = async (): Promise<StatisticsProper
 };
 
 export const fetchQuirks = async (): Promise<Array<Quirk>> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<Array<Quirk>>(`/robot/capabilities/${Capability.Quirks}`)
         .then(({ data }) => {
             return data;
@@ -901,7 +900,7 @@ export const fetchQuirks = async (): Promise<Array<Quirk>> => {
 };
 
 export const sendSetQuirkValueCommand = async (command: SetQuirkValueCommand): Promise<void> => {
-    await valetudoAPI.put(
+    await nimbusAPI.put(
         `/robot/capabilities/${Capability.Quirks}`,
         {
             "id": command.id,
@@ -911,7 +910,7 @@ export const sendSetQuirkValueCommand = async (command: SetQuirkValueCommand): P
 };
 
 export const fetchRobotProperties = async (): Promise<RobotProperties> => {
-    return valetudoAPI
+    return nimbusAPI
         .get<RobotProperties>("/robot/properties")
         .then(({ data }) => {
             return data;
@@ -922,7 +921,7 @@ export type MopDockCleanManualTriggerCommand = "start" | "stop";
 export const sendMopDockCleanManualTriggerCommand = async (
     command: MopDockCleanManualTriggerCommand
 ): Promise<void> => {
-    await valetudoAPI.put(
+    await nimbusAPI.put(
         `/robot/capabilities/${Capability.MopDockCleanManualTrigger}`,
         {
             action: command,
@@ -934,7 +933,7 @@ export type MopDockDryManualTriggerCommand = "start" | "stop";
 export const sendMopDockDryManualTriggerCommand = async (
     command: MopDockDryManualTriggerCommand
 ): Promise<void> => {
-    await valetudoAPI.put(
+    await nimbusAPI.put(
         `/robot/capabilities/${Capability.MopDockDryManualTrigger}`,
         {
             action: command,

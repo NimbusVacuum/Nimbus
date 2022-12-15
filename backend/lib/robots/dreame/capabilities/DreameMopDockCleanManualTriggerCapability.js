@@ -4,13 +4,13 @@ const entities = require("../../../entities");
 const MopDockCleanManualTriggerCapability = require("../../../core/capabilities/MopDockCleanManualTriggerCapability");
 
 /**
- * @extends MopDockCleanManualTriggerCapability<import("../DreameValetudoRobot")>
+ * @extends MopDockCleanManualTriggerCapability<import("../DreameNimbusRobot")>
  */
 class DreameMopDockCleanManualTriggerCapability extends MopDockCleanManualTriggerCapability {
 
     /**
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {number} options.siid MIOT Service ID
      * @param {number} options.aiid MIOT Action ID

@@ -8,7 +8,7 @@ order: 34
 ## Logging
 ### Log Level
 
-Valetudo's log level can be set in the UI. It is not persisted across restarts. If you need to permanently set a log level, adjust it in the valetudo config file.
+Nimbus's log level can be set in the UI. It is not persisted across restarts. If you need to permanently set a log level, adjust it in the nimbus config file.
 
 ### MQTT
 

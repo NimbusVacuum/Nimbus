@@ -2,13 +2,13 @@ const DreameMiotHelper = require("../DreameMiotHelper");
 const PersistentMapControlCapability = require("../../../core/capabilities/PersistentMapControlCapability");
 
 /**
- * @extends PersistentMapControlCapability<import("../DreameValetudoRobot")>
+ * @extends PersistentMapControlCapability<import("../DreameNimbusRobot")>
  */
 class DreamePersistentMapControlCapability extends PersistentMapControlCapability {
 
     /**
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {number} options.siid MIOT Service ID
      * @param {number} options.piid MIOT Property ID

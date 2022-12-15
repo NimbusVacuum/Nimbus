@@ -2,13 +2,13 @@ const Capability = require("./Capability");
 const NotImplementedError = require("../NotImplementedError");
 
 /**
- * @template {import("../ValetudoRobot")} T
+ * @template {import("../NimbusRobot")} T
  * @extends Capability<T>
  */
 class WifiConfigurationCapability extends Capability {
     /**
      * @abstract
-     * @returns {Promise<import("../../entities/core/ValetudoWifiStatus")>}
+     * @returns {Promise<import("../../entities/core/NimbusWifiStatus")>}
      */
     async getWifiStatus() {
         throw new NotImplementedError();
@@ -16,7 +16,7 @@ class WifiConfigurationCapability extends Capability {
 
     /**
      * @abstract
-     * @param {import("../../entities/core/ValetudoWifiConfiguration")} wifiConfig
+     * @param {import("../../entities/core/NimbusWifiConfiguration")} wifiConfig
      * @returns {Promise<void>}
      */
     async setWifiConfiguration(wifiConfig) {

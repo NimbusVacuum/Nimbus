@@ -1,12 +1,12 @@
 const CapabilityRouter = require("./CapabilityRouter");
-const ValetudoGoToLocation = require("../../entities/core/ValetudoGoToLocation");
+const NimbusGoToLocation = require("../../entities/core/NimbusGoToLocation");
 
 class GoToLocationCapabilityRouter extends CapabilityRouter {
     initRoutes() {
         this.router.put("/", this.validator, async (req, res) => {
             if (req.body.action === "goto" && req.body.coordinates !== undefined) {
                 try {
-                    await this.capability.goTo(new ValetudoGoToLocation({
+                    await this.capability.goTo(new NimbusGoToLocation({
                         coordinates: {
                             x: req.body.coordinates.x,
                             y: req.body.coordinates.y

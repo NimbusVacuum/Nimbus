@@ -5,7 +5,7 @@ class StatusStateAttribute extends StateAttribute {
      * @param {object} options
      * @param {StatusStateAttributeValue} options.value
      * @param {StatusStateAttributeFlag} [options.flag]
-     * @param {import("../../core/ValetudoRobotError")} [options.error]
+     * @param {import("../../core/NimbusRobotError")} [options.error]
      * @param {object} [options.metaData]
      */
     constructor(options) {
@@ -57,6 +57,5 @@ StatusStateAttribute.FLAG = Object.freeze({
     RESUMABLE: "resumable",
     MAPPING: "mapping"
 });
-
 
 module.exports = StatusStateAttribute;

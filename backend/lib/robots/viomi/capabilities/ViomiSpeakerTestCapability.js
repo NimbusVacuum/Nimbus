@@ -1,7 +1,7 @@
 const SpeakerTestCapability = require("../../../core/capabilities/SpeakerTestCapability");
 
 /**
- * @extends SpeakerTestCapability<import("../ViomiValetudoRobot")>
+ * @extends SpeakerTestCapability<import("../ViomiNimbusRobot")>
  */
 class ViomiSpeakerTestCapability extends SpeakerTestCapability {
     /**

@@ -11,13 +11,13 @@ const manifest = {
 }
 
 const binaries = {
-    "valetudo-armv7": "./build/armv7/valetudo",
-    "valetudo-armv7-lowmem": "./build/armv7/valetudo-lowmem",
-    "valetudo-aarch64": "./build/aarch64/valetudo",
+    "nimbus-armv7": "./build/armv7/nimbus",
+    "nimbus-armv7-lowmem": "./build/armv7/nimbus-lowmem",
+    "nimbus-aarch64": "./build/aarch64/nimbus",
 
-    "valetudo-armv7.upx": "./build/armv7/valetudo.upx",
-    "valetudo-armv7-lowmem.upx": "./build/armv7/valetudo-lowmem.upx",
-    "valetudo-aarch64.upx": "./build/aarch64/valetudo.upx",
+    "nimbus-armv7.upx": "./build/armv7/nimbus.upx",
+    "nimbus-armv7-lowmem.upx": "./build/armv7/nimbus-lowmem.upx",
+    "nimbus-aarch64.upx": "./build/aarch64/nimbus.upx",
 }
 
 Object.values(binaries).forEach((path, i) => {
@@ -48,4 +48,4 @@ if (process.argv.length > 2 && process.argv[2] === "nightly") {
     }
 }
 
-fs.writeFileSync("./build/valetudo_release_manifest.json", JSON.stringify(manifest, null, 2))
+fs.writeFileSync("./build/nimbus_release_manifest.json", JSON.stringify(manifest, null, 2))

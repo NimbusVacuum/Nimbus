@@ -2,21 +2,21 @@ const RoborockMapParser = require("../RoborockMapParser");
 const ZoneCleaningCapability = require("../../../core/capabilities/ZoneCleaningCapability");
 
 /**
- * @extends ZoneCleaningCapability<import("../RoborockValetudoRobot")>
+ * @extends ZoneCleaningCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockZoneCleaningCapability extends ZoneCleaningCapability {
     /**
-     * @param {Array<import("../../../entities/core/ValetudoZone")>} valetudoZones
+     * @param {Array<import("../../../entities/core/NimbusZone")>} nimbusZones
      * @returns {Promise<void>}
      */
-    async start(valetudoZones) {
-        const flippedRoborockZones = valetudoZones.map(valetudoZone => {
+    async start(nimbusZones) {
+        const flippedRoborockZones = nimbusZones.map(nimbusZone => {
             const yFlippedZone = [
-                Math.floor(valetudoZone.points.pA.x * 10),
-                Math.floor(RoborockMapParser.DIMENSION_MM - valetudoZone.points.pA.y * 10),
-                Math.floor(valetudoZone.points.pC.x * 10),
-                Math.floor(RoborockMapParser.DIMENSION_MM - valetudoZone.points.pC.y * 10),
-                valetudoZone.iterations
+                Math.floor(nimbusZone.points.pA.x * 10),
+                Math.floor(RoborockMapParser.DIMENSION_MM - nimbusZone.points.pA.y * 10),
+                Math.floor(nimbusZone.points.pC.x * 10),
+                Math.floor(RoborockMapParser.DIMENSION_MM - nimbusZone.points.pC.y * 10),
+                nimbusZone.iterations
             ];
 
             // it seems as the vacuum only works with 'positive rectangles'! So flip the coordinates if the user entered them wrong.

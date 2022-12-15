@@ -3,14 +3,14 @@ const DreameUtils = require("../DreameUtils");
 const WaterUsageControlCapability = require("../../../core/capabilities/WaterUsageControlCapability");
 
 /**
- * @extends WaterUsageControlCapability<import("../DreameValetudoRobot")>
+ * @extends WaterUsageControlCapability<import("../DreameNimbusRobot")>
  */
 class DreameMopDockWaterUsageControlCapability extends WaterUsageControlCapability {
 
     /**
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
-     * @param {Array<import("../../../entities/core/ValetudoSelectionPreset")>} options.presets
+     * @param {import("../DreameNimbusRobot")} options.robot
+     * @param {Array<import("../../../entities/core/NimbusSelectionPreset")>} options.presets
      *
      * @param {number} options.siid MIOT Service ID
      * @param {number} options.piid MIOT Property ID

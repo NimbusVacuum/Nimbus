@@ -1,10 +1,10 @@
-const ValetudoVoicePackOperationStatus = require("../../../entities/core/ValetudoVoicePackOperationStatus");
+const NimbusVoicePackOperationStatus = require("../../../entities/core/NimbusVoicePackOperationStatus");
 const VoicePackManagementCapability = require("../../../core/capabilities/VoicePackManagementCapability");
 
 const Logger = require("../../../Logger");
 
 /**
- * @extends VoicePackManagementCapability<import("../RoborockValetudoRobot")>
+ * @extends VoicePackManagementCapability<import("../RoborockNimbusRobot")>
  */
 class RoborockVoicePackManagementCapability extends VoicePackManagementCapability {
     /**
@@ -61,11 +61,11 @@ class RoborockVoicePackManagementCapability extends VoicePackManagementCapabilit
     /**
      * This method should return the status of the current voice pack operation, if one is ongoing.
      *
-     * @returns {Promise<ValetudoVoicePackOperationStatus>}
+     * @returns {Promise<NimbusVoicePackOperationStatus>}
      */
     async getVoicePackOperationStatus() {
         let statusOptions = {
-            type: ValetudoVoicePackOperationStatus.TYPE.IDLE,
+            type: NimbusVoicePackOperationStatus.TYPE.IDLE,
             progress: undefined,
         };
 
@@ -84,18 +84,18 @@ class RoborockVoicePackManagementCapability extends VoicePackManagementCapabilit
             switch (res[0].state) {
                 case 0:
                 case 2:
-                    statusOptions.type = ValetudoVoicePackOperationStatus.TYPE.IDLE;
+                    statusOptions.type = NimbusVoicePackOperationStatus.TYPE.IDLE;
                     break;
                 case 1:
-                    statusOptions.type = ValetudoVoicePackOperationStatus.TYPE.DOWNLOADING;
+                    statusOptions.type = NimbusVoicePackOperationStatus.TYPE.DOWNLOADING;
                     statusOptions.progress = res[0].progress;
                     break;
                 case 3:
                     //This actually seems to be "installed successfully"
-                    statusOptions.type = ValetudoVoicePackOperationStatus.TYPE.IDLE;
+                    statusOptions.type = NimbusVoicePackOperationStatus.TYPE.IDLE;
                     break;
                 case 4:
-                    statusOptions.type = ValetudoVoicePackOperationStatus.TYPE.ERROR;
+                    statusOptions.type = NimbusVoicePackOperationStatus.TYPE.ERROR;
                     break;
                 default:
                     Logger.warn("RoborockVoicePackManagementCapability: Unhandled state " + res[0].state);
@@ -105,22 +105,21 @@ class RoborockVoicePackManagementCapability extends VoicePackManagementCapabilit
                 case 0:
                     break;
                 case 2:
-                    statusOptions.type = ValetudoVoicePackOperationStatus.TYPE.ERROR;
+                    statusOptions.type = NimbusVoicePackOperationStatus.TYPE.ERROR;
                     Logger.warn("RoborockVoicePackManagementCapability: Failed to install Voicepack. Download failed");
                     break;
                 case 13:
-                    statusOptions.type = ValetudoVoicePackOperationStatus.TYPE.ERROR;
+                    statusOptions.type = NimbusVoicePackOperationStatus.TYPE.ERROR;
                     Logger.warn("RoborockVoicePackManagementCapability: Failed to install Voicepack. Disk is full");
                     break;
                 default:
-                    statusOptions.type = ValetudoVoicePackOperationStatus.TYPE.ERROR;
+                    statusOptions.type = NimbusVoicePackOperationStatus.TYPE.ERROR;
                     Logger.warn("RoborockVoicePackManagementCapability: Failed to install Voicepack. Unknown error code " + res[0].error);
                     break;
             }
         }
 
-
-        return new ValetudoVoicePackOperationStatus(statusOptions);
+        return new NimbusVoicePackOperationStatus(statusOptions);
     }
 }
 
@@ -128,7 +127,7 @@ const VOICEPACK_ID_TO_COUNTRY_CODE_MAPPING = {
     1: "prc",
     2: "tw",
     3: "en",
-    10000: "va" //custom. therefore using this unassigned country code for valetudo :)
+    10000: "va" //custom. therefore using this unassigned country code for nimbus :)
 };
 
 module.exports = RoborockVoicePackManagementCapability;

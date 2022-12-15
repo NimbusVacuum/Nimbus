@@ -11,7 +11,7 @@ class BatteryStateMqttHandle extends RobotStateNodeMqttHandle {
      * @param {object} options
      * @param {import("../handles/RobotMqttHandle")} options.parent
      * @param {import("../MqttController")} options.controller MqttController instance
-     * @param {import("../../core/ValetudoRobot")} options.robot
+     * @param {import("../../core/NimbusRobot")} options.robot
      */
     constructor(options) {
         super(Object.assign(options, {

@@ -1,5 +1,5 @@
 module.exports = {
-    ValetudoUpdaterApplyStep: require("./ValetudoUpdaterApplyStep"),
-    ValetudoUpdaterCheckStep: require("./ValetudoUpdaterCheckStep"),
-    ValetudoUpdaterDownloadStep: require("./ValetudoUpdaterDownloadStep"),
+    NimbusUpdaterApplyStep: require("./NimbusUpdaterApplyStep"),
+    NimbusUpdaterCheckStep: require("./NimbusUpdaterCheckStep"),
+    NimbusUpdaterDownloadStep: require("./NimbusUpdaterDownloadStep"),
 };

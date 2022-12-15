@@ -13,7 +13,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/ValetudoMapSegment"
+                  "$ref": "#/components/schemas/NimbusMapSegment"
                 }
               }
             }

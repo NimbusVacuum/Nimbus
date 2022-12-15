@@ -13,9 +13,9 @@ const VacuumHassComponent = require("../homeassistant/components/VacuumHassCompo
 class RobotMqttHandle extends MqttHandle {
     /**
      * @param {object} options
-     * @param {import("../../core/ValetudoRobot")} options.robot
+     * @param {import("../../core/NimbusRobot")} options.robot
      * @param {import("../MqttController")} options.controller
-     * @param {string} options.baseTopic Base topic for Valetudo
+     * @param {string} options.baseTopic Base topic for Nimbus
      * @param {string} options.topicName Topic identifier for this robot
      * @param {string} options.friendlyName Friendly name for this robot
      * @param {Array<string>} options.optionalExposedCapabilities
@@ -139,7 +139,7 @@ class RobotMqttHandle extends MqttHandle {
                 return p.topicName;
             }).join(","),
             "$extensions": "",
-            "$implementation": "Valetudo"
+            "$implementation": "Nimbus"
         };
     }
 

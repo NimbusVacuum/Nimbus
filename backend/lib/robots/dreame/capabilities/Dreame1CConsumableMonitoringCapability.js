@@ -6,13 +6,13 @@ const ConsumableStateAttribute = require("../../../entities/state/attributes/Con
 const Logger = require("../../../Logger");
 
 /**
- * @extends ConsumableMonitoringCapability<import("../DreameValetudoRobot")>
+ * @extends ConsumableMonitoringCapability<import("../DreameNimbusRobot")>
  */
 class Dreame1CConsumableMonitoringCapability extends ConsumableMonitoringCapability {
     /**
      *
      * @param {object} options
-     * @param {import("../DreameValetudoRobot")} options.robot
+     * @param {import("../DreameNimbusRobot")} options.robot
      *
      * @param {object} options.miot_actions
      * @param {object} options.miot_actions.reset_main_brush
@@ -48,7 +48,6 @@ class Dreame1CConsumableMonitoringCapability extends ConsumableMonitoringCapabil
         this.miot_actions = options.miot_actions;
         this.miot_properties = options.miot_properties;
     }
-
 
     /**
      * This function polls the current consumables state and stores the attributes in our robotState
@@ -123,7 +122,6 @@ class Dreame1CConsumableMonitoringCapability extends ConsumableMonitoringCapabil
             throw new Error("No such consumable");
         }
     }
-
 
     parseConsumablesMessage(msg) {
         let consumable;
