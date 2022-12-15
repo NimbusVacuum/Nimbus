@@ -5,8 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Autoclose all PRs
-      uses: roots/issue-closer@v1.1
+      if: ${{ github.actor != 'dependabot[bot]' }}
+      uses: roots/issue-closer-action@v1.1
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-        issue-close-message: "@${issue.user.login} this PR was automatically closed because this repository is not intended for any external use or contribution."
-        issue-pattern: ".*"
+        pr-close-message: "Your pull request has been automatically closed because this repository does not accept pull requests."
+        pr-pattern: "(?!)"
