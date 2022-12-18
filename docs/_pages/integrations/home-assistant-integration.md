@@ -248,5 +248,5 @@ vacuum_trigger_autoempty:
 
 ### Map display
 
-If you are on Hass.io and want the map also on your dashboards of Home Assistant, you can use the [Lovelace Valetudo Map Card
-](https://github.com/TheLastProject/lovelace-valetudo-map-card).
+If you are on Hass.io and want the map also on your dashboards of Home Assistant, you can use the [Lovelace Nimbus Map Card
+](https://github.com/NimbusVacuum/lovelace-nimbus-map-card).

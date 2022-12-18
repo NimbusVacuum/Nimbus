@@ -33,7 +33,7 @@ automatically discover your Nimbus instance.
 Note that, in order to view the map provided over MQTT, you additionally need
 [I Can't Believe It's Not Valetudo](/pages/companion_apps/i_cant_believe_its_not_valetudo.html) to generate PNG maps.
 You can then configure it to serve the PNG map over HTTP or install the
-[Lovelace Valetudo Card Map](/pages/companion_apps/lovelace_valetudo_map_card.html) for Home Assistant.
+[Lovelace Nimbus Card Map](/pages/companion_apps/lovelace_nimbus_map_card.html) for Home Assistant.
 
 ## Custom integrations
 
@@ -659,7 +659,7 @@ ICBINV should be configured so that it publishes the map to this topic.
 
 *Property, readable, retained*
 
-This handle is added automatically if Home Assistant autodiscovery is enabled. It provides a map embedded in a PNG image that recommends installing the Valetudo Lovelace card.
+This handle is added automatically if Home Assistant autodiscovery is enabled. It provides a map embedded in a PNG image that recommends installing the Nimbus Lovelace card.
 
 - Read topic: `<TOPIC PREFIX>/<IDENTIFIER>/MapData/map-data-hass`
 - Data type: [string](https://homieiot.github.io/specification/#string)
